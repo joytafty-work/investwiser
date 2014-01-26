@@ -1,41 +1,43 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import MySQLdb
+
 app = Flask(__name__)
-import os
-pwd = os.getenv('MYSQLROOTPWD')
-db = MySQLdb.connect(user="root",host="localhost", port=3386, db="upsdata", passwd=pwd)
 
-# prepare a cursor object using cursor() method
-cursor = db.cursor()
 
-@app.route('/')
-def hello_world():
-	return render_template('index.html')
-    # return "Yay!! It's live"
+@app.route("/")
+def hello():
+    return render_template('index.html') 
 
-@app.route('/db')
-def activity_page(pagename=None):
-	querystr = "SELECT DATE FROM activity;"
-	res = db.query(querystr)
-	print res
-	return render_template('index.html')
+@app.route('/fetchcompany')
+def fetchcompany():
+    query = request.args.get('q', '')
+    return render_template('fetchcompany.html', query=query)
 
-	# query_results = db.store_result().fetch_row(maxrow=0)
-	# print "query finished"
-	# activities=""
-	# for result in query_results:
-	# 	print result[0]
-	# 	activities += unicode(result[0], 'utf-8')
-	# 	activities += "<br>"
-	# return activities
+@app.route('/fetchcompany?q=<query>')
+def fetchcompanyTo(query):
+    query = query.replace('+',' ')
+    return render_template('fetchcompany.html', query=query)
 
-@app.route('/blocker')
-def block(pagename=None):
-	return "Blocked!"
+@app.route('/fetchfounder')
+def fetchfounder():
+    query = request.args.get('q', '')
+    return render_template('fetchfounder.html', query=query)
 
-@app.route('/<pagename>')
-def regularpage(pagename=None):
-	return "You've arrived at "+pagename
+@app.route('/fetchfounder?q=<query>')
+def fetchfounderTo():
+    query = query.replace('+',' ')
+    return render_template('fetchfounder.html', query=query)
+
+@app.route('/<pagename>') 
+def regularpage(pagename=None): 
+    """ 
+    Route not found by the other routes above. May point to a static template. 
+    """ 
+    return "You've arrived at " + pagename
+    if pagename==None: 
+       raise Exception, 'page_not_found' 
+    return render_template(pagename) 
 
 if __name__ == '__main__':
-    app.run()
+    print "Starting debugging server."
+    app.run(debug=True, host='localhost', port=8000)
