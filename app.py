@@ -8,25 +8,25 @@ app = Flask(__name__)
 def hello():
     return render_template('index.html') 
 
-@app.route('/fetchcompany')
-def fetchcompany():
-    query = request.args.get('q', '')
-    return render_template('fetchcompany.html', query=query)
+# @app.route('/fetchcompany')
+# def fetchcompany():
+#     query = request.args.get('q', '')
+#     return render_template('fetchcompany.html', query=query)
 
-@app.route('/fetchcompany?q=<query>')
-def fetchcompanyTo(query):
-    query = query.replace('+',' ')
-    return render_template('fetchcompany.html', query=query)
+# @app.route('/fetchcompany?q=<query>')
+# def fetchcompanyTo(query):
+#     query = query.replace('+',' ')
+#     return render_template('fetchcompany.html', query=query)
 
-@app.route('/fetchfounder')
-def fetchfounder():
-    query = request.args.get('q', '')
-    return render_template('fetchfounder.html', query=query)
+# @app.route('/fetchfounder')
+# def fetchfounder():
+#     query = request.args.get('q', '')
+#     return render_template('fetchfounder.html', query=query)
 
-@app.route('/fetchfounder?q=<query>')
-def fetchfounderTo():
-    query = query.replace('+',' ')
-    return render_template('fetchfounder.html', query=query)
+# @app.route('/fetchfounder?q=<query>')
+# def fetchfounderTo():
+#     query = query.replace('+',' ')
+#     return render_template('fetchfounder.html', query=query)
 
 @app.route('/<pagename>') 
 def regularpage(pagename=None): 
