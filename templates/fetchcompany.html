@@ -7,7 +7,7 @@
    <meta name="description" content="">
    <meta name="author" content="">
 
-   <title>Newsline</title>
+   <title>InvestWiser</title>
 
    <!-- Bootstrap core CSS -->
    <!-- <link href="static/css/bootstrap.css" rel="stylesheet"> -->
@@ -27,45 +27,38 @@
 
  <body {% if query %} onload="queryURL('{{ query }}')" {% endif %}>
 
+   <div class="container-full">
+     <div align="center">
 
-   <div class="container">
-   <div align="center">
-    <a href="/"><h1 class="splash">InvestWiser</h1></a>
-     <h2 class="caption">Predict founders' effect on series A funding</h2>
-        <div class="form-group">
-         <span class="input-group-btn">
-           <form class="form-inline" action="fetchcompany" method="get">
-           <input style="width: 200px; height:43px; font-size:20px;" 
-        type="text" id="company" name="company" class="form-control">  
+     <a href="/"><h1 class="splash-small">InvestWiser</h1></a>
+     <h2 class="caption" style="font-size:1.5em">Predict Founder's effect on SeriesA Funding</h2>
+
+     <div class="form-group">
+       <span class="input-group-btn">
+         <form class="form-inline" action="fetchcompany" method="get">
+           <input style="width: 350px; height:43px; font-size:20px;" 
+                  type="text" id="query" name="q" class="form-control">  
            <button style="font-size:20px; height:43px;" 
-         class="btn primary-button" type="submit">Company</button>
-          </form>
-
-          <form class="form-inline" action="fetchfounder" method="get">
-            <input style="width: 200px; height:43px; font-size:20px;" 
-        type="text" id="founder" name="founder" class="form-control">  
-            <button style="font-size:20px; height:43px;" 
-         class="btn primary-button" type="submit">Founder</button>                                  
-           <a class="btn secondary-button" onclick="location.href=''"
-    style="font-size:20px; height:43px;"></a>
+                   class="btn primary-button" id="timelinebut" type="submit">Show Prediction</button>                       
+           <button style="height:43px; font-size:20px;" class="btn secondary-button" 
+                   onclick="visualize_features()" id="summarybut" type="button">Show People</button>
          </form>
-         </span>
-       </div>
+       </span>
      </div>
-   </div>
    
      <div id="spinner" style="margin-top: 20px;"></div>
 
      <div class="timeline-jquery" style="margin-top: 20px; margin-left: 20px; margin-right: 20px;"></div>
      <div id="google-table"></div> <!-- style=" width: 650px; height: 800px; margin-top: 20px;"></div>-->
 
+     <div id="hbar-chart"></div>
+     <div id="people-info"></div>
 <!--      <div class="myfooter">
-       Jun Yan - 
+       Joy Rimchala - 
        An <a href="http://insightdatascience.com" target="_blank">Insight Data Science</a> Project  - 
        <a href="https://github.com/spiningup/Insight_newsline" target="_blank">Github Repo</a> - 
        <a href="mailto:mouseyan@gmail.com">Contact Me</a>
-     </div>
- -->
+     </div> -->
      </div>
    </div>
    <!-- Bootstrap core JavaScript

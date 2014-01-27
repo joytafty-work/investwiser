@@ -7,7 +7,7 @@
    <meta name="description" content="">
    <meta name="author" content="">
 
-   <title>Newsline</title>
+   <title>InvestWiser</title>
 
    <!-- Bootstrap core CSS -->
    <!-- <link href="static/css/bootstrap.css" rel="stylesheet"> -->
@@ -25,7 +25,7 @@
 
  </head>
 
- <body>
+ <body {% if query %} onload="queryURL('{{ query }}')" {% endif %}>
 
   <div class="container">
    <div align="center">
@@ -34,30 +34,24 @@
         <div class="form-group">
 	       <span class="input-group-btn">
 	         <form class="form-inline" action="fetchcompany" method="get">
-	         <input style="width: 200px; height:43px; font-size:20px;" 
+	         <input style="width: 400px; height:43px; font-size:20px;" 
 		    type="text" id="company" name="company" class="form-control">  
 	         <button style="font-size:20px; height:43px;" 
 		     class="btn primary-button" type="submit">Company</button>
           </form>
 
-          <form class="form-inline" action="fetchfounder" method="get">
-            <input style="width: 200px; height:43px; font-size:20px;" 
-        type="text" id="founder" name="founder" class="form-control">  
-            <button style="font-size:20px; height:43px;" 
-         class="btn primary-button" type="submit">Founder</button>                                  
-	         <a class="btn secondary-button" onclick="location.href=''"
-		style="font-size:20px; height:43px;"></a>
-	       </form>
 	       </span>
        </div>
      </div>
    </div>
-  
-   <!-- Bootstrap core JavaScript
+
+    <!-- Bootstrap core JavaScript
    ================================================== -->
    <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.0/d3.min.js"></script> 
+    <script type="text/javascript" src="static/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="static/js/d3.v3.min.js"></script> 
+    <script type="text/javascript" src="static/js/tooltip.js"></script> 
+    <script type="text/javascript" src="static/js/visualize.js"></script>
  </body>
 </html>
