@@ -22,8 +22,6 @@ function drawd3(results) {
 function cback(results) {
     window.history.pushState("", "InvestWiser", "/fetchcompany?q="+results['query']);
 
-    //    $("chartlayer").remove();
-    //    $("textlayer").remove();
     alert("cback was called with results " + results);
     $("#spinner").html('');
     $("#summarybut").css("background", "#fff");
@@ -33,13 +31,19 @@ function cback(results) {
     $("#timelinebut").css("color", "#fff");
     $("#timelinebut").css("border", "0px");
 
-    // $('.timeline-jquery').verticalTimeline({
-    //    data: results['items'],
-    //    width: '100%',
-    //   });
-    $("#people-info").prepend('<img alt="" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32217-9cef1dc3721cc42fcad1871cb99ef109-medium_jpg.jpg?buster=1326842472">');
-    // $("#people-info").appendFounderImg({
-    //     data: results['items'],
-    //     width: '100%',
-    // })
+    appendFounderImg(results);
 }
+
+function appendFounderImg(data) {
+   alert("appendFounderImg was called with results " + data['company_img']);
+   console.log(data['company_img']);
+   $('#people-info').prepend('<img alt="" src="' + data['company_img'] + ">'");
+    // $('#people-info').prepend('<img alt="" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32217-9cef1dc3721cc42fcad1871cb99ef109-medium_jpg.jpg?buster=1326842472">');    
+}
+
+// (function($) {
+//     $.fn.appendFounderImg(data) {
+//     var container = document.getElementById('people-info');
+//     alert("appendFounderImg was called with results " + data);
+//     $('#people-info').prepend('<img alt="" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32217-9cef1dc3721cc42fcad1871cb99ef109-medium_jpg.jpg?buster=1326842472">');
+// })(jQuery);
