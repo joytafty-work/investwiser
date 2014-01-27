@@ -14,7 +14,9 @@ function visualize() {
 }
 
 function drawd3(results) {
-    
+    // Try CSV first
+    d3.csv("../static/data/")
+
 }
 
 function cback(results) {
