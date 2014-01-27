@@ -19,7 +19,7 @@ def hello():
 @app.route('/fetchcompany')
 def fetchcompany():
     query = request.args.get('q', '')
-    return render_template('fetchcompany.html', query=query)
+    return render_template('fetchcompany.html', query=query, company=request.args.get('company', 'rethinkdb'))
 
 @app.route('/fetchcompany?q=<query>')
 def fetchcompanyTo(query):
