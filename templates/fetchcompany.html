@@ -27,6 +27,14 @@
 
  <body {% if query %} onload="queryURL('{{ query }}')" {% endif %}>
 
+ <style>
+ .founder {
+   display: none;
+ }
+ #company_img {
+   // max-height: 120px;
+ }
+ </style>
    <div class="container-full">
      <div align="center">
 
@@ -63,20 +71,32 @@
    </div>
    <div class="container">
      <div class="row">
+<<<<<<< HEAD
        <img class="col-xs-8" src="/static/img/featureimportances.png">
        <img class="col-xs-4 pull-right" id="company_img" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg?buster=1326842750">
+=======
+       <div class="col-xs-2">
+           <img class="col-xs-10" src="/static/zuckerberg.jpeg"><br>
+           <img style="margin-left: 20px; width:100px" src="/static/addinvestor.png">
+        </div>
+      </div>
+     <div class="row">
+       <img class="col-xs-8" src="/static/chart.png">
+       <img class="col-xs-3 pull-right" id="company_img" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg?buster=1326842750">
+>>>>>>> ee1a9bea7769ec31457e3be1c6d30d2b0aad6d48
        <div class="col-xs-4">
          <div class="row">
          <br><br>
-           <div class="col-xs-10">
+           <div class="col-xs-10 founder" id="wrapper1">
              <img class="col-xs-8" id="founder1" src="https://s3.amazonaws.com/photos.angel.co/users/26786-medium_jpg?1306973402"><span id="name1">Jeff Lawson</span>
            </div>
-           <div class="col-xs-10">
+           <div class="col-xs-10 founder" id="wrapper2">
              <img class="col-xs-8" id="founder2" src="https://s3.amazonaws.com/photos.angel.co/users/169245-medium_jpg?1346719228"><span id="name2">John Wolthuis</span>
            </div>
-           <div class="col-xs-10">
+           <div class="col-xs-10 founder" id="wrapper3">
              <img class="col-xs-8" id="founder3" src="https://s3.amazonaws.com/photos.angel.co/users/114331-medium_jpg?1333666677"><span id="name3">Evan Cooke</span>
             </div>
+            
           </div>
         </div>
       </div>
@@ -110,6 +130,7 @@ d3.csv('/static/companies.csv', function (data) {
       $('#company_img').attr('src', data[i].company_img);
       $('#founder' + founder_counter).attr('src', data[i].founder_img);
       $('#name' + founder_counter).text(data[i].founder_name);
+      $('#wrapper' + founder_counter).show();
       founder_counter = founder_counter + 1;
     }
   }
