@@ -1,11 +1,14 @@
 def fetch_data(searchkey):
+	import os
+	import sys
+	import urlparse
 	import MySQLdb as mdb
-	# from datetime import datetime
 
 	curstr1 = 'SELECT * FROM founder_seed2A_info WHERE company_name like "%s"' % searchkey
 	# curstr2 = {"SELECT * FROM seriesApred WHERE company_name like '%(searchkey)'" % vars()}
 
-	con = mdb.connect('localhost', 'joyinsight', 'san00k', 'insightdata')
+	# con = mdb.connect('localhost', 'joyinsight', 'san00k', 'insightdata')
+	con = mdb.connect('us-cdbr-east-05.cleardb.net', 'b79f007212e595', 'bb086a2b', 'heroku_5b440647f9181bc')
 	d1 = con.cursor()
 	d1.execute(curstr1)
 	founders = d1.fetchall()
