@@ -6,7 +6,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="description" content="">
    <meta name="author" content="">
-
+   <link rel="shortcut icon" href="{{ url_for('static', filename='assets/img/favicon.png') }}">
    <title>InvestWiser</title>
 
    <!-- Bootstrap core CSS -->
@@ -14,9 +14,12 @@
    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
 
    <!-- Custom styles for this template -->
-<!--    <link href="static/css/personal.css" rel="stylesheet">
-   <link href="static/css/vertical-timeline.css" rel="stylesheet">
- -->
+   <link href="{{ url_for('static', filename='assets/css/main.css') }}" rel="stylesheet">
+   <link href="static/css/dc.css" rel="stylesheet">
+
+    <!-- Fonts from Google Fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
+
    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
    <!--[if lt IE 9]>
      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -38,42 +41,43 @@
    <div class="container-full">
      <div align="center">
 
-     <a href="/"><h1 class="splash-small">InvestWiser</h1></a>
-     <h2 class="caption" style="font-size:1.5em">Predict Founder's effect on SeriesA Funding</h2>
+     <a href="/"><h1>InvestWiser</h1></a>
+     <h3 class="caption">Predict Founder's effect on SeriesA Funding</h3>
 
      <div class="form-group">
        <span class="input-group-btn">
          <form class="form-inline" action="fetchcompany" method="get">
-           <input style="width: 350px; height:43px; font-size:20px;" 
+           <input style="width: 500px; height:64px; font-size:20px;" 
                   type="text" id="query" name="q" class="form-control">  
-           <button style="font-size:20px; height:43px;" 
-                   class="btn primary-button" id="timelinebut" type="submit">Show Prediction</button>                       
-           <button style="height:43px; font-size:20px;" class="btn secondary-button" 
-                   onclick="visualize_features()" id="summarybut" type="button">Show People</button>
+           <button style="font-size:20px; height:64px;" 
+                   class="btn primary-button" id="company" type="submit">Predict</button>                       
+<!--            <button style="height:43px; font-size:20px;" class="btn secondary-button" 
+                   onclick="visualize_features()" id="summarybut" type="button">Show People</button> -->
          </form>
        </span>
      </div>
    
      <div id="spinner" style="margin-top: 20px;"></div>
-
-     <div id="pred-bar" class="" style="margin-top: 20px; margin-left: 20px; margin-right: 20px;">Place holder for prediction bar</div>
+     <div id="worth-box"></div>
+     <div id="pred-bar"></div>
      </div>
    </div>
    <div class="container">
      <div class="row">
        <img class="col-xs-8" src="/static/img/featureimportances.png">
        <img class="col-xs-3 pull-right" id="company_img" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg?buster=1326842750">
+       <p <p style="font-size:20px;" id="company_name"></p>
        <div class="col-xs-4">
          <div class="row">
          <br><br>
            <div class="col-xs-10 founder" id="wrapper1">
-             <img class="col-xs-8" id="founder1" src="https://s3.amazonaws.com/photos.angel.co/users/26786-medium_jpg?1306973402"><span id="name1">Jeff Lawson</span>
+             <img class="col-xs-8" id="founder1" src="https://s3.amazonaws.com/photos.angel.co/users/26786-medium_jpg?1306973402"><span id="name1"><p style="font-size:24px;font-weight:bold">Jeff Lawson</p></span>
            </div>
            <div class="col-xs-10 founder" id="wrapper2">
-             <img class="col-xs-8" id="founder2" src="https://s3.amazonaws.com/photos.angel.co/users/169245-medium_jpg?1346719228"><span id="name2">John Wolthuis</span>
+             <img class="col-xs-8" id="founder2" src="https://s3.amazonaws.com/photos.angel.co/users/169245-medium_jpg?1346719228"><span id="name2"><p style="font-size:24px;font-weight:bold">John Wolthuis</p></span>
            </div>
            <div class="col-xs-10 founder" id="wrapper3">
-             <img class="col-xs-8" id="founder3" src="https://s3.amazonaws.com/photos.angel.co/users/114331-medium_jpg?1333666677"><span id="name3">Evan Cooke</span>
+             <img class="col-xs-8" id="founder3" src="https://s3.amazonaws.com/photos.angel.co/users/114331-medium_jpg?1333666677"><span id="name3"><p styel="font-size:24px;font-weight:bold">Evan Cooke</p></span>
             </div>
             
           </div>
@@ -95,7 +99,8 @@
    <script type="text/javascript" src="static/js/libs/jquery.ba-resize.v1.1.min.js"></script>
    <script type="text/javascript" src="static/js/libs/jquery.imagesloaded.v2.1.0.min.js"></script>
    <script type="text/javascript" src="static/js/jquery-veritcal-timeline.js"></script>
-   
+   <script type="text/javascript" src="static/js/dimple.v1.1.3.min.js"></script>     
+   <script type="text/javascript" src="static/js/crossfilter.js"></script>     
    <script type="text/javascript" src="static/js/google-timeline.js"></script>  
    <script type="text/javascript" src="static/js/visualize.js"></script>
    <script>
@@ -106,8 +111,9 @@ d3.csv('/static/companies.csv', function (data) {
   founder_counter = 1;
   for(i in data) {
     if(data[i].company_name.toLowerCase() == company.toLowerCase()) {
-      console.log(data[i]);
+      // console.log(data[i]);
       $('#company_img').attr('src', data[i].company_img);
+      $('#company_name').text(data[i].company_name);
       $('#founder' + founder_counter).attr('src', data[i].founder_img);
       $('#name' + founder_counter).text(data[i].founder_name);
       $('#wrapper' + founder_counter).show();
@@ -116,30 +122,36 @@ d3.csv('/static/companies.csv', function (data) {
   }
 });
 
-var predChart = dc.rowChart("#pred-bar");
-predChart.width(180)
-  .height(180)
-  .margins({top: 20, left: 10, right: 10, bottom: 20})
-  .elasticX(true)
-  .xAxis().ticks(4);
+console.log(company);
 
-d3.csv('/static/predictions/randomForestpred_rf1_seed2seriesA.csv', function(data) {
-  for (i in data) {
-    if (data[i].name.toLowerCase() == company.toLowerCase()) {
-      console.log('pred:' + data[i]);
-    }
-  }
-})
-
-d3.csv('/static/predictions/featureWorth_winX.csv', function (data) {
-  // console.log(data[0]);
-  for (i in data) {
-    if (data[i].name.toLowerCase() == company.toLowerCase()) {
-      console.log(data[i]);
-    }
-  }
-});
+var svg = dimple.newSvg("#pred-bar", 590, 120);
+  d3.csv("/static/predictions/randomForestALL_rf1_seed2seriesA.csv", function (data) {
+    console.log(data);
+      var target; 
+      var meanA = 17279004.878;
+      for (i in data) {
+        if (data[i].name.toLowerCase() == company.toLowerCase()) {
+        target = ['predA', data[i].pred_seriesA_p100];
+        }
+      }
+      if (target != 'NaN') {
+        // $('#worth-box').text('$' + target[1]/1000000 + 'M');
+        var worth = target[1]/1000000
+        $('#worth-box').append('<h2> $' + worth.toPrecision(3) + 'M </h2>');        
+      }
+      
+      var myChart = new dimple.chart(svg, target);
+      myChart.setBounds(45, 0, 720, 320)
+      myChart.addMeasureAxis("x", "Total SeriesA Amount");
+      myChart.addCategoryAxis("y", ["", "Prediction"]);
+      myChart.addSeries("Prediction", dimple.plot.bar);
+      // myChart.addLegend(60, 10, 510, 20, "right");
+      myChart.draw();
+    });
    </script>
 
+   <script>
+     $('#company').autocomplete('static/names.txt');
+   </script> 
  </body>
 </html>

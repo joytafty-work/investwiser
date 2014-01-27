@@ -1,4 +1,4 @@
-jQuery.autocomplete = function(input, options) {
+$.autocomplete = function(input, options) {
 	// Create a link to self
 	var me = this;
 

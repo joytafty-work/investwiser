@@ -13,13 +13,19 @@ def initialize_data():
     return searchkey, company_name, company_img, founder_names, founder_imgs
 
 @app.route("/")
-def hello():
+def index():
     return render_template('index.html') 
+    # return render_template('index_flatty.html') 
+
+@app.route("/nest")
+def nest():
+    return render_template('nestindex.html') 
+    # return render_template('index_flatty.html') 
 
 @app.route('/fetchcompany')
 def fetchcompany():
     query = request.args.get('q', '')
-    return render_template('fetchcompany.html', query=query, company=request.args.get('company', 'rethinkdb'))
+    return render_template('fetchcompany.html', query=query, company=request.args.get('company'))
 
 @app.route('/fetchcompany?q=<query>')
 def fetchcompanyTo(query):

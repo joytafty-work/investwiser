@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Nested</title>
+<!-- <link href="style.css" rel="stylesheet" type="text/css" media="screen" /> -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/jquery.nested.js') }}"></script>
+<script src="{{ url_for('static', filename='js/makeboxes.js') }}"></script>
+<!-- <script src="jquery.nested.js"></script>
+<script src="makeboxes.js"></script> -->
+</head>
+<body>
+
+<style>
+  body {  background-color:#e1e1e1;
+        color:#fff;
+        font-family: Arial, sans-serif;
+        font-size:11px;
+        line-height: 14px;
+        padding:0px;
+        margin:0px; 
+        }
+
+
+.box {  background-color:#ff4499;
+        -moz-border-radius:3px;
+        -khtml-border-radius: 3px;
+        -webkit-border-radius:3px;
+        border-radius:3px;
+
+ 
+-webkit-transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000); 
+   -moz-transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000); 
+    -ms-transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000); 
+     -o-transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000); 
+        transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
+        
+  -webkit-transition-property: left, right, top;
+     -moz-transition-property: left, right, top;
+      -ms-transition-property: left, right, top;
+       -o-transition-property: left, right, top;
+          transition-property: left, right, top;
+
+
+                 
+                }
+      
+#container { background: red;}
+
+.size21, .size22, .size23, .twocols { background: #ccc }
+.size31, .size32, .size33, .threecols { background: #ff9999 }
+
+a.btn {
+  margin-right: 1px;
+  line-height: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: inline-block;
+  width: 75px;
+  color: red;
+}
+</style>
+<a class="btn" id="prepend">Prepend</a>
+
+<div id="container">
+  <div class="box size11">1</div>
+  <div class="box size21">2</div>
+  <div class="box size32">3</div>
+  <div class="box size11">4</div>
+  <div class="box size21">5</div>
+  <div class="box size12">6</div>
+  <div class="box size21">7</div>
+  <div class="box size11">8</div>
+  <div class="box size31">9</div>
+  <div class="box size22">10</div>
+  <div class="box size11">11</div>
+  <div class="box size21">12</div>
+  <div class="box size12">13</div>
+  <div class="box size21">14</div>
+  <div class="box size23">15</div>
+  <div class="box size22">16</div>
+  <div class="box size11">17</div>
+  <div class="box size21">18</div>
+  <div class="box size12">19</div>
+  <div class="box size21">20</div>
+  <div class="box size22">21</div>
+  <div class="box size23">22</div>
+  <div class="box size11">23</div>
+  <div class="box size21">24</div>
+  <div class="box size12">25</div>
+  <div class="box size21">26</div>
+  <div class="box size22">27</div>
+  <div class="box size22">28</div>
+</div>
+
+<a class="btn" id="append">Append</a>
+
+<script type="text/javascript" >
+  
+  $(function() { 
+   
+    $('#container').nested(); 
+    
+    $('#prepend').click(function(){
+      var boxes = makeBoxes();
+      $('#container').prepend(boxes).nested('prepend',boxes);
+    })
+    $('#append').click(function(){
+      var boxes = makeBoxes();
+      $('#container').append(boxes).nested('append',boxes);     
+    })
+
+  });
+  
+  
+</script>
+  
+</body>
+</html>    
