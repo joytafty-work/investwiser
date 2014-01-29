@@ -15,7 +15,7 @@
 
    <!-- Custom styles for this template -->
    <link href="{{ url_for('static', filename='assets/css/main.css') }}" rel="stylesheet">
-   <link href="static/css/dc.css" rel="stylesheet">
+   <link href="{{ url_for('static', filename='css/dc.css') }}" rel="stylesheet">
 
     <!-- Fonts from Google Fonts -->
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
@@ -37,6 +37,7 @@
  #company_img {
    // max-height: 120px;
  }
+
  </style>
    <div class="container-full">
      <div align="center">
@@ -96,14 +97,11 @@
    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.0/d3.min.js"></script>
    <script type="text/javascript" src="static/js/tooltip.js"></script>  
-
    <script type="text/javascript" src="static/js/libs/handlebars-1.0.rc.1.min.js"></script>
-<!--   <script type="text/javascript" src="static/js/libs/tabletop-zzolo.master-20130402.min.js"></script>  -->
    <script type="text/javascript" src="static/js/libs/jquery.isotope.v1.5.21.min.js"></script>
    <script type="text/javascript" src="static/js/libs/jquery.ba-resize.v1.1.min.js"></script>
    <script type="text/javascript" src="static/js/libs/jquery.imagesloaded.v2.1.0.min.js"></script>
    <script type="text/javascript" src="static/js/jquery-veritcal-timeline.js"></script>
-   <script type="text/javascript" src="static/js/dimple.v1.1.3.min.js"></script>     
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/dc/1.6.0/dc.js"></script>
    <script type="text/javascript" src="static/js/crossfilter.js"></script>     
    <script type="text/javascript" src="static/js/google-timeline.js"></script>  
@@ -127,7 +125,6 @@ d3.csv('/static/companies.csv', function (data) {
   }
 });
 
-// var svg = dimple.newSvg("#pred-bar", 590, 120);
 var pbar = dc.rowChart("#pred-bar", "pbarchart");
   d3.csv("/static/predictions/randomForestALL_rf1_seed2seriesA.csv", function (data) {
       var target; 
@@ -140,7 +137,7 @@ var pbar = dc.rowChart("#pred-bar", "pbarchart");
       if (target != 'NaN') {
         // $('#worth-box').text('$' + target[1]/1000000 + 'M');
         var worth = target[1]/1000000;
-        var prob = 1/(0.5*worth + 0.001);
+        var prob = 0.5/(0.5*worth + 0.001);
         $('#worth-box').append('<h2> $' + worth.toPrecision(3) + 'M </h2>');
         $('#prob-box').append('<h2>' + prob.toPrecision(3) + '</h2>');        
       }
@@ -156,18 +153,10 @@ var pbar = dc.rowChart("#pred-bar", "pbarchart");
       .dimension(tdim)
       .group(tgrp)
       .elasticX(true)
-      .renderLabel(true);
+      // .renderLabel(true);
       // .xAxis().ticks(5).tickFormat(d3.format("s");
 
     dc.renderAll("pbarchart");
-
-      // var myChart = new dimple.chart(svg, target);
-      // myChart.setBounds(45, 0, 720, 320)
-      // myChart.addMeasureAxis("x", "Total SeriesA Amount");
-      // myChart.addCategoryAxis("y", ["", "Prediction"]);
-      // myChart.addSeries("Prediction", dimple.plot.bar);
-      // // myChart.addLegend(60, 10, 510, 20, "right");
-      // myChart.draw();
     });
   
   var physColors = ["#d9ef8b","#a6d96a","#66bd63","#D9EDF7","#ccece6", "#e6f5d0","#b8e186","#7fbc41","#99d8c9","#41ae76","#238b45","#ccebc5","#e0f3db","#78c679","#41ab5d"];
@@ -178,7 +167,7 @@ var pbar = dc.rowChart("#pred-bar", "pbarchart");
     var ddim = ups.dimension(function(d) {return +d.weights;});
     var dgroup = ddim.group().reduceSum(function(d) {return +d.weights;});
 
-    frow.width(800).height(400)
+    frow.width(800).height(540)
       .margins({top: 10, right: 50, bottom: 30, left: 50})
       .transitionDuration(500)
       .x(d3.scale.linear().domain([0.5, 7.5]))
@@ -187,7 +176,9 @@ var pbar = dc.rowChart("#pred-bar", "pbarchart");
       .elasticX(true)
       .colors(physColors)
       .renderLabel(true)
-      .gap(5);
+      .gap(5)
+      .renderTitle(true)
+      .title("Testtitle");
       // .xAxis().ticks(5).tickFormat(d3.format("s");
 
     dc.renderAll("chart");
@@ -196,7 +187,7 @@ var pbar = dc.rowChart("#pred-bar", "pbarchart");
    </script>
 
    <script>
-     $('#company').autocomplete('static/names.txt');
+     $('#query').autocomplete('static/names.txt');
    </script> 
  </body>
 </html>
