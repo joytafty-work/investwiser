@@ -57,27 +57,31 @@
        </span>
      </div>
    
-     <div id="spinner" style="margin-top: 20px;"></div>
-     <div id="worth-box"></div>
+  <div class="row">
+     <div class="col-md-6" id="prob-box">Probability of series A</div>
+     <div class="col-md-6" id="worth-box">Predicted Amount</div>
      <div id="pred-bar"></div>
+  </div>
+     <div id="feat-bar"></div>
      </div>
    </div>
    <div class="container">
      <div class="row">
-       <img class="col-xs-8" src="/static/img/featureimportances.png">
+      <!-- <div id="feature-hplot">Place Holder for feature importance</div> -->
+       <!-- <img class="col-xs-8" src="/static/img/featureimportances.png"> -->
        <img class="col-xs-3 pull-right" id="company_img" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg?buster=1326842750">
        <p <p style="font-size:20px;" id="company_name"></p>
        <div class="col-xs-4">
          <div class="row">
          <br><br>
            <div class="col-xs-10 founder" id="wrapper1">
-             <img class="col-xs-8" id="founder1" src="https://s3.amazonaws.com/photos.angel.co/users/26786-medium_jpg?1306973402"><span id="name1"><p style="font-size:24px;font-weight:bold">Jeff Lawson</p></span>
+             <img class="col-xs-8" id="founder1" src="https://s3.amazonaws.com/photos.angel.co/users/26786-medium_jpg?1306973402"><span id="name1"><p style="font-size:32px;font-weight:bold">Jeff Lawson</p></span>
            </div>
            <div class="col-xs-10 founder" id="wrapper2">
-             <img class="col-xs-8" id="founder2" src="https://s3.amazonaws.com/photos.angel.co/users/169245-medium_jpg?1346719228"><span id="name2"><p style="font-size:24px;font-weight:bold">John Wolthuis</p></span>
+             <img class="col-xs-8" id="founder2" src="https://s3.amazonaws.com/photos.angel.co/users/169245-medium_jpg?1346719228"><span id="name2"><p style="font-size:32px;font-weight:bold">John Wolthuis</p></span>
            </div>
            <div class="col-xs-10 founder" id="wrapper3">
-             <img class="col-xs-8" id="founder3" src="https://s3.amazonaws.com/photos.angel.co/users/114331-medium_jpg?1333666677"><span id="name3"><p styel="font-size:24px;font-weight:bold">Evan Cooke</p></span>
+             <img class="col-xs-8" id="founder3" src="https://s3.amazonaws.com/photos.angel.co/users/114331-medium_jpg?1333666677"><span id="name3"><p styel="font-size:32px;font-weight:bold">Evan Cooke</p></span>
             </div>
             
           </div>
@@ -100,6 +104,7 @@
    <script type="text/javascript" src="static/js/libs/jquery.imagesloaded.v2.1.0.min.js"></script>
    <script type="text/javascript" src="static/js/jquery-veritcal-timeline.js"></script>
    <script type="text/javascript" src="static/js/dimple.v1.1.3.min.js"></script>     
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/dc/1.6.0/dc.js"></script>
    <script type="text/javascript" src="static/js/crossfilter.js"></script>     
    <script type="text/javascript" src="static/js/google-timeline.js"></script>  
    <script type="text/javascript" src="static/js/visualize.js"></script>
@@ -122,13 +127,11 @@ d3.csv('/static/companies.csv', function (data) {
   }
 });
 
-console.log(company);
-
-var svg = dimple.newSvg("#pred-bar", 590, 120);
+// var svg = dimple.newSvg("#pred-bar", 590, 120);
+var pbar = dc.rowChart("#pred-bar", "pbarchart");
   d3.csv("/static/predictions/randomForestALL_rf1_seed2seriesA.csv", function (data) {
-    console.log(data);
       var target; 
-      var meanA = 17279004.878;
+      // var meanA = 17279004.878;
       for (i in data) {
         if (data[i].name.toLowerCase() == company.toLowerCase()) {
         target = ['predA', data[i].pred_seriesA_p100];
@@ -136,18 +139,60 @@ var svg = dimple.newSvg("#pred-bar", 590, 120);
       }
       if (target != 'NaN') {
         // $('#worth-box').text('$' + target[1]/1000000 + 'M');
-        var worth = target[1]/1000000
-        $('#worth-box').append('<h2> $' + worth.toPrecision(3) + 'M </h2>');        
+        var worth = target[1]/1000000;
+        var prob = 1/worth;
+        $('#worth-box').append('<h2> $' + worth.toPrecision(3) + 'M </h2>');
+        $('#prob-box').append('<h2>' + prob.toPrecision(3) + '</h2>');        
       }
       
-      var myChart = new dimple.chart(svg, target);
-      myChart.setBounds(45, 0, 720, 320)
-      myChart.addMeasureAxis("x", "Total SeriesA Amount");
-      myChart.addCategoryAxis("y", ["", "Prediction"]);
-      myChart.addSeries("Prediction", dimple.plot.bar);
-      // myChart.addLegend(60, 10, 510, 20, "right");
-      myChart.draw();
+      var t = crossfilter(target);
+      var tdim = t.dimension(function(d) {return +1;});
+      var tgrp = tdim.group().reduceSum(function(d) {return +1;});
+
+    pbar.width(800).height(100)
+      .margins({top: 10, right: 50, bottom: 30, left: 50})
+      .transitionDuration(500)
+      .x(d3.scale.linear().domain([0.5, 7.5]))
+      .dimension(tdim)
+      .group(tgrp)
+      .elasticX(true)
+      .renderLabel(true);
+      // .xAxis().ticks(5).tickFormat(d3.format("s");
+
+    dc.renderAll("pbarchart");
+
+      // var myChart = new dimple.chart(svg, target);
+      // myChart.setBounds(45, 0, 720, 320)
+      // myChart.addMeasureAxis("x", "Total SeriesA Amount");
+      // myChart.addCategoryAxis("y", ["", "Prediction"]);
+      // myChart.addSeries("Prediction", dimple.plot.bar);
+      // // myChart.addLegend(60, 10, 510, 20, "right");
+      // myChart.draw();
     });
+  
+  var physColors = ["#d9ef8b","#a6d96a","#66bd63","#D9EDF7","#ccece6", "#e6f5d0","#b8e186","#7fbc41","#99d8c9","#41ae76","#238b45","#ccebc5","#e0f3db","#78c679","#41ab5d"];
+
+  var frow = dc.rowChart("#feat-bar", "chart");
+  d3.csv("/static/predictions/featureimportances.csv", function (d) {
+    var ups = crossfilter(d);
+    var ddim = ups.dimension(function(d) {return +d.weights;});
+    var dgroup = ddim.group().reduceSum(function(d) {return +d.weights;});
+
+    frow.width(800).height(400)
+      .margins({top: 10, right: 50, bottom: 30, left: 50})
+      .transitionDuration(500)
+      .x(d3.scale.linear().domain([0.5, 7.5]))
+      .dimension(ddim)
+      .group(dgroup)
+      .elasticX(true)
+      .colors(physColors)
+      .renderLabel(true)
+      .gap(5);
+      // .xAxis().ticks(5).tickFormat(d3.format("s");
+
+    dc.renderAll("chart");
+    });
+
    </script>
 
    <script>
