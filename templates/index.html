@@ -15,8 +15,8 @@
 
    <!-- Custom styles for this template -->
    <link href="{{ url_for('static', filename='assets/css/main.css') }}" rel="stylesheet">
-   <link href="static/css/dc.css" rel="stylesheet">
-   <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/transition.css" rel="stylesheet"> -->
+   <link href="{{ url_for('static', filename='css/jquery.autocomplete.css') }}" rel="stylesheet">
+   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/transition.css" rel="stylesheet">
 
    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
    <!--[if lt IE 9]>
@@ -55,20 +55,15 @@
     <!-- Bootstrap core JavaScript
    ================================================== -->
    <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="static/js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.autocomplete.js') }}"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/autoComplete/1.5.2/jqm.autoComplete.min.js"></script 
-    <script type="text/javascript" src="static/jquery.grid-a-licious.min.js"></script>
     <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="static/js/d3.v3.min.js"></script> 
-    <script type="text/javascript" src="static/js/tooltip.js"></script> 
     <script type="text/javascript" src="static/js/visualize.js"></script>
-    <script src="{{ url_for('static', filename='js/jquery.nested.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/makeboxes.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.autocomplete.js') }}"></script>
+    <script type="text/javascript" src="static/js/jquery.autocomplete.js'"></script>
     <script>
-      $('#company').autocomplete("{{ url_for('static', filename='names.txt') }}");
+      // $('#company').autocomplete("{{ url_for('static', filename='names.txt') }}");
+      $('#company').autocomplete("static/names.txt");
     </script>  
 
     <script type="text/javascript">

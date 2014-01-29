@@ -125,41 +125,42 @@ d3.csv('/static/companies.csv', function (data) {
   }
 });
 
-var pbar = dc.rowChart("#pred-bar", "pbarchart");
-  d3.csv("/static/predictions/randomForestALL_rf1_seed2seriesA.csv", function (data) {
-      var target; 
-      // var meanA = 17279004.878;
+// var pbar = dc.rowChart("#pred-bar", "pbarchart");
+  d3.csv("/static/predictions/RF_classify_and_regress.csv", function (data) {
+      var prob; 
+      var worth;
       for (i in data) {
         if (data[i].name.toLowerCase() == company.toLowerCase()) {
-        target = ['predA', data[i].pred_seriesA_p100];
+        prob = data[i].RFCprobA;
+        worth = data[i].RFRval;
         }
       }
-      if (target != 'NaN') {
+
+      if (worth != 'NaN') {
         // $('#worth-box').text('$' + target[1]/1000000 + 'M');
-        var worth = target[1]/1000000;
-        var prob = 0.5/(0.5*worth + 0.001);
-        $('#worth-box').append('<h2> $' + worth.toPrecision(3) + 'M </h2>');
-        $('#prob-box').append('<h2>' + prob.toPrecision(3) + '</h2>');        
+        worthval = (worth/1000000).toPrecision(3);
+        $('#worth-box').append('<h2> $' + worthval + 'M </h2>');
+        $('#prob-box').append('<h2>' + prob + '</h2>');        
       }
       
-      var t = crossfilter(target);
-      var tdim = t.dimension(function(d) {return +1;});
-      var tgrp = tdim.group().reduceSum(function(d) {return +1;});
+    //   var t = crossfilter(target);
+    //   var tdim = t.dimension(function(d) {return +1;});
+    //   var tgrp = tdim.group().reduceSum(function(d) {return +1;});
 
-    pbar.width(800).height(100)
-      .margins({top: 10, right: 50, bottom: 30, left: 50})
-      .transitionDuration(500)
-      .x(d3.scale.linear().domain([0.5, 7.5]))
-      .dimension(tdim)
-      .group(tgrp)
-      .elasticX(true)
+    // pbar.width(800).height(100)
+    //   .margins({top: 10, right: 50, bottom: 30, left: 50})
+    //   .transitionDuration(500)
+    //   .x(d3.scale.linear().domain([0.5, 7.5]))
+    //   .dimension(tdim)
+    //   .group(tgrp)
+    //   .elasticX(true)
       // .renderLabel(true);
       // .xAxis().ticks(5).tickFormat(d3.format("s");
 
     dc.renderAll("pbarchart");
     });
-  
-  var physColors = ["#d9ef8b","#a6d96a","#66bd63","#D9EDF7","#ccece6", "#e6f5d0","#b8e186","#7fbc41","#99d8c9","#41ae76","#238b45","#ccebc5","#e0f3db","#78c679","#41ab5d"];
+
+  var expenseColors = ["#fee391","#fec44f","#fe9929","#fd8d3c","#e08214","#fdb863","#fdae6b","#ec7014"];
 
   var frow = dc.rowChart("#feat-bar", "chart");
   d3.csv("/static/predictions/featureimportances.csv", function (d) {
@@ -167,16 +168,17 @@ var pbar = dc.rowChart("#pred-bar", "pbarchart");
     var ddim = ups.dimension(function(d) {return +d.weights;});
     var dgroup = ddim.group().reduceSum(function(d) {return +d.weights;});
 
-    frow.width(800).height(540)
+    frow.width(800).height(640)
       .margins({top: 10, right: 50, bottom: 30, left: 50})
       .transitionDuration(500)
       .x(d3.scale.linear().domain([0.5, 7.5]))
       .dimension(ddim)
       .group(dgroup)
       .elasticX(true)
-      .colors(physColors)
+      .colors(expenseColors)
       .renderLabel(true)
       .gap(5)
+      .ordering(function(d) {return -d.value;})
       .renderTitle(true)
       .title("Testtitle");
       // .xAxis().ticks(5).tickFormat(d3.format("s");
