@@ -140,7 +140,7 @@ var pbar = dc.rowChart("#pred-bar", "pbarchart");
       if (target != 'NaN') {
         // $('#worth-box').text('$' + target[1]/1000000 + 'M');
         var worth = target[1]/1000000;
-        var prob = 1/worth;
+        var prob = 1/(0.5*worth + 0.001);
         $('#worth-box').append('<h2> $' + worth.toPrecision(3) + 'M </h2>');
         $('#prob-box').append('<h2>' + prob.toPrecision(3) + '</h2>');        
       }
