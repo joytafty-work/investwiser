@@ -16,6 +16,7 @@
    <!-- Custom styles for this template -->
    <link href="{{ url_for('static', filename='assets/css/main.css') }}" rel="stylesheet">
    <link href="{{ url_for('static', filename='css/dc.css') }}" rel="stylesheet">
+   <link href="{{ url_for('static', filename='css/jquery.autocomplete.css') }}" rel="stylesheet">
 
     <!-- Fonts from Google Fonts -->
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
@@ -96,16 +97,16 @@
    <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.1.min.js"></script> 
    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.0/d3.min.js"></script>
-   <script type="text/javascript" src="static/js/tooltip.js"></script>  
-   <script type="text/javascript" src="static/js/libs/handlebars-1.0.rc.1.min.js"></script>
-   <script type="text/javascript" src="static/js/libs/jquery.isotope.v1.5.21.min.js"></script>
-   <script type="text/javascript" src="static/js/libs/jquery.ba-resize.v1.1.min.js"></script>
-   <script type="text/javascript" src="static/js/libs/jquery.imagesloaded.v2.1.0.min.js"></script>
-   <script type="text/javascript" src="static/js/jquery-veritcal-timeline.js"></script>
+   // <script type="text/javascript" src="static/js/libs/jquery.isotope.v1.5.21.min.js"></script>
+   // <script type="text/javascript" src="static/js/libs/jquery.ba-resize.v1.1.min.js"></script>
+   // <script type="text/javascript" src="static/js/libs/jquery.imagesloaded.v2.1.0.min.js"></script>
+   // <script type="text/javascript" src="static/js/jquery-veritcal-timeline.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/dc/1.6.0/dc.js"></script>
    <script type="text/javascript" src="static/js/crossfilter.js"></script>     
-   <script type="text/javascript" src="static/js/google-timeline.js"></script>  
+   // <script type="text/javascript" src="static/js/google-timeline.js"></script>  
    <script type="text/javascript" src="static/js/visualize.js"></script>
+    <script type="text/javascript" src="static/js/jquery.autocomplete.js'"></script>
+
    <script>
 
 var company = "{{company}}";
@@ -119,6 +120,7 @@ d3.csv('/static/companies.csv', function (data) {
       $('#company_name').text(data[i].company_name);
       $('#founder' + founder_counter).attr('src', data[i].founder_img);
       $('#name' + founder_counter).text(data[i].founder_name);
+      $('#name' + founder_counter).css(data[i].founder_name);
       $('#wrapper' + founder_counter).show();
       founder_counter = founder_counter + 1;
     }
