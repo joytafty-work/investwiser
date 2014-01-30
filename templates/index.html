@@ -66,7 +66,7 @@
     </script>  
 
     <script type="text/javascript">
-    d3.csv('static/companies_distinct.csv', function (data) {
+    d3.csv('static/companies_pred.csv', function (data) {
       for (i in data) {
       $('#icons').append(
         "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
