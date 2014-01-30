@@ -63,7 +63,7 @@ div.dc-chart {
 }
 
 .dc-chart .axis text {
-    font: 24px sans-serif;
+    font: 32px sans-serif;
 }
 
 .dc-chart .grid-line {
@@ -206,7 +206,7 @@ div.dc-chart {
 
 .dc-chart g.row text {
     fill: gray;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
     cursor: pointer;
 }

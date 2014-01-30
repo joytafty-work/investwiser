@@ -35,10 +35,10 @@
  .founder {
    display: none;
  }
- #company_img {
+/* #company_img {
    // max-height: 120px;
  }
-
+*/
  </style>
    <div class="container-full">
      <div align="center">
@@ -60,8 +60,8 @@
      </div>
    
   <div class="row">
-     <div class="col-md-6" id="prob-box">Probability of series A</div>
-     <div class="col-md-6" id="worth-box">Predicted Amount</div>
+     <div class="col-md-6" id="prob-box"><h3>Probability of series A</h3></div>
+     <div class="col-md-6" id="worth-box"><h3>Predicted Amount</h3></div>
      <div id="pred-bar"></div>
   </div>
      <div id="feat-bar"></div>
@@ -72,18 +72,18 @@
       <!-- <div id="feature-hplot">Place Holder for feature importance</div> -->
        <!-- <img class="col-xs-8" src="/static/img/featureimportances.png"> -->
        <img class="col-xs-3 pull-right" id="company_img" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg?buster=1326842750">
-       <p <p style="font-size:20px;" id="company_name"></p>
+       <p <p style="font-size:42px; font-weight:bold;" id="company_name"></p>
        <div class="col-xs-4">
          <div class="row">
          <br><br>
-           <div class="col-xs-10 founder" id="wrapper1">
-             <img class="col-xs-8" id="founder1" src="https://s3.amazonaws.com/photos.angel.co/users/26786-medium_jpg?1306973402"><span id="name1"><p style="font-size:32px;font-weight:bold">Jeff Lawson</p></span>
+           <div class="col-sm-10 founder" id="wrapper1">
+             <img class="col-xs-8" id="founder1" src="https://s3.amazonaws.com/photos.angel.co/users/26786-medium_jpg?1306973402"><span><p id="name1" style="font-size:32px;font-weight:bold">Jeff Lawson</p></span>
            </div>
-           <div class="col-xs-10 founder" id="wrapper2">
-             <img class="col-xs-8" id="founder2" src="https://s3.amazonaws.com/photos.angel.co/users/169245-medium_jpg?1346719228"><span id="name2"><p style="font-size:32px;font-weight:bold">John Wolthuis</p></span>
+           <div class="col-sm-10 founder" id="wrapper2">
+             <img class="col-xs-8" id="founder2" src="https://s3.amazonaws.com/photos.angel.co/users/169245-medium_jpg?1346719228"><span><p id="name2"style="font-size:32px;font-weight:bold">John Wolthuis</p></span>
            </div>
-           <div class="col-xs-10 founder" id="wrapper3">
-             <img class="col-xs-8" id="founder3" src="https://s3.amazonaws.com/photos.angel.co/users/114331-medium_jpg?1333666677"><span id="name3"><p styel="font-size:32px;font-weight:bold">Evan Cooke</p></span>
+           <div class="col-sm-10 founder" id="wrapper3">
+             <img class="col-xs-8" id="founder3" src="https://s3.amazonaws.com/photos.angel.co/users/114331-medium_jpg?1333666677"><span><p  id="name3" style="font-size:32px;font-weight:bold">Evan Cooke</p></span>
             </div>
             
           </div>
@@ -97,13 +97,8 @@
    <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.1.min.js"></script> 
    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.0/d3.min.js"></script>
-   // <script type="text/javascript" src="static/js/libs/jquery.isotope.v1.5.21.min.js"></script>
-   // <script type="text/javascript" src="static/js/libs/jquery.ba-resize.v1.1.min.js"></script>
-   // <script type="text/javascript" src="static/js/libs/jquery.imagesloaded.v2.1.0.min.js"></script>
-   // <script type="text/javascript" src="static/js/jquery-veritcal-timeline.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/dc/1.6.0/dc.js"></script>
+   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/dc/1.6.0/dc.js"></script>
    <script type="text/javascript" src="static/js/crossfilter.js"></script>     
-   // <script type="text/javascript" src="static/js/google-timeline.js"></script>  
    <script type="text/javascript" src="static/js/visualize.js"></script>
     <script type="text/javascript" src="static/js/jquery.autocomplete.js'"></script>
 
@@ -138,55 +133,43 @@ d3.csv('/static/companies.csv', function (data) {
         }
       }
 
-      if (worth != 'NaN') {
-        // $('#worth-box').text('$' + target[1]/1000000 + 'M');
+      var pcutoff = 0.3;
+      if (prob > pcutoff) {
         worthval = (worth/1000000).toPrecision(3);
         $('#worth-box').append('<h2> $' + worthval + 'M </h2>');
-        $('#prob-box').append('<h2>' + prob + '</h2>');        
+      } else {
+        $('#worth-box').append('<h2>--</h2>');
       }
       
-    //   var t = crossfilter(target);
-    //   var tdim = t.dimension(function(d) {return +1;});
-    //   var tgrp = tdim.group().reduceSum(function(d) {return +1;});
-
-    // pbar.width(800).height(100)
-    //   .margins({top: 10, right: 50, bottom: 30, left: 50})
-    //   .transitionDuration(500)
-    //   .x(d3.scale.linear().domain([0.5, 7.5]))
-    //   .dimension(tdim)
-    //   .group(tgrp)
-    //   .elasticX(true)
-      // .renderLabel(true);
-      // .xAxis().ticks(5).tickFormat(d3.format("s");
-
+      $('#prob-box').append('<h2>' + prob + '</h2>');    
     dc.renderAll("pbarchart");
     });
 
-  var expenseColors = ["#fee391","#fec44f","#fe9929","#fd8d3c","#e08214","#fdb863","#fdae6b","#ec7014"];
+  // var expenseColors = ["#fee391","#fec44f","#fe9929","#fd8d3c","#e08214","#fdb863","#fdae6b","#ec7014"];
 
-  var frow = dc.rowChart("#feat-bar", "chart");
-  d3.csv("/static/predictions/featureimportances.csv", function (d) {
-    var ups = crossfilter(d);
-    var ddim = ups.dimension(function(d) {return +d.weights;});
-    var dgroup = ddim.group().reduceSum(function(d) {return +d.weights;});
+  // var frow = dc.rowChart("#feat-bar", "chart");
+  // d3.csv("/static/predictions/featureimportances.csv", function (d) {
+  //   var ups = crossfilter(d);
+  //   var ddim = ups.dimension(function(d) {return +d.weights;});
+  //   var dgroup = ddim.group().reduceSum(function(d) {return +d.weights;});
 
-    frow.width(800).height(640)
-      .margins({top: 10, right: 50, bottom: 30, left: 50})
-      .transitionDuration(500)
-      .x(d3.scale.linear().domain([0.5, 7.5]))
-      .dimension(ddim)
-      .group(dgroup)
-      .elasticX(true)
-      .colors(expenseColors)
-      .renderLabel(true)
-      .gap(5)
-      .ordering(function(d) {return -d.value;})
-      .renderTitle(true)
-      .title("Testtitle");
-      // .xAxis().ticks(5).tickFormat(d3.format("s");
+  //   frow.width(800).height(640)
+  //     .margins({top: 10, right: 50, bottom: 30, left: 50})
+  //     .transitionDuration(500)
+  //     .x(d3.scale.linear().domain([0.5, 7.5]))
+  //     .dimension(ddim)
+  //     .group(dgroup)
+  //     .elasticX(true)
+  //     .colors(expenseColors)
+  //     .renderLabel(true)
+  //     .gap(5)
+  //     .ordering(function(d) {return -d.value;})
+  //     .renderTitle(true)
+  //     .title("Testtitle");
+  //     // .xAxis().ticks(5).tickFormat(d3.format("s");
 
-    dc.renderAll("chart");
-    });
+  //   dc.renderAll("chart");
+  //   });
 
    </script>
 
