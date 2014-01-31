@@ -48,7 +48,34 @@
    <br><br>
      <br><br>
 
-     <!-- <div class="span-9 centered" id="icons" align="center"></div> -->
+    <!-- Prediction box -->
+    <div class="container">
+      <div class="centered col-md-12">   
+        <div class='pin-wide' id="result-box" style="display: none">
+          <div class="col-md-6"><h3>Likelihood of raising Series A</h3>
+          <h2 id="prob-box"></h2></div>
+          <div class="col-md-6"><h3>Series A Amount (predicted)</h3>
+          <h2 id="worth-box"></h2></div>
+          <img class="col-xs-3 pull-left" id="company_img" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg?buster=1326842750">
+       <p style="font-size:42px; font-weight:bold;" height="400px" id="company_name"></p>
+
+<!--           <div class="row">
+         <br><br>
+           <div class="col-sm-4 founder" id="wrapper1">
+             <img class="col-xs-8" id="founder1" src="https://s3.amazonaws.com/photos.angel.co/users/26786-medium_jpg?1306973402"><span><p id="name1" style="font-size:32px;font-weight:bold">Jeff Lawson</p></span>
+           </div>
+           <div class="col-sm-4 founder" id="wrapper2">
+             <img class="col-xs-8" id="founder2" src="https://s3.amazonaws.com/photos.angel.co/users/169245-medium_jpg?1346719228"><span><p id="name2"style="font-size:32px;font-weight:bold">John Wolthuis</p></span>
+           </div>
+           <div class="col-sm-4 founder" id="wrapper3">
+             <img class="col-xs-8" id="founder3" src="https://s3.amazonaws.com/photos.angel.co/users/114331-medium_jpg?1333666677"><span><p  id="name3" style="font-size:32px;font-weight:bold">Evan Cooke</p></span>
+            </div>
+            
+          </div> -->
+        </div>
+      </div>
+    </div>
+       
      <div id="columns" align="center"></div>
    </div>
 
@@ -66,23 +93,108 @@
       $('#company').autocomplete("static/names.txt");
     </script>  
 
+  <!-- Script for fetching company data -->
+   <!-- ================================================== --> 
     <script type="text/javascript">
+    // Fetch prediction
+    var g_data=[]; 
+    d3.csv('static/RF_classify_and_regress.csv', function (data) { g_data = data; } );
+    // Load companies data
+    var c_data = []; 
+    d3.csv('static/companies.csv', function (data) { c_data = data; } );
+
+
+    $('form').submit(function (e) { 
+      e.preventDefault(); 
+      s = $('input').val(); 
+      console.log(s);
+      for(i in g_data) {
+        row = g_data[i]; 
+        if (row.name.toLowerCase() == s.toLowerCase()) {
+          gi = i;
+          }
+        }
+
+      for (j in c_data) {
+        r = c_data[j]; 
+        if (r.company_name.toLowerCase() == s.toLowerCase()) {
+          cj = j;
+        }
+      }
+    
+      target = g_data[gi].company_name;
+      prob = g_data[gi].RFCprobA;
+      worth = g_data[gi].RFRval;        
+      worthval = (worth/1000000).toPrecision(3);
+
+      if (prob < 0.3) {
+        $('#worth-box').html('<h2> <$1M </h2>');
+      } else {
+        $('#worth-box').html('<h2> $' + worthval + 'M </h2>');
+      }
+
+      $('#prob-box').html('<h2>' + (prob*100).toPrecision(3) + ' % </h2>');
+      // $('#prob-box').append((prob*100).toPrecision(3));
+      $('#company_img').attr('src', c_data[cj].company_img);
+      $('#result-box').fadeIn();       
+    } );
+
+    // Load grid icons with links
     d3.csv('static/companies_pred.csv', function (data) {
       for (i in data) {
       $('#columns').append(
         "<div class='pin'>" + 
         "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
-        "<img src=" + data[i].company_img + " height='84'></img>" + "</a></div>"
+        "<img src=" + data[i].company_img + " height='84px' align:center></img>" + 
+        "</a></div>"
         );  
-
-      // $('#icons').append(
-      //   "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
-      //   "<img src=" + data[i].company_img + " height='80'></img>" + "</a>"
-      //   );  
-      // console.log(data);
     }
     });
-    </script>    
+    </script>
+
+    <script>
+    $('form').submit(function (e) { e.preventDefault(); 
+      var s = $('input').val();
+      $('#result-box').fadeIn(); } );
+    var company = "{{company}}";
+    d3.csv('/static/companies.csv', function (data) {
+    // console.log(data[0]);
+    founder_counter = 1;
+    for(i in data) {
+      if(data[i].company_name.toLowerCase() == company.toLowerCase()) {
+      // console.log(data[i]);
+      $('#company_img').attr('src', data[i].company_img);
+      $('#company_name').text(data[i].company_name);
+      $('#founder' + founder_counter).attr('src', data[i].founder_img);
+      $('#name' + founder_counter).text(data[i].founder_name);
+      $('#name' + founder_counter).css(data[i].founder_name);
+      $('#wrapper' + founder_counter).show();
+      founder_counter = founder_counter + 1;
+    }
+  }
+});
+
+// d3.csv("/static/predictions/RF_classify_and_regress.csv", function (data) {
+//       var prob; 
+//       var worth;
+//       for (i in data) {
+//         if (data[i].name.toLowerCase() == company.toLowerCase()) {
+//         prob = data[i].RFCprobA;
+//         worth = data[i].RFRval;
+//         }
+//       }
+
+//       var pcutoff = 0.3;
+//       if (prob > pcutoff) {
+//         worthval = (worth/1000000).toPrecision(3);
+//         $('#worth-box').append('<h2> $' + worthval + 'M </h2>');
+//       } else {
+//         $('#worth-box').append('<h2> < $1M </h2>');
+//       }
+      
+//       $('#prob-box').append('<h2>' + prob*100 + ' % </h2>');
+//     });
+   </script>    
     
  </body>
 </html>

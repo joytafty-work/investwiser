@@ -1,0 +1,34 @@
+### Load prediction data
+
+var g_data=[]; 
+d3.csv('static/RF_classify_and_regress.csv', function (data) { g_data = data; } );
+
+### Load companies data
+var c_dta = []; 
+d3.csv('static/companies.csv', function (data) { c_data = data; } );
+
+$('form').submit(function (e) { 
+	e.preventDefault(); 
+	s = $('input').val(); 
+	console.log(s);
+	for(i in g_data) {
+		row = g_data[i]; 
+		if (row.name.toLowerCase() == s.toLowerCase()) {
+			idx = i;
+			}
+	}
+	target = g_data[idx].company_name;
+	prob = g_data[idx].RFCprobA;
+	worth = g_data[idx].RFRval;
+		
+	worthval = (worth/1000000).toPrecision(3);
+	$('#worth-box').append('<h2> $' + worthval + 'M </h2>');
+	$('#prob-box').append('<h2>' + prob*100 + ' % </h2>');
+	$('#result-box').fadeIn(); 
+} );
+
+
+
+
+$('#worth-box').replaceWith('<h2> $1M </h2>')
+$('#prob-box').replaceWith('50%')
