@@ -32,12 +32,12 @@
   <div class="container">
    <div align="center">
     <a href="/"><h1 class="splash">InvestWiser</h1></a>
-     <h3 class="caption">Predict founders' effect on series A funding</h3>
+     <h3 class="caption">Predict Series A Crunch Outcome</h3>
         <div class="form-group">
 	       <span class="input-group-btn">
 	         <form class="form-inline" action="fetchcompany" method="get">
 	         <input style="width: 500px; height:64px; font-size:20px;" 
-		    type="text" id="company" name="company" class="form-control">  
+		    type="text" id="company" name="company" class="form-control" placeholder="Type in startup name">  
 	         <button style="font-size:20px; height:64px;" 
 		     class="btn primary-button" type="submit">Predict!</button>
           </form>
@@ -124,7 +124,7 @@
     
       target = g_data[gi].company_name;
       prob = g_data[gi].RFCprobA;
-      worth = g_data[gi].RFRval;        
+      worth = g_data[gi].RFRval; 
       worthval = (worth/1000000).toPrecision(3);
 
       if (prob < 0.3) {
