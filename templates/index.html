@@ -12,10 +12,10 @@
    <!-- Bootstrap core CSS -->
    <!-- <link href="static/css/bootstrap.css" rel="stylesheet"> -->
    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-
-   <!-- Custom styles for this template -->
+    <!-- Custom styles for this template -->
    <link href="{{ url_for('static', filename='assets/css/main.css') }}" rel="stylesheet">
    <link href="{{ url_for('static', filename='css/jquery.autocomplete.css') }}" rel="stylesheet">
+   <link href="{{ url_for('static', filename='css/pin.css') }}" rel="stylesheet">
    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/transition.css" rel="stylesheet">
 
    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -49,7 +49,8 @@
    <br><br>
      <br><br>
 
-     <div class="span-9 centered" id="icons" align="center"></div>
+     <!-- <div class="span-9 centered" id="icons" align="center"></div> -->
+     <div id="columns"></div>
 
     <!-- Bootstrap core JavaScript
    ================================================== -->
@@ -68,10 +69,16 @@
     <script type="text/javascript">
     d3.csv('static/companies_pred.csv', function (data) {
       for (i in data) {
-      $('#icons').append(
+      $('#columns').append(
+        "<div class='pin'>" + 
         "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
-        "<img src=" + data[i].company_img + "></img>" + "</a>"
+        "<img src=" + data[i].company_img + " height='80'></img>" + "</a></div>"
         );  
+
+      // $('#icons').append(
+      //   "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+      //   "<img src=" + data[i].company_img + " height='80'></img>" + "</a>"
+      //   );  
       // console.log(data);
     }
     });

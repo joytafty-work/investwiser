@@ -15,6 +15,7 @@
 
    <!-- Custom styles for this template -->
    <link href="{{ url_for('static', filename='assets/css/main.css') }}" rel="stylesheet">
+   <link href="{{ url_for('static', filename='css/pin.css') }}" rel="stylesheet">
    <link href="{{ url_for('static', filename='css/dc.css') }}" rel="stylesheet">
    <link href="{{ url_for('static', filename='css/jquery.autocomplete.css') }}" rel="stylesheet">
 
@@ -60,8 +61,12 @@
      </div>
    
   <div class="row">
-     <div class="col-md-6" id="prob-box"><h3>Probability of series A</h3></div>
-     <div class="col-md-6" id="worth-box"><h3>Predicted Amount</h3></div>
+    <div class='pin-wide'>
+      <div class="col-md-6" id="prob-box"><h3>Chance of series A</h3></div>
+      <div class="col-md-6" id="worth-box"><h3>Predicted Amount</h3></div>
+    </div>
+<!--      <div class="col-md-6" id="prob-box"><h3>Probability of series A</h3></div>
+     <div class="col-md-6" id="worth-box"><h3>Predicted Amount</h3></div> -->
      <div id="pred-bar"></div>
   </div>
      <div id="feat-bar"></div>
@@ -141,7 +146,7 @@ d3.csv('/static/companies.csv', function (data) {
         $('#worth-box').append('<h2>--</h2>');
       }
       
-      $('#prob-box').append('<h2>' + prob + '</h2>');    
+      $('#prob-box').append('<h2>' + prob*100 + ' % </h2>');    
     dc.renderAll("pbarchart");
     });
 
