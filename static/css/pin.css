@@ -1,3 +1,21 @@
+body {
+	background: url(http://subtlepatterns.com/patterns/scribble_light.png) ;
+}
+
+.container {
+  width: 940px;
+  .center-block();
+}
+
+#wrapper {
+	width: 90%;
+	max-width: 800px;
+	min-width: 800px;
+	text-align: center;
+	vertical-align:
+	margin: 150px auto;
+}
+
 #columns {
     -moz-column-count: 1;
     -moz-column-gap: 10px;
