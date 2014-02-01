@@ -55,19 +55,24 @@
           <h2 id="prob-box"></h2></div>
           <div class="col-md-6"><h3>Series A Amount (predicted)</h3>
           <h2 id="worth-box"></h2></div>
+          <br><br>
           <img class="col-xs-3 pull-left" id="company_img" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg?buster=1326842750">
-       <p style="font-size:42px; font-weight:bold;" height="400px" id="company_name"></p>
+        <br><br>
+       <p style="font-size:32px; font-weight:bold;" height="400px" id="company_name" align="left"></p>
+       <p style="font-weight:bold" align="left" id="snippet"></p>
+       <p id="prod_desc" align="left"></p>
 
           <div class="row">
          <br><br>
            <div class="col-sm-4 founder" id="wrapper1">
-             <img class="col-xs-8" id="founder1" src="https://s3.amazonaws.com/photos.angel.co/users/26786-medium_jpg?1306973402"><span><p id="name1" style="font-size:32px;font-weight:bold">Jeff Lawson</p></span>
+             <img class="col-xs-8" id="founder1" src="https://s3.amazonaws.com/photos.angel.co/users/26786-medium_jpg?1306973402">
+             <div class="caption" id="name1" style="font-size:32px;font-weight:bold">Jeff Lawson</div>
            </div>
            <div class="col-sm-4 founder" id="wrapper2">
              <img class="col-xs-8" id="founder2" src="https://s3.amazonaws.com/photos.angel.co/users/169245-medium_jpg?1346719228"><span><p id="name2"style="font-size:32px;font-weight:bold">John Wolthuis</p></span>
            </div>
            <div class="col-sm-4 founder" id="wrapper3">
-             <img class="col-xs-8" id="founder3" src="https://s3.amazonaws.com/photos.angel.co/users/114331-medium_jpg?1333666677"><span><p  id="name3" style="font-size:32px;font-weight:bold">Evan Cooke</p></span>
+             <img class="col-xs-8" id="founder3" src=""><span><p  id="name3" style="font-size:32px;font-weight:bold"></p></span>
             </div>
             
           </div>
@@ -102,25 +107,28 @@
     var c_data = []; 
     d3.csv('static/companies.csv', function (data) { c_data = data; } );
     // Load companies description
+    d3.csv('static/predictions/company_snippets.csv', function (data) {sn_data = data;} );
 
     // Form submission
     $('form').submit(function (e) { 
       e.preventDefault(); 
       s = $('input').val(); 
-      console.log(s);
       for(i in g_data) {
         row = g_data[i]; 
-        if (row.name.toLowerCase() == s.toLowerCase()) {
-          gi = i;
-          }
+        if (row.name.toLowerCase() == s.toLowerCase()) { gi = i; }
         }
 
       for (j in c_data) {
         r = c_data[j]; 
-        if (r.company_name.toLowerCase() == s.toLowerCase()) {
-          cj = j;
+        if (r.company_name.toLowerCase() == s.toLowerCase()) { cj = j; }
         }
+
+      for (k in sn_data) {
+        sn = sn_data[k];
+        if (sn.company_name.toLowerCase() == s.toLowerCase()) { sk = k; }
       }
+
+      console.log(sn_data[sk]);
     
       target = g_data[gi].company_name;
       prob = g_data[gi].RFCprobA;
@@ -128,6 +136,7 @@
       worth = g_data[gi].RFRpred; 
       worthval = (worth/1000000).toPrecision(3);
       aval = (aval/1000000).toPrecision(3);
+      // snippet = sn_data[sk].high_concept
 
       if (aval != 0) {
         $('#worth-box').html('<h2> $' + worthval + 'M</h2><h3>($' + aval + 'M)</h3>');
@@ -143,8 +152,19 @@
       
       $('#company_img').attr('src', c_data[cj].company_img);
       $('#company_name').text(c_data[cj].company_name);
+      $('#snippet').text(sn_data[sk].high_concept);
+      $('#prod_desc').text(sn_data[sk].product_desc);
       founder_counter = 1;
-
+      for(i in c_data) {
+        if(c_data[i].company_name.toLowerCase() == s.toLowerCase()) {
+          $('#founder' + founder_counter).attr('src', '');
+          $('#founder' + founder_counter).attr('src', c_data[i].founder_img);
+          $('#name' + founder_counter).text(c_data[i].founder_name);          
+          $('#name' + founder_counter).css(c_data[i].founder_name);
+          $('#wrapper' + founder_counter).show(); 
+          founder_counter = founder_counter + 1;           
+        }
+      }
       $('#result-box').fadeIn();             
     } );
   </script>
