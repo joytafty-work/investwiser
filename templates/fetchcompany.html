@@ -68,12 +68,12 @@
         <div class="col-md-6" id="prob-box"><h3>Likelihood of raising Series A</h3></div>
         <div class="col-md-6" id="worth-box"><h3>Series A Amount (predicted)</h3></div>
         <!-- <div class="col-md-8" id="actual-box"><h3>Amount (actual)</h3></div> -->
+        <div class="row">
         <p style="font-size:42px; font-weight:bold;" height="400px" id="company_name"></p>
         <img class="col-xs-3 pull-left" id="company_img" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg?buster=1326842750">
+        </div>
 
-       <div class="col-xs-4">
          <div class="row">
-         <br><br>
            <div class="col-sm-10 founder" id="wrapper1">
              <img class="col-xs-8" id="founder1" src="https://s3.amazonaws.com/photos.angel.co/users/26786-medium_jpg?1306973402"><span><p id="name1" style="font-size:32px;font-weight:bold">Jeff Lawson</p></span>
            </div>
@@ -81,9 +81,7 @@
              <img class="col-xs-8" id="founder2" src="https://s3.amazonaws.com/photos.angel.co/users/169245-medium_jpg?1346719228"><span><p id="name2"style="font-size:32px;font-weight:bold">John Wolthuis</p></span>
            </div>
            <div class="col-sm-10 founder" id="wrapper3">
-             <img class="col-xs-8" id="founder3" src="https://s3.amazonaws.com/photos.angel.co/users/114331-medium_jpg?1333666677"><span><p  id="name3" style="font-size:32px;font-weight:bold">Evan Cooke</p></span>
-            </div>
-            
+             <img class="col-xs-8" id="founder3" src="https://s3.amazonaws.com/photos.angel.co/users/114331-medium_jpg?1333666677"><span><p  id="name3" style="font-size:32px;font-weight:bold">Evan Cooke</p></span>          
           </div>
         </div>
 
@@ -130,11 +128,11 @@ d3.csv('/static/companies.csv', function (data) {
       for (i in data) {
         if (data[i].name.toLowerCase() == company.toLowerCase()) {
         prob = data[i].RFCprobA;
-        worth = data[i].RFRval;
+        worth = data[i].RFRpred;
         }
       }
 
-      var pcutoff = 0.3;
+      var pcutoff = 0.2;
       if (prob > pcutoff) {
         worthval = (worth/1000000).toPrecision(3);
         $('#worth-box').append('<h2> $' + worthval + 'M </h2>');

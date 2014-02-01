@@ -27,8 +27,89 @@ $('form').submit(function (e) {
 	$('#result-box').fadeIn(); 
 } );
 
+// Capturing pin clicks
+$('.pin').click(function (e) {
+	e.preventDefault();
+	console.log($this.attr('data-company'));
+});
 
+$('.pin').click(function (e) {
+	e.preventDefault();
+	console.log($(this).data);
+});
 
+$('.pin').click(function (e) {
+	e.preventDefault();
+	s = $(this).attr('data-company');
+	
+	for(i in g_data) {
+	        row = g_data[i]; 
+	        if (row.name.toLowerCase() == s.toLowerCase()) {
+	          gi = i;
+	          }
+	        }
 
-$('#worth-box').replaceWith('<h2> $1M </h2>')
-$('#prob-box').replaceWith('50%')
+	      for (j in c_data) {
+	        r = c_data[j]; 
+	        if (r.company_name.toLowerCase() == s.toLowerCase()) {
+	          cj = j;
+	        }
+	      }
+		target = g_data[gi].company_name;
+		      prob = g_data[gi].RFCprobA;
+		      aval = g_data[gi].RFRval;
+		      worth = g_data[gi].RFRpred; 
+		      worthval = (worth/1000000).toPrecision(3);
+		      aval = (aval/1000000).toPrecision(3);
+
+		      if (aval != 0) {
+		        $('#worth-box').html('<h2> $' + worthval + 'M</h2><h3>($' + aval + 'M)</h3>');
+		      } else {
+		        if (prob < 0.3) {
+		          $('#worth-box').html('<h2> <$1M </h2>');
+		        } else {
+		          $('#worth-box').html('<h2> $' + worthval + 'M </h2>');
+		        }
+		      }
+		      $('#prob-box').html('<h2>' + (prob*100).toPrecision(3) + ' % </h2>');
+		      $('#company_img').attr('src', c_data[cj].company_img);
+		      $('#result-box').fadeIn();
+});
+
+$('.img').click(function (e) {
+	e.preventDefault();
+	s = $(this).attr('data-company');
+	
+	for(i in g_data) {
+	        row = g_data[i]; 
+	        if (row.name.toLowerCase() == s.toLowerCase()) {
+	          gi = i;
+	          }
+	        }
+
+	      for (j in c_data) {
+	        r = c_data[j]; 
+	        if (r.company_name.toLowerCase() == s.toLowerCase()) {
+	          cj = j;
+	        }
+	      }
+		target = g_data[gi].company_name;
+		      prob = g_data[gi].RFCprobA;
+		      aval = g_data[gi].RFRval;
+		      worth = g_data[gi].RFRpred; 
+		      worthval = (worth/1000000).toPrecision(3);
+		      aval = (aval/1000000).toPrecision(3);
+
+		      if (aval != 0) {
+		        $('#worth-box').html('<h2> $' + worthval + 'M</h2><h3>($' + aval + 'M)</h3>');
+		      } else {
+		        if (prob < 0.3) {
+		          $('#worth-box').html('<h2> <$1M </h2>');
+		        } else {
+		          $('#worth-box').html('<h2> $' + worthval + 'M </h2>');
+		        }
+		      }
+		      $('#prob-box').html('<h2>' + (prob*100).toPrecision(3) + ' % </h2>');
+		      $('#company_img').attr('src', c_data[cj].company_img);
+		      $('#result-box').fadeIn();
+});
