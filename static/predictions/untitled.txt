@@ -113,3 +113,11 @@ $('.img').click(function (e) {
 		      $('#company_img').attr('src', c_data[cj].company_img);
 		      $('#result-box').fadeIn();
 });
+
+// New pin clicks
+
+$('#columns').on("click", ".pin", function (e) {
+	s = $(this).attr('data-company');
+	console.log(s);
+	console.log("pin clicked")
+})
