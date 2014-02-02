@@ -26,7 +26,7 @@
 
  </head>
 
- <body {% if query %} onload="queryURL('{{ query }}')" {% endif %}>
+ <!-- <body {% if query %} onload="queryURL('{{ query }}')" {% endif %}> -->
 
   <div class="container">
    <div align="center">
@@ -43,10 +43,33 @@
 	       </span>
        </div>
      </div>
-
-   <br><br>
+     <div id="notfound-box" style="display: none" align="center"><h4>Company not found</h4></div>
      <br><br>
 
+<!-- Button trigger modal -->
+<!-- <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+ -->
+<!-- Modal -->
+<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+ -->
     <!-- Prediction box -->
     <div class="container">
       <div class="centered col-md-12">   
@@ -61,10 +84,11 @@
        <p style="font-size:32px; font-weight:bold;" height="400px" id="company_name" align="left"></p>
        <p style="font-weight:bold" align="left" id="snippet"></p>
        <p id="prod_desc" align="left"></p>
+       <a href="#" id="result-dismiss">Close<p>
 
           <div class="row">
          <br><br>
-           <div class="col-sm-4 founder" id="wrapper1">
+<!--            <div class="col-sm-4 founder" id="wrapper1">
              <img class="col-xs-8" id="founder1" src="https://s3.amazonaws.com/photos.angel.co/users/26786-medium_jpg?1306973402">
              <div class="caption" id="name1" style="font-size:32px;font-weight:bold">Jeff Lawson</div>
            </div>
@@ -73,7 +97,7 @@
            </div>
            <div class="col-sm-4 founder" id="wrapper3">
              <img class="col-xs-8" id="founder3" src=""><span><p  id="name3" style="font-size:32px;font-weight:bold"></p></span>
-            </div>
+            </div> -->
             
           </div>
         </div>
@@ -109,16 +133,8 @@
     // Load companies description
     d3.csv('static/predictions/company_snippets.csv', function (data) {sn_data = data;} );
 
-    // Form submission
-    $('form').submit(function (e) { 
-      e.preventDefault(); 
-      s = $('input').val(); 
-      for(i in g_data) {
-        row = g_data[i]; 
-        if (row.name.toLowerCase() == s.toLowerCase()) { gi = i; }
-        }
-
-      for (j in c_data) {
+    function fetchResults(s) {
+           for (j in c_data) {
         r = c_data[j]; 
         if (r.company_name.toLowerCase() == s.toLowerCase()) { cj = j; }
         }
@@ -127,8 +143,6 @@
         sn = sn_data[k];
         if (sn.company_name.toLowerCase() == s.toLowerCase()) { sk = k; }
       }
-
-      console.log(sn_data[sk]);
     
       target = g_data[gi].company_name;
       prob = g_data[gi].RFCprobA;
@@ -148,25 +162,58 @@
         }
       }
 
-      $('#prob-box').html('<h2>' + (prob*100).toPrecision(3) + ' % </h2>');
-      
+      $('#prob-box').html('<h2>' + (prob*100).toPrecision(3) + ' % </h2>');      
       $('#company_img').attr('src', c_data[cj].company_img);
       $('#company_name').text(c_data[cj].company_name);
       $('#snippet').text(sn_data[sk].high_concept);
-      $('#prod_desc').text(sn_data[sk].product_desc);
-      founder_counter = 1;
-      for(i in c_data) {
-        if(c_data[i].company_name.toLowerCase() == s.toLowerCase()) {
-          $('#founder' + founder_counter).attr('src', '');
-          $('#founder' + founder_counter).attr('src', c_data[i].founder_img);
-          $('#name' + founder_counter).text(c_data[i].founder_name);          
-          $('#name' + founder_counter).css(c_data[i].founder_name);
-          $('#wrapper' + founder_counter).show(); 
-          founder_counter = founder_counter + 1;           
-        }
+
+      // Add Read more clickable if there's more snippets
+      if (sn_data[sk].product_desc !== "") { 
+        $('#prod_desc').html("<a href='#' id='more_prod_desc'>More Info</a>");
+        $('#more_prod_desc').click(function (e) { 
+          e.preventDefault(); 
+          $(this).html(sn_data[sk].product_desc);
+        });
       }
-      $('#result-box').fadeIn();             
-    } );
+      // $('#prod_desc').text(sn_data[sk].product_desc);
+      // founder_counter = 1;
+      // for(i in c_data) {
+      //   if(c_data[i].company_name.toLowerCase() == s.toLowerCase()) {
+      //     $('#founder' + founder_counter).attr('src', '');
+      //     $('#founder' + founder_counter).attr('src', c_data[i].founder_img);
+      //     $('#name' + founder_counter).text(c_data[i].founder_name);          
+      //     $('#name' + founder_counter).css(c_data[i].founder_name);
+      //     $('#wrapper' + founder_counter).show(); 
+      //     founder_counter = founder_counter + 1;           
+      //   }
+      // }
+    }
+
+    // Form submission
+    $('form').submit(function (e) { 
+      e.preventDefault(); 
+      s = $('input').val();
+      console.log(s); 
+      gi = "None"
+      for(i in g_data) {
+        row = g_data[i]; 
+        if (row.name.toLowerCase() == s.toLowerCase()) { gi = i; }
+        }
+
+      if (gi === "None") { $('#notfound-box').toggle(); } 
+      else { 
+        fetchResults(s);
+        $('#result-box').fadeIn();    
+       }
+    });
+
+    // Read more
+
+    // Close Result box 
+    $('#result-dismiss').click(function (e) {
+      e.preventDefault();
+      $('#result-box').fadeOut();
+    })
   </script>
 
 <!-- // Load grid icons with links -->
@@ -176,35 +223,12 @@
       $('#columns').append(
         "<div class='pin' data-company=" + data[i].company_name + ">" + 
         // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
-        "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='84px' align:center></img>" + 
+        "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
         "</a></div>"
         );  
       }
     });
   </script>
-
-    <!-- Prediction box control -->
-     <!-- // <script> -->
-<!-- //     $('form').submit(function (e) { e.preventDefault(); 
-//       var s = $('input').val();
-//       $('#result-box').fadeIn(); } );
-//     var company = "{{company}}";
-//     d3.csv('/static/companies.csv', function (data) {
-//     founder_counter = 1;
-//     for(i in data) {
-//       if(data[i].company_name.toLowerCase() == company.toLowerCase()) {
-//       // console.log(data[i]);
-//       $('#company_img').attr('src', data[i].company_img);
-//       $('#company_name').text(data[i].company_name);
-//       $('#founder' + founder_counter).attr('src', data[i].founder_img);
-//       $('#name' + founder_counter).text(data[i].founder_name);
-//       $('#name' + founder_counter).css(data[i].founder_name);
-//       $('#wrapper' + founder_counter).show();
-//       founder_counter = founder_counter + 1;
-//     }
-//   }
-// });
-//    </script>   -->
 
   <script type="text/javascript">
   function readyPin(jQuery) {
@@ -252,65 +276,33 @@
           $('#company_name').text(c_data[cj].company_name);
 
           $('#snippet').text(sn_data[sk].high_concept);
-          $('#prod_desc').text(sn_data[sk].product_desc);
-      founder_counter = 1;
-      for(i in c_data) {
-        if(c_data[i].company_name.toLowerCase() == s.toLowerCase()) {
-          $('#founder' + founder_counter).attr('src', '');
-          $('#founder' + founder_counter).attr('src', c_data[i].founder_img);
-          $('#name' + founder_counter).text(c_data[i].founder_name);          
-          $('#name' + founder_counter).css(c_data[i].founder_name);
-          $('#wrapper' + founder_counter).show(); 
-          founder_counter = founder_counter + 1;           
-        }
+
+          // Add Read more clickable if there's more snippets
+          if (sn_data[sk].product_desc !== "") { 
+          $('#prod_desc').html("<a href='#' id='more_prod_desc'>More Info</a>");
+          $('#more_prod_desc').click(function (e) { 
+            e.preventDefault(); 
+            $(this).html(sn_data[sk].product_desc);
+        });
       }
+
+      //     $('#prod_desc').text(sn_data[sk].product_desc);
+      // founder_counter = 1;
+      // for(i in c_data) {
+      //   if(c_data[i].company_name.toLowerCase() == s.toLowerCase()) {
+      //     $('#founder' + founder_counter).attr('src', '');
+      //     $('#founder' + founder_counter).attr('src', c_data[i].founder_img);
+      //     $('#name' + founder_counter).text(c_data[i].founder_name);          
+      //     $('#name' + founder_counter).css(c_data[i].founder_name);
+      //     $('#wrapper' + founder_counter).show(); 
+      //     founder_counter = founder_counter + 1;           
+      //   }
+      // }
       $('#result-box').fadeIn();
     });
-
-    // $('.pin').click(function (e) {
-    // console.log("pin clicked");
-    //   // e.preventDefault();
-    //   var s = $(this).attr('data-company');
-    //   console.log(s);
-  
-    //   for(i in g_data) {
-    //       row = g_data[i]; 
-    //       if (row.name.toLowerCase() == s.toLowerCase()) {
-    //         gi = i;
-    //         }
-    //       }
-
-    //     for (j in c_data) {
-    //       r = c_data[j]; 
-    //       if (r.company_name.toLowerCase() == s.toLowerCase()) {
-    //         cj = j;
-    //       }
-    //     }
-    //       target = g_data[gi].company_name;
-    //       prob = g_data[gi].RFCprobA;
-    //       aval = g_data[gi].RFRval;
-    //       worth = g_data[gi].RFRpred; 
-    //       worthval = (worth/1000000).toPrecision(3);
-    //       aval = (aval/1000000).toPrecision(3);
-
-    //       if (aval != 0) {
-    //         $('#worth-box').html('<h2> $' + worthval + 'M</h2><h3>($' + aval + 'M)</h3>');
-    //       } else {
-    //         if (prob < 0.3) {
-    //           $('#worth-box').html('<h2> <$1M </h2>');
-    //         } else {
-    //           $('#worth-box').html('<h2> $' + worthval + 'M </h2>');
-    //         }
-    //       }
-    //       $('#prob-box').html('<h2>' + (prob*100).toPrecision(3) + ' % </h2>');
-    //       $('#company_img').attr('src', c_data[cj].company_img);
-    //       $('#result-box').fadeIn();
-    //   });
     }
 
   $(document).ready(readyPin);
-  </script>  
-    
-    <!-- // <script type="text/javascript" src="static/js/pinclick.js"></script> -->
+  </script>      
  </body>
 </html>

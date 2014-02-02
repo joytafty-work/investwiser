@@ -121,3 +121,12 @@ $('#columns').on("click", ".pin", function (e) {
 	console.log(s);
 	console.log("pin clicked")
 })
+
+if (sn_data[sk].product_desc !== "") {
+	$('#prod_desc').html(<p id="more_product_desc">Read more</p>);
+	}
+	
+$('#more_prod_desc').click(function (e) { 
+	e.preventDefault(); 
+	$(this).html(sn_data[sk].product_desc);
+});
