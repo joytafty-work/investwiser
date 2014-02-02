@@ -35,32 +35,32 @@
         <div class="form-group">
 	       <span class="input-group-btn">
 	         <form class="form-inline" action="fetchcompany" method="get">
-	         <input style="width: 500px; height:64px; font-size:20px;" 
+	         <input style="width: 500px; height:48px; font-size:20px;" 
 		    type="text" id="company" name="company" class="form-control" placeholder="Type in startup name">  
-	         <button style="font-size:20px; height:64px;" 
+	         <button style="font-size:20px; height:48px;" 
 		     class="btn primary-button" type="submit">Predict!</button>
+          <!-- Button trigger modal -->
+          <button class="btn primary-button" style="font-size:20px; height:48px;" data-toggle="modal" data-target="#myPrezi">
+            How it works
+          </button>
+
           </form>
+         <!-- <a href="http://prezi.com/r4g0f27usss-/?utm_campaign=share&utm_medium=copy&rc=ex0share"> How it works</a> -->
 	       </span>
        </div>
      </div>
      <div id="notfound-box" style="display: none" align="center"><h4>Company not found</h4></div>
      <br><br>
 
-<!-- Button trigger modal -->
-<!-- <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button>
- -->
 <!-- Modal -->
-<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myPrezi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-        ...
+          <iframe src="http://prezi.com/embed/r4g0f27usss-/?bgcolor=ffffff&amp;lock_to_path=1&amp;autoplay=0&amp;autohide_ctrls=0&amp;features=undefined&amp;disabled_features=undefined" width="550" height="400" frameBorder="0"></iframe>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -69,7 +69,7 @@
     </div>
   </div>
 </div>
- -->
+
     <!-- Prediction box -->
     <div class="container">
       <div class="centered col-md-12">   
@@ -84,7 +84,7 @@
        <p style="font-size:32px; font-weight:bold;" height="400px" id="company_name" align="left"></p>
        <p style="font-weight:bold" align="left" id="snippet"></p>
        <p id="prod_desc" align="left"></p>
-       <a href="#" id="result-dismiss">Close<p>
+       <a class="boxclose" id="result-dismiss"></a>
 
           <div class="row">
          <br><br>
@@ -103,7 +103,7 @@
         </div>
       </div>
     </div>
-       
+    
      <div id="columns" align="center"></div>
    </div>
 
@@ -169,7 +169,7 @@
 
       // Add Read more clickable if there's more snippets
       if (sn_data[sk].product_desc !== "") { 
-        $('#prod_desc').html("<a href='#' id='more_prod_desc'>More Info</a>");
+        $('#prod_desc').html("<a href='#' id='more_prod_desc'>Read more</a>");
         $('#more_prod_desc').click(function (e) { 
           e.preventDefault(); 
           $(this).html(sn_data[sk].product_desc);
@@ -200,7 +200,10 @@
         if (row.name.toLowerCase() == s.toLowerCase()) { gi = i; }
         }
 
-      if (gi === "None") { $('#notfound-box').toggle(); } 
+      if (gi === "None") { 
+        $('#notfound-box').html("Not enough information about '" + s + "'");
+        $('#notfound-box').toggle(); 
+      } 
       else { 
         fetchResults(s);
         $('#result-box').fadeIn();    
@@ -218,7 +221,7 @@
 
 <!-- // Load grid icons with links -->
   <script type="text/javascript">
-    d3.csv('static/companies_pred.csv', function (data) {
+    d3.csv('static/predictions/companies_class1YH.csv', function (data) {
       for (i in data) {
       $('#columns').append(
         "<div class='pin' data-company=" + data[i].company_name + ">" + 
@@ -234,10 +237,10 @@
   function readyPin(jQuery) {
     // Load prediction data
    var g_data=[]; 
-    d3.csv('static/predictions/RF_classify_and_regress.csv', function (data) { g_data = data; } );
+    d3.csv('static/predictions/RF_class1YH_classify_and_regress.csv', function (data) { g_data = data; } );
     // Load companies data
     var c_data = []; 
-    d3.csv('static/companies.csv', function (data) { c_data = data; } );
+    d3.csv('static/predictions/companies_class1YH.csv', function (data) { c_data = data; } );
     // Pin click responses
     $('#columns').on("click", ".pin", function (e) {
       e.preventDefault();
