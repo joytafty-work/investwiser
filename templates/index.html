@@ -43,11 +43,10 @@
           </button>
 
           </form>
-         <!-- <a href="http://prezi.com/r4g0f27usss-/?utm_campaign=share&utm_medium=copy&rc=ex0share"> How it works</a> -->
 	       </span>
        </div>
      </div>
-     <div id="notfound-box" style="display:none" align="center"><h4>Company not found</h4></div>
+     <div id="notfound-box" style="display:none" align="center"><h4>Startup not found</h4></div>
      <br><br>
 
 <!-- Modal -->
@@ -55,14 +54,20 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+      <h3>About InvestWiser</h3>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
-<!--       <div class="modal-body">
-          <iframe src="http://prezi.com/embed/r4g0f27usss-/?bgcolor=ffffff&amp;lock_to_path=1&amp;autoplay=0&amp;autohide_ctrls=0&amp;features=undefined&amp;disabled_features=undefined" width="550" height="400" frameBorder="0"></iframe>
-      </div> -->
+      <div class="modal-body">
+          <p>
+            InvestWiser is a project of Joy Rimchala, a Fellow at the Insight Data Science program.
+          </p>
+          <p>
+                This app provides probabilistic predictions of seed-stage's change of raising series A funding. The predictions result from supervised classification of early stage startups that have received seriesA funding after 2010 by Random Forest Classification with 5-fold cross validation. The model that  offered the best results (in mean square error sense) uses startup lifetime, log(seed amount), and founder experience as the most important features and consists of 16 trees. It would be really neat to try to correlate this with other metadata like startup hiring activities and social media visibility, something I'm looking into now. 
+          </p>
+          <p>Check out <a href="http://prezi.com/r4g0f27usss-/?utm_campaign=share&utm_medium=copy&rc=ex0share">InvestWiser's Prezi</a> to find out more information.</p>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -265,20 +270,19 @@
           $('#col1').append(
           "<div class='pin' data-company=" + data[i].company_name + ">" + 
           // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
-          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
           "</div>");          
 
         } else {
           $('#col1-showmore').append(
           "<div class='pin' data-company=" + data[i].company_name + ">" + 
           // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
-          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
           "</a></div>");
         }
         // Show more startups button
       }
       $('#YHhead').append("<h4><a href='#' id='col1-trigger'> Show all</a> <a href='#' id='col1-hider' style='display:none'> leaders </h4>");      
-      // $('#col1-showmore').append("<a href='#' id='col1-hider'> top performers</a>");
     });
 
 // <!-- ================================================== -->  -->
@@ -291,20 +295,19 @@
           $('#col2').append(
           "<div class='pin' data-company=" + data[i].company_name + ">" + 
           // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
-          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
           "</div>");          
 
         } else {
           $('#col2-showmore').append(
           "<div class='pin' data-company=" + data[i].company_name + ">" + 
           // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
-          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
           "</a></div>");
         }
         // Show more startups button
       }
       $('#MHhead').append("<h4><a href='#' id='col2-trigger'> Show all</a> <a href='#' id='col2-hider' style='display:none'> leaders </h4>");      
-      // $('#col1-showmore').append("<a href='#' id='col1-hider'> top performers</a>");
     });
 
 // <!-- ================================================== -->  
@@ -317,20 +320,19 @@
           $('#col3').append(
           "<div class='pin' data-company=" + data[i].company_name + ">" + 
           // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
-          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
           "</div>");          
 
         } else {
           $('#col3-showmore').append(
           "<div class='pin' data-company=" + data[i].company_name + ">" + 
           // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
-          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
           "</a></div>");
         }
         // Show more startups button
       }
       $('#YLhead').append("<h4><a href='#' id='col3-trigger'> Show all</a> <a href='#' id='col3-hider' style='display:none'> leaders </h4>");      
-      // $('#col1-showmore').append("<a href='#' id='col1-hider'> top performers</a>");
     });
 
 // <!-- ================================================== -->  
@@ -343,24 +345,21 @@
           $('#col4').append(
           "<div class='pin' data-company=" + data[i].company_name + ">" + 
           // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
-          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
           "</div>");          
 
         } else {
           $('#col4-showmore').append(
           "<div class='pin' data-company=" + data[i].company_name + ">" + 
           // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
-          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
           "</a></div>");
         }
         // Show more startups button
       }
       $('#MLhead').append("<h4><a href='#' id='col4-trigger'> Show all</a> <a href='#' id='col4-hider' style='display:none'> leaders </h4>");      
-      // $('#col1-showmore').append("<a href='#' id='col1-hider'> top performers</a>");
     });
   </script>
-
-
 
 <!-- // ReadyPins -->
 <!-- ================================================== -->  

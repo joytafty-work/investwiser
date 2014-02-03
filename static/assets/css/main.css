@@ -39,13 +39,13 @@ h2 {
 h3 {
 	color: #95a5a6;
 	font-weight: 300;
-    font-size: 32px;
+    font-size: 40px;
 }
 
 h4 {
 	color: #95a5a6;
 	font-weight: 400;
-	font-size: 20px;
+	font-size: 28px;
 }
 
 /* Paragraph & Typographic */
@@ -61,7 +61,7 @@ p {
 
 /* Links */
 a {
-    color: #3498db;
+    color: #FF6600;
     word-wrap: break-word;
 
     -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
