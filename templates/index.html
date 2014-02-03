@@ -26,9 +26,7 @@
 
  </head>
 
- <!-- <body {% if query %} onload="queryURL('{{ query }}')" {% endif %}> -->
-
-  <div class="container">
+  <div class="container-fluid">
    <div align="center">
     <a href="/"><h1 class="splash">InvestWiser</h1></a>
      <h3 class="caption">Predict Series A Crunch Outcome</h3>
@@ -49,7 +47,7 @@
 	       </span>
        </div>
      </div>
-     <div id="notfound-box" style="display: none" align="center"><h4>Company not found</h4></div>
+     <div id="notfound-box" style="display:none" align="center"><h4>Company not found</h4></div>
      <br><br>
 
 <!-- Modal -->
@@ -59,9 +57,9 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
-      <div class="modal-body">
+<!--       <div class="modal-body">
           <iframe src="http://prezi.com/embed/r4g0f27usss-/?bgcolor=ffffff&amp;lock_to_path=1&amp;autoplay=0&amp;autohide_ctrls=0&amp;features=undefined&amp;disabled_features=undefined" width="550" height="400" frameBorder="0"></iframe>
-      </div>
+      </div> -->
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
@@ -72,23 +70,29 @@
 
     <!-- Prediction box -->
     <div class="container">
-      <div class="centered col-md-12">   
+      <div class="centered col-lg-12">   
         <div class='pin-wide' id="result-box" style="display: none">
-          <div class="col-md-6"><h3>Likelihood of raising Series A</h3>
-          <h2 id="prob-box"></h2></div>
-          <div class="col-md-6"><h3>Series A Amount (predicted)</h3>
-          <h2 id="worth-box"></h2></div>
-          <br><br>
-          <img class="col-xs-3 pull-left" id="company_img" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg?buster=1326842750">
+        <div class='row'>
+            <div class="col-md-6"><h3>Likelihood</h3>
+              <h2 id="prob-box"></h2></div>
+            <div class="col-md-6"><h3>Amount(predicted)</h3>
+              <h2 id="worth-box"></h2></div>
+        </div>
+        <br><br>
+        <div class="row">
+        <div class="col-md-10">
+        <img class="col-xs-3 pull-left" id="company_img" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg?buster=1326842750">
         <br><br>
        <p style="font-size:32px; font-weight:bold;" height="400px" id="company_name" align="left"></p>
        <p style="font-weight:bold" align="left" id="snippet"></p>
        <p id="prod_desc" align="left"></p>
-       <a class="boxclose" id="result-dismiss"></a>
+       <a id="result-dismiss">CLOSE</a>
+       </div>
+       </div>
 
-          <div class="row">
+<!--           <div class="row">
          <br><br>
-<!--            <div class="col-sm-4 founder" id="wrapper1">
+ --><!--            <div class="col-sm-4 founder" id="wrapper1">
              <img class="col-xs-8" id="founder1" src="https://s3.amazonaws.com/photos.angel.co/users/26786-medium_jpg?1306973402">
              <div class="caption" id="name1" style="font-size:32px;font-weight:bold">Jeff Lawson</div>
            </div>
@@ -99,14 +103,35 @@
              <img class="col-xs-8" id="founder3" src=""><span><p  id="name3" style="font-size:32px;font-weight:bold"></p></span>
             </div> -->
             
-          </div>
+          <!-- </div> -->
         </div>
       </div>
     </div>
-    
-     <div id="columns" align="center"></div>
-   </div>
+    <div class="pin-container">
+      <h3 align="center" id="YHhead">Young Promising Startups</h3>
+      <div class="columns" id="col1" align="center"></div>
+      <div class="columns" id="col1-showmore"  style="display:none" align="center"></div>
+    </div>
 
+    <div class="pin-container">
+      <h3 align="center" id="MHhead">Mature Promising Startups</h3>
+      <div class="columns" id="col2" align="center"></div>
+      <div class="columns" id="col2-showmore"  style="display:none" align="center"></div>
+    </div>
+
+<!--     <div class="pin-container">
+      <h3 align="center">Young Contenders</h3>
+      <div class="columns" id="col2" align="center"></div>
+      <div class="columns" id="col2-showmore"  style="display:none" align="center"></div>
+    </div>
+
+    <div class="pin-container">
+      <h3 align="center">Mature Contenders</h3>
+      <div class="columns" id="col2" align="center"></div>
+      <div class="columns" id="col2-showmore"  style="display:none" align="center"></div>
+    </div>
+   </div>
+ -->
     <!-- Bootstrap core JavaScript
    ================================================== -->
    <!-- Placed at the end of the document so the pages load faster -->
@@ -189,6 +214,9 @@
       // }
     }
 
+  // <!-- Form submission response -->
+   // <!-- ================================================== --> 
+
     // Form submission
     $('form').submit(function (e) { 
       e.preventDefault(); 
@@ -210,8 +238,6 @@
        }
     });
 
-    // Read more
-
     // Close Result box 
     $('#result-dismiss').click(function (e) {
       e.preventDefault();
@@ -219,32 +245,127 @@
     })
   </script>
 
-<!-- // Load grid icons with links -->
+<!-- // Class YH grid icons with links -->
+<!-- ================================================== -->  -->
   <script type="text/javascript">
     d3.csv('static/predictions/companies_class1YH.csv', function (data) {
+      npin = 10; 
       for (i in data) {
-      $('#columns').append(
-        "<div class='pin' data-company=" + data[i].company_name + ">" + 
-        // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
-        "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
-        "</a></div>"
-        );  
+        if (i < npin) {
+          $('#col1').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "</div>");          
+
+        } else {
+          $('#col1-showmore').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "</a></div>");
+        }
+        // Show more startups button
       }
+      $('#YHhead').append("<h4><a href='#' id='col1-trigger'> Show all</a> <a href='#' id='col1-hider' style='display:none'> leaders </h4>");      
+      // $('#col1-showmore').append("<a href='#' id='col1-hider'> top performers</a>");
+    });
+
+    d3.csv('static/predictions/companies_class2MH.csv', function (data) {
+      npin = 10; 
+      for (i in data) {
+        if (i < npin) {
+          $('#col2').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "</div>");          
+
+        } else {
+          $('#col2-showmore').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "</a></div>");
+        }
+        // Show more startups button
+      }
+      $('#MHhead').append("<h4><a href='#' id='col2-trigger'> Show all</a> <a href='#' id='col2-hider' style='display:none'> leaders </h4>");      
+      // $('#col1-showmore').append("<a href='#' id='col1-hider'> top performers</a>");
     });
   </script>
 
+
+<!-- // Class YH readyPins -->
+<!-- ================================================== -->  -->
   <script type="text/javascript">
-  function readyPin(jQuery) {
+  function readyPinYH(jQuery) {
     // Load prediction data
-   var g_data=[]; 
-    d3.csv('static/predictions/RF_class1YH_classify_and_regress.csv', function (data) { g_data = data; } );
+   var g1_data=[]; d3.csv('static/predictions/RF_class1YH_classify_and_regress.csv', function (data) { g1_data = data; } );
+   var g2_data=[]; d3.csv('static/predictions/RF_class2MH_classify_and_regress.csv', function (data) { g2_data = data; } );
+
     // Load companies data
-    var c_data = []; 
-    d3.csv('static/predictions/companies_class1YH.csv', function (data) { c_data = data; } );
-    // Pin click responses
-    $('#columns').on("click", ".pin", function (e) {
+    var c1_data = []; d3.csv('static/predictions/companies_class1YH.csv', function (data) { c1_data = data; } );
+    var c2_data = []; d3.csv('static/predictions/companies_class2MH.csv', function (data) { c2_data = data; } );
+    // YH Show MORE click responses
+    $('#YHhead').on("click", "#col1-trigger", function(e) {
+      e.preventDefault();
+      $('#col1-trigger').toggle();
+      $('#col1-showmore').toggle();
+      $('#col1-hider').toggle();
+    }) 
+
+   // Show LESS click responses
+    $('#YHhead').on("click", "#col1-hider", function(e) {
+      e.preventDefault();
+      $('#col1-showmore').toggle();
+      $('#col1-hider').toggle();
+      $('#col1-trigger').toggle();
+    }); 
+
+    // MH Show MORE click responses
+    $('#MHhead').on("click", "#col2-trigger", function(e) {
+      e.preventDefault();
+      $('#col2-trigger').toggle();
+      $('#col2-showmore').toggle();
+      $('#col2-hider').toggle();
+    }) 
+
+   // MH Show LESS click responses
+    $('#MHhead').on("click", "#col2-hider", function(e) {
+      e.preventDefault();
+      $('#col2-showmore').toggle();
+      $('#col2-hider').toggle();
+      $('#col2-trigger').toggle();
+    }); 
+
+    // YH Pin click responses
+    $('#col1').on("click", ".pin", function (e) {
       e.preventDefault();
       s = $(this).attr('data-company');
+      getPinResult(s, g1_data, c1_data);
+    });
+
+    $('#col1-showmore').on("click", ".pin", function (e) {
+      e.preventDefault();
+      s = $(this).attr('data-company');
+      getPinResult(s, g1_data, c1_data);
+    });
+
+    // MH Pin click responses
+    $('#col2').on("click", ".pin", function (e) {
+      e.preventDefault();
+      s = $(this).attr('data-company');
+      getPinResult(s, g2_data, c2_data);
+    });
+
+    $('#col2-showmore').on("click", ".pin", function (e) {
+      e.preventDefault();
+      s = $(this).attr('data-company');
+      getPinResult(s, g2_data, c2_data);
+    });
+
+    function getPinResult(s, g_data, c_data) {
       for(i in g_data) {
           row = g_data[i]; 
           if (row.name.toLowerCase() == s.toLowerCase()) { gi = i; } }
@@ -265,7 +386,7 @@
           worthval = (worth/1000000).toPrecision(3);
           aval = (aval/1000000).toPrecision(3);
 
-          if (aval != 0) {
+          if (aval > 1) {
             $('#worth-box').html('<h2> $' + worthval + 'M</h2><h3>($' + aval + 'M)</h3>');
           } else {
             if (prob < 0.3) {
@@ -288,24 +409,11 @@
             $(this).html(sn_data[sk].product_desc);
         });
       }
-
-      //     $('#prod_desc').text(sn_data[sk].product_desc);
-      // founder_counter = 1;
-      // for(i in c_data) {
-      //   if(c_data[i].company_name.toLowerCase() == s.toLowerCase()) {
-      //     $('#founder' + founder_counter).attr('src', '');
-      //     $('#founder' + founder_counter).attr('src', c_data[i].founder_img);
-      //     $('#name' + founder_counter).text(c_data[i].founder_name);          
-      //     $('#name' + founder_counter).css(c_data[i].founder_name);
-      //     $('#wrapper' + founder_counter).show(); 
-      //     founder_counter = founder_counter + 1;           
-      //   }
-      // }
       $('#result-box').fadeIn();
-    });
+    }
     }
 
-  $(document).ready(readyPin);
+  $(document).ready(readyPinYH);
   </script>      
  </body>
 </html>
