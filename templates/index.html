@@ -69,6 +69,8 @@
 </div>
 
     <!-- Prediction box -->
+   <!-- ================================================== --> 
+
     <div class="container">
       <div class="centered col-lg-12">   
         <div class='pin-wide' id="result-box" style="display: none">
@@ -107,31 +109,37 @@
         </div>
       </div>
     </div>
+
+  <!-- Pin container 1 -->
+  <!-- ================================================== --> 
     <div class="pin-container">
       <h3 align="center" id="YHhead">Young Promising Startups</h3>
       <div class="columns" id="col1" align="center"></div>
       <div class="columns" id="col1-showmore"  style="display:none" align="center"></div>
     </div>
-
+  <!-- Pin container 2 -->
+  <!-- ================================================== --> 
     <div class="pin-container">
       <h3 align="center" id="MHhead">Mature Promising Startups</h3>
       <div class="columns" id="col2" align="center"></div>
       <div class="columns" id="col2-showmore"  style="display:none" align="center"></div>
     </div>
-
-<!--     <div class="pin-container">
-      <h3 align="center">Young Contenders</h3>
-      <div class="columns" id="col2" align="center"></div>
-      <div class="columns" id="col2-showmore"  style="display:none" align="center"></div>
-    </div>
-
+  <!-- Pin container 3 -->
+  <!-- ================================================== --> 
     <div class="pin-container">
-      <h3 align="center">Mature Contenders</h3>
-      <div class="columns" id="col2" align="center"></div>
-      <div class="columns" id="col2-showmore"  style="display:none" align="center"></div>
+      <h3 align="center"  id="YLhead">Young Contenders</h3>
+      <div class="columns" id="col3" align="center"></div>
+      <div class="columns" id="col3-showmore"  style="display:none" align="center"></div>
+    </div>
+  <!-- Pin container 4 -->
+  <!-- ================================================== --> 
+    <div class="pin-container">
+      <h3 align="center" id="MLhead">Mature Contenders</h3>
+      <div class="columns" id="col4" align="center"></div>
+      <div class="columns" id="col4-showmore"  style="display:none" align="center"></div>
     </div>
    </div>
- -->
+
     <!-- Bootstrap core JavaScript
    ================================================== -->
    <!-- Placed at the end of the document so the pages load faster -->
@@ -245,8 +253,10 @@
     })
   </script>
 
-<!-- // Class YH grid icons with links -->
-<!-- ================================================== -->  -->
+<!-- // Grid icons with links -->
+<!-- ================================================== -->  
+ <!-- Class 1 : YH -->
+<!-- ================================================== --> 
   <script type="text/javascript">
     d3.csv('static/predictions/companies_class1YH.csv', function (data) {
       npin = 10; 
@@ -271,6 +281,9 @@
       // $('#col1-showmore').append("<a href='#' id='col1-hider'> top performers</a>");
     });
 
+// <!-- ================================================== -->  -->
+//  <!-- Class 2 : MH -->
+// <!-- ================================================== -->  -->
     d3.csv('static/predictions/companies_class2MH.csv', function (data) {
       npin = 10; 
       for (i in data) {
@@ -293,29 +306,86 @@
       $('#MHhead').append("<h4><a href='#' id='col2-trigger'> Show all</a> <a href='#' id='col2-hider' style='display:none'> leaders </h4>");      
       // $('#col1-showmore').append("<a href='#' id='col1-hider'> top performers</a>");
     });
+
+// <!-- ================================================== -->  
+//  <!-- Class 3 : YL -->
+// <!-- ================================================== -->  
+    d3.csv('static/predictions/companies_class3YL.csv', function (data) {
+      npin = 10; 
+      for (i in data) {
+        if (i < npin) {
+          $('#col3').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "</div>");          
+
+        } else {
+          $('#col3-showmore').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "</a></div>");
+        }
+        // Show more startups button
+      }
+      $('#YLhead').append("<h4><a href='#' id='col3-trigger'> Show all</a> <a href='#' id='col3-hider' style='display:none'> leaders </h4>");      
+      // $('#col1-showmore').append("<a href='#' id='col1-hider'> top performers</a>");
+    });
+
+// <!-- ================================================== -->  
+//  <!-- Class 4 : MH -->
+// <!-- ================================================== -->  
+  d3.csv('static/predictions/companies_class4ML.csv', function (data) {
+      npin = 10; 
+      for (i in data) {
+        if (i < npin) {
+          $('#col4').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "</div>");          
+
+        } else {
+          $('#col4-showmore').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='40px'></img>" + 
+          "</a></div>");
+        }
+        // Show more startups button
+      }
+      $('#MLhead').append("<h4><a href='#' id='col4-trigger'> Show all</a> <a href='#' id='col4-hider' style='display:none'> leaders </h4>");      
+      // $('#col1-showmore').append("<a href='#' id='col1-hider'> top performers</a>");
+    });
   </script>
 
 
-<!-- // Class YH readyPins -->
-<!-- ================================================== -->  -->
+
+<!-- // ReadyPins -->
+<!-- ================================================== -->  
   <script type="text/javascript">
   function readyPinYH(jQuery) {
     // Load prediction data
    var g1_data=[]; d3.csv('static/predictions/RF_class1YH_classify_and_regress.csv', function (data) { g1_data = data; } );
    var g2_data=[]; d3.csv('static/predictions/RF_class2MH_classify_and_regress.csv', function (data) { g2_data = data; } );
+   var g3_data=[]; d3.csv('static/predictions/RF_class3YL_classify_and_regress.csv', function (data) { g3_data = data; } );
+   var g4_data=[]; d3.csv('static/predictions/RF_class4ML_classify_and_regress.csv', function (data) { g4_data = data; } );
 
     // Load companies data
     var c1_data = []; d3.csv('static/predictions/companies_class1YH.csv', function (data) { c1_data = data; } );
     var c2_data = []; d3.csv('static/predictions/companies_class2MH.csv', function (data) { c2_data = data; } );
-    // YH Show MORE click responses
+    var c3_data = []; d3.csv('static/predictions/companies_class3YL.csv', function (data) { c3_data = data; } );
+    var c4_data = []; d3.csv('static/predictions/companies_class4ML.csv', function (data) { c4_data = data; } );
+    
+    // Class 1: YH Show MORE click responses
     $('#YHhead').on("click", "#col1-trigger", function(e) {
       e.preventDefault();
       $('#col1-trigger').toggle();
       $('#col1-showmore').toggle();
       $('#col1-hider').toggle();
     }) 
-
-   // Show LESS click responses
+   // Class 1: YH Show LESS click responses
     $('#YHhead').on("click", "#col1-hider", function(e) {
       e.preventDefault();
       $('#col1-showmore').toggle();
@@ -323,7 +393,7 @@
       $('#col1-trigger').toggle();
     }); 
 
-    // MH Show MORE click responses
+    // Class 2: MH Show MORE click responses
     $('#MHhead').on("click", "#col2-trigger", function(e) {
       e.preventDefault();
       $('#col2-trigger').toggle();
@@ -331,7 +401,7 @@
       $('#col2-hider').toggle();
     }) 
 
-   // MH Show LESS click responses
+   // Class 2: MH Show LESS click responses
     $('#MHhead').on("click", "#col2-hider", function(e) {
       e.preventDefault();
       $('#col2-showmore').toggle();
@@ -339,20 +409,49 @@
       $('#col2-trigger').toggle();
     }); 
 
-    // YH Pin click responses
+    // Class 3: YL Show MORE click responses
+    $('#YLhead').on("click", "#col3-trigger", function(e) {
+      e.preventDefault();
+      $('#col3-trigger').toggle();
+      $('#col3-showmore').toggle();
+      $('#col3-hider').toggle();
+    }) 
+   // Class 3: YL Show LESS click responses
+    $('#YLhead').on("click", "#col3-hider", function(e) {
+      e.preventDefault();
+      $('#col3-showmore').toggle();
+      $('#col3-hider').toggle();
+      $('#col3-trigger').toggle();
+    });
+
+    // Class 4: ML Show MORE click responses
+    $('#MLhead').on("click", "#col4-trigger", function(e) {
+      e.preventDefault();
+      $('#col4-trigger').toggle();
+      $('#col4-showmore').toggle();
+      $('#col4-hider').toggle();
+    }) 
+   // Class 4: ML Show LESS click responses
+    $('#MLhead').on("click", "#col4-hider", function(e) {
+      e.preventDefault();
+      $('#col4-showmore').toggle();
+      $('#col4-hider').toggle();
+      $('#col4-trigger').toggle();
+    }); 
+
+    // Class 1: YH Pin click responses
     $('#col1').on("click", ".pin", function (e) {
       e.preventDefault();
       s = $(this).attr('data-company');
       getPinResult(s, g1_data, c1_data);
     });
-
     $('#col1-showmore').on("click", ".pin", function (e) {
       e.preventDefault();
       s = $(this).attr('data-company');
       getPinResult(s, g1_data, c1_data);
     });
 
-    // MH Pin click responses
+    // Class 2: MH Pin click responses
     $('#col2').on("click", ".pin", function (e) {
       e.preventDefault();
       s = $(this).attr('data-company');
@@ -365,6 +464,31 @@
       getPinResult(s, g2_data, c2_data);
     });
 
+    // Class 3: YL Pin click responses
+    $('#col3').on("click", ".pin", function (e) {
+      e.preventDefault();
+      s = $(this).attr('data-company');
+      getPinResult(s, g3_data, c3_data);
+    });
+    $('#col3-showmore').on("click", ".pin", function (e) {
+      e.preventDefault();
+      s = $(this).attr('data-company');
+      getPinResult(s, g3_data, c3_data);
+    });
+
+    // Class 4: YL Pin click responses
+    $('#col4').on("click", ".pin", function (e) {
+      e.preventDefault();
+      s = $(this).attr('data-company');
+      getPinResult(s, g4_data, c4_data);
+    });
+    $('#col4-showmore').on("click", ".pin", function (e) {
+      e.preventDefault();
+      s = $(this).attr('data-company');
+      getPinResult(s, g4_data, c4_data);
+    });
+
+    // Utility function for fetching pin results
     function getPinResult(s, g_data, c_data) {
       for(i in g_data) {
           row = g_data[i]; 
