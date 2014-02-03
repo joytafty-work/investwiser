@@ -62,7 +62,7 @@
             InvestWiser is a project of Joy Rimchala, a Fellow at the Insight Data Science program.
           </p>
           <p>
-                This app provides probabilistic predictions of seed-stage's change of raising series A funding. The predictions result from supervised classification of early stage startups that have received seriesA funding after 2010 by Random Forest Classification with 5-fold cross validation. The model that  offered the best results (in mean square error sense) uses startup lifetime, log(seed amount), and founder experience as the most important features and consists of 16 trees. It would be really neat to try to correlate this with other metadata like startup hiring activities and social media visibility, something I'm looking into now. 
+                This app provides probabilistic predictions of seed-stage's chance of raising series A funding. The predictions are derived from supervised classification of early stage startups that have received seriesA funding after 2010 by Random Forest Classification with 5-fold cross validation. The model that  offered the best results (in mean square error sense) uses startup lifetime, log(seed amount), and founder experience as the most important features and consists of 16 trees. It would be really neat to try to correlate this with other metadata like startup hiring activities and social media visibility, something I'm looking into now. 
           </p>
           <p>Check out <a href="http://prezi.com/r4g0f27usss-/?utm_campaign=share&utm_medium=copy&rc=ex0share">InvestWiser's Prezi</a> to find out more information.</p>
       </div>
@@ -122,6 +122,32 @@
       <div class="columns" id="col1" align="center"></div>
       <div class="columns" id="col1-showmore"  style="display:none" align="center"></div>
     </div>
+
+  <!-- Prediction box 2-->
+   <!-- ================================================== --> 
+    <div class="container">
+      <div class="centered col-lg-12">   
+        <div class='pin-wide' id="result-box2" style="display: none">
+        <div class='row'>
+            <div class="col-md-6"><h3>Likelihood</h3>
+              <h2 id="prob-box2"></h2></div>
+            <div class="col-md-6"><h3>Amount(predicted)</h3>
+              <h2 id="worth-box2"></h2></div>
+        </div>
+        <br><br>
+        <div class="row">
+        <div class="col-md-10">
+        <img class="col-xs-3 pull-left" id="company_img2" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg?buster=1326842750">
+        <br><br>
+       <p style="font-size:32px; font-weight:bold;" height="400px" id="company_name2" align="left"></p>
+       <p style="font-weight:bold" align="left" id="snippet2"></p>
+       <p id="prod_desc2" align="left"></p>
+       <a id="result-dismiss2">CLOSE</a>
+       </div>
+       </div>
+        </div>
+      </div>
+    </div>
   <!-- Pin container 2 -->
   <!-- ================================================== --> 
     <div class="pin-container">
@@ -129,6 +155,32 @@
       <div class="columns" id="col2" align="center"></div>
       <div class="columns" id="col2-showmore"  style="display:none" align="center"></div>
     </div>
+
+    <!-- Prediction box 3-->
+     <!-- ================================================== --> 
+      <div class="container">
+        <div class="centered col-lg-12">   
+          <div class='pin-wide' id="result-box3" style="display: none">
+          <div class='row'>
+              <div class="col-md-6"><h3>Likelihood</h3>
+                <h2 id="prob-box3"></h2></div>
+              <div class="col-md-6"><h3>Amount(predicted)</h3>
+                <h2 id="worth-box3"></h2></div>
+          </div>
+          <br><br>
+          <div class="row">
+          <div class="col-md-10">
+          <img class="col-xs-3 pull-left" id="company_img3" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg?buster=1326842750">
+          <br><br>
+         <p style="font-size:32px; font-weight:bold;" height="400px" id="company_name3" align="left"></p>
+         <p style="font-weight:bold" align="left" id="snippet3"></p>
+         <p id="prod_desc3" align="left"></p>
+         <a id="result-dismiss3">CLOSE</a>
+         </div>
+         </div>
+          </div>
+        </div>
+      </div>    
   <!-- Pin container 3 -->
   <!-- ================================================== --> 
     <div class="pin-container">
@@ -136,6 +188,32 @@
       <div class="columns" id="col3" align="center"></div>
       <div class="columns" id="col3-showmore"  style="display:none" align="center"></div>
     </div>
+
+  <!-- Prediction box 4-->
+     <!-- ================================================== --> 
+      <div class="container">
+        <div class="centered col-lg-12">   
+          <div class='pin-wide' id="result-box4" style="display: none">
+          <div class='row'>
+              <div class="col-md-6"><h3>Likelihood</h3>
+                <h2 id="prob-box4"></h2></div>
+              <div class="col-md-6"><h3>Amount(predicted)</h3>
+                <h2 id="worth-box4"></h2></div>
+          </div>
+          <br><br>
+          <div class="row">
+          <div class="col-md-10">
+          <img class="col-xs-3 pull-left" id="company_img4" src="https://s3.amazonaws.com/photos.angel.co/startups/i/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg?buster=1326842750">
+          <br><br>
+         <p style="font-size:32px; font-weight:bold;" height="400px" id="company_name3" align="left"></p>
+         <p style="font-weight:bold" align="left" id="snippet4"></p>
+         <p id="prod_desc4" align="left"></p>
+         <a id="result-dismiss4">CLOSE</a>
+         </div>
+         </div>
+          </div>
+        </div>
+      </div>        
   <!-- Pin container 4 -->
   <!-- ================================================== --> 
     <div class="pin-container">
@@ -234,7 +312,6 @@
     $('form').submit(function (e) { 
       e.preventDefault(); 
       s = $('input').val();
-      console.log(s); 
       gi = "None"
       for(i in g_data) {
         row = g_data[i]; 
@@ -442,53 +519,53 @@
     $('#col1').on("click", ".pin", function (e) {
       e.preventDefault();
       s = $(this).attr('data-company');
-      getPinResult(s, g1_data, c1_data);
+      getPinResult(s, g1_data, c1_data, '');
     });
     $('#col1-showmore').on("click", ".pin", function (e) {
       e.preventDefault();
       s = $(this).attr('data-company');
-      getPinResult(s, g1_data, c1_data);
+      getPinResult(s, g1_data, c1_data, '');
     });
 
     // Class 2: MH Pin click responses
     $('#col2').on("click", ".pin", function (e) {
       e.preventDefault();
       s = $(this).attr('data-company');
-      getPinResult(s, g2_data, c2_data);
+      getPinResult(s, g2_data, c2_data, 2);
     });
 
     $('#col2-showmore').on("click", ".pin", function (e) {
       e.preventDefault();
       s = $(this).attr('data-company');
-      getPinResult(s, g2_data, c2_data);
+      getPinResult(s, g2_data, c2_data, 2);
     });
 
     // Class 3: YL Pin click responses
     $('#col3').on("click", ".pin", function (e) {
       e.preventDefault();
       s = $(this).attr('data-company');
-      getPinResult(s, g3_data, c3_data);
+      getPinResult(s, g3_data, c3_data, 3);
     });
     $('#col3-showmore').on("click", ".pin", function (e) {
       e.preventDefault();
       s = $(this).attr('data-company');
-      getPinResult(s, g3_data, c3_data);
+      getPinResult(s, g3_data, c3_data, 3);
     });
 
     // Class 4: YL Pin click responses
     $('#col4').on("click", ".pin", function (e) {
       e.preventDefault();
       s = $(this).attr('data-company');
-      getPinResult(s, g4_data, c4_data);
+      getPinResult(s, g4_data, c4_data, 4);
     });
     $('#col4-showmore').on("click", ".pin", function (e) {
       e.preventDefault();
       s = $(this).attr('data-company');
-      getPinResult(s, g4_data, c4_data);
+      getPinResult(s, g4_data, c4_data, 4);
     });
 
     // Utility function for fetching pin results
-    function getPinResult(s, g_data, c_data) {
+    function getPinResult(s, g_data, c_data, m) {
       for(i in g_data) {
           row = g_data[i]; 
           if (row.name.toLowerCase() == s.toLowerCase()) { gi = i; } }
@@ -510,30 +587,36 @@
           aval = (aval/1000000).toPrecision(3);
 
           if (aval > 1) {
-            $('#worth-box').html('<h2> $' + worthval + 'M</h2><h3>($' + aval + 'M)</h3>');
+            $('#worth-box' + m).html('<h2> $' + worthval + 'M</h2><h3>($' + aval + 'M)</h3>');
           } else {
             if (prob < 0.3) {
-              $('#worth-box').html('<h2> <$1M </h2>');
+              $('#worth-box'+ m).html('<h2> <$1M </h2>');
             } else {
-              $('#worth-box').html('<h2> $' + worthval + 'M </h2>');
+              $('#worth-box'+ m).html('<h2> $' + worthval + 'M </h2>');
             }
           }
-          $('#prob-box').html('<h2>' + (prob*100).toPrecision(3) + ' % </h2>');
-          $('#company_img').attr('src', c_data[cj].company_img);
-          $('#company_name').text(c_data[cj].company_name);
+          $('#prob-box'+ m).html('<h2>' + (prob*100).toPrecision(3) + ' % </h2>');
+          $('#company_img'+ m).attr('src', c_data[cj].company_img);
+          $('#company_name'+ m).text(c_data[cj].company_name);
 
-          $('#snippet').text(sn_data[sk].high_concept);
+          $('#snippet'+ m).text(sn_data[sk].high_concept);
 
           // Add Read more clickable if there's more snippets
           if (sn_data[sk].product_desc !== "") { 
-          $('#prod_desc').html("<a href='#' id='more_prod_desc'>More Info</a>");
-          $('#more_prod_desc').click(function (e) { 
+          $('#prod_desc'+ m).html("<a href='#' id='more_prod_desc"+ m + "'>More Info</a>");
+          $('#more_prod_desc'+ m).click(function (e) { 
             e.preventDefault(); 
             $(this).html(sn_data[sk].product_desc);
         });
       }
-      $('#result-box').fadeIn();
+      $('#result-box'+ m).fadeIn();
+
+      $('#result-dismiss' + m).click(function (e) {
+        e.preventDefault();
+        $('#result-box'+m).fadeOut();
+      });
     }
+
     }
 
   $(document).ready(readyPinYH);
