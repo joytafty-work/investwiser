@@ -232,10 +232,19 @@
     <script type="text/javascript" src="static/js/visualize.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.autocomplete.js') }}"></script>
     <!-- // <script type="text/javascript" src="static/js/jquery.autocomplete.js'"></script> -->
+    <!-- Autocomplete input box -->
     <script>
-      // $('#company').autocomplete("{{ url_for('static', filename='names.txt') }}");
       $('#company').autocomplete("static/names.txt");
     </script>  
+    <!-- Submit input with ENTER key -->
+    <script type="text/javascript">
+    $('input').keypress(function(event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            $('form').submit();
+        }
+    });
+    </script>
 
   <!-- Script for fetching company data -->
    <!-- ================================================== --> 
