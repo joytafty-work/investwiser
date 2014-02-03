@@ -277,7 +277,7 @@
       aval = (aval/1000000).toPrecision(3);
       // snippet = sn_data[sk].high_concept
 
-      if (aval != 0) {
+      if (aval > 1) {
         $('#worth-box').html('<h2> $' + worthval + 'M</h2><h3>($' + aval + 'M)</h3>');
       } else {
         if (prob < 0.3) {
