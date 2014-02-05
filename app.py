@@ -17,9 +17,9 @@ def index():
     return render_template('index.html') 
     # return render_template('index_flatty.html') 
 
-@app.route("/nest")
+@app.route("/flatty")
 def nest():
-    return render_template('nestindex.html') 
+    return render_template('index_flatty.html') 
     # return render_template('index_flatty.html') 
 
 @app.route('/fetchcompany')

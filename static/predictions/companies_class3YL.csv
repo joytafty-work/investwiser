@@ -1,5 +1,7 @@
 company_name,company_img
 121nexus,https://s3.amazonaws.com/photos.angel.co/startups/i/82334-3c143dd8754f6bc6d524347abdce9537-medium_jpg.jpg?buster=1334106111
+99dresses,https://s3.amazonaws.com/photos.angel.co/startups/i/79556-5a4f3f4fb122167726ee1c213ff7fec5-medium_jpg.jpg?buster=1383082439
+9GAG,https://s3.amazonaws.com/photos.angel.co/startups/i/19563-3bb24ef47482a01ad8e319328f00ca82-medium_jpg.jpg?buster=1355795963
 AdhereTech,https://s3.amazonaws.com/photos.angel.co/startups/i/127125-299514d7bb76506e34397ec74889cf3f-medium_jpg.jpg?buster=1379355548
 Amicus,https://s3.amazonaws.com/photos.angel.co/startups/i/20331-f20e1bef2b930ed19c1c0631c835c2da-medium_jpg.jpg?buster=1341372291
 AnyPerk,https://s3.amazonaws.com/photos.angel.co/startups/i/76533-501008e2cd9b79527c0e7b161cdfa142-medium_jpg.jpg?buster=1332268913
@@ -29,12 +31,14 @@ Fieldwire,https://s3.amazonaws.com/photos.angel.co/startups/i/27490-b8cb93e8d497
 Fitocracy,https://s3.amazonaws.com/photos.angel.co/startups/i/18937-25d96605a57406758a0f9cbe39b8ecda-medium_jpg.jpg?buster=1333476070
 Freshdesk,https://s3.amazonaws.com/photos.angel.co/startups/i/2473-2c38490d8e4c91660d86ff54ba5391ea-medium_jpg.jpg?buster=1359041713
 Genomera,https://s3.amazonaws.com/photos.angel.co/startups/i/797-40e905170a1d4e18bff5593c02bebb66-medium_jpg.jpg?buster=1315770819
+GinzaMetrics,https://s3.amazonaws.com/photos.angel.co/startups/i/1410-96476610c318aa9c0078456f7df388c7-medium_jpg.jpg?buster=1327613191
 Glassmap,https://s3.amazonaws.com/photos.angel.co/startups/i/130560-3496c6c0d9952f25053e791a2ee7b3cd-medium_jpg.jpg?buster=1350499124
 Guardly,https://s3.amazonaws.com/photos.angel.co/startups/i/106063-d7a3cbddce3a57cf219eaa6cf8ddb310-medium_jpg.jpg?buster=1342582298
 HealthRally,https://s3.amazonaws.com/photos.angel.co/startups/i/1787-a9208029d76e1ac8077ad75d52da13a0-medium_jpg.jpg?buster=1315770378
 iCracked,https://s3.amazonaws.com/photos.angel.co/startups/i/79259-04f6ff52ae8799ba2721cf1a6f7df88f-medium_jpg.jpg?buster=1376930863
 inDinero,https://s3.amazonaws.com/photos.angel.co/startups/i/153921-2a4c75afc6d2ebac33e9acf20bdc4448-medium_jpg.jpg?buster=1357603494
 InVenture,https://s3.amazonaws.com/photos.angel.co/startups/i/24322-99810a874bee29a5f577d9d6ab67a120-medium_jpg.jpg?buster=1316036141
+Kaleidoscope,https://angel.co/images/shared/nopic_startup.png
 Kamcord,https://s3.amazonaws.com/photos.angel.co/startups/i/115146-2109c6f07c0d6129664996e911547dd1-medium_jpg.jpg?buster=1371355611
 Kicksend,https://s3.amazonaws.com/photos.angel.co/startups/i/6028-a0c3f0a97d12c54c8a6fd64f933f759f-medium_jpg.jpg?buster=1354618605
 Kinsights,https://s3.amazonaws.com/photos.angel.co/startups/i/20834-7fcc3ca8078702177b81009b3d7ff7e4-medium_jpg.jpg?buster=1386186929
@@ -57,7 +61,9 @@ Pharmly,https://s3.amazonaws.com/photos.angel.co/startups/i/206333-0b0761fda568c
 PlanGrid,https://s3.amazonaws.com/photos.angel.co/startups/i/85839-99cae95d511098f375c6133e08167e03-medium_jpg.jpg?buster=1344459307
 Plivo,https://s3.amazonaws.com/photos.angel.co/startups/i/27869-ed69b53f55006fff52d05a61cbc152dc-medium_jpg.jpg?buster=1374723197
 popexpert,https://s3.amazonaws.com/photos.angel.co/startups/i/162477-ee6b9bf8df6ac586b9fe0caf44d4e3f5-medium_jpg.jpg?buster=1386372311
+Priceonomics,https://s3.amazonaws.com/photos.angel.co/startups/i/69763-e7410c45bbcb227cf1135a5233dd1f48-medium_jpg.jpg?buster=1329340748
 Pymetrics,https://s3.amazonaws.com/photos.angel.co/startups/i/135880-2b066b8ce65bd793d592f3655545f0d7-medium_jpg.jpg?buster=1387133627
+qunb,https://s3.amazonaws.com/photos.angel.co/startups/i/11393-6c14d76c96d0ce36ddd67e4ddebc512d-medium_jpg.jpg?buster=1369254128
 ReelSurfer,https://s3.amazonaws.com/photos.angel.co/startups/i/75737-69d01307cdc994c3dfa071621f025be6-medium_jpg.jpg?buster=1344526422
 Ringadoc,https://s3.amazonaws.com/photos.angel.co/startups/i/74927-2e6003dd2f4ba76a8ceb41632923f5d1-medium_jpg.jpg?buster=1359527016
 SaleMove,https://s3.amazonaws.com/photos.angel.co/startups/i/95278-72c7ca4e128466e7e8ecb993ac8580d6-medium_jpg.jpg?buster=1375239191
@@ -66,8 +72,8 @@ SmartAsset,https://s3.amazonaws.com/photos.angel.co/startups/i/85122-c742a92e24a
 Snapjoy,https://s3.amazonaws.com/photos.angel.co/startups/i/53145-e30a9adbf809000def7e3955038a952f-medium_jpg.jpg?buster=1349165643
 Sportlyzer,https://s3.amazonaws.com/photos.angel.co/startups/i/2198-1833c62fd5b85f9e62f2a3c8229cff84-medium_jpg.jpg?buster=1315741517
 SpotMe,https://s3.amazonaws.com/photos.angel.co/startups/i/169960-6ef37e21fc7915adb3f643bfaa29ad49-medium_jpg.jpg?buster=1386691859
-Sproutling,https://s3.amazonaws.com/photos.angel.co/startups/i/78769-fe8f3e4e6f3f15094e84d031d6059a55-medium_jpg.jpg?buster=1376448956
 Statwing,https://s3.amazonaws.com/photos.angel.co/startups/i/114180-a8d5c65e9cb986eb5ffbb96ebe0baa19-medium_jpg.jpg?buster=1361386791
+Survata,https://s3.amazonaws.com/photos.angel.co/startups/i/182277-41f305e6f5c5e8c468a1567f8ce4a68d-medium_jpg.jpg?buster=1363210065
 ThriveHive,https://s3.amazonaws.com/photos.angel.co/startups/i/22197-35ec0087d07d434c2e49e4d8057473cb-medium_jpg.jpg?buster=1315731348
 TinyTap,https://s3.amazonaws.com/photos.angel.co/startups/i/99407-9a6da72856341069bf190e47842c8fcf-medium_jpg.jpg?buster=1340565665
 Transcriptic,https://s3.amazonaws.com/photos.angel.co/startups/i/76047-3a6a70790ce66dc29e49b2199c65c57a-medium_jpg.jpg?buster=1383677824
@@ -83,5 +89,6 @@ Yardsale,https://s3.amazonaws.com/photos.angel.co/startups/i/52073-67f1b16fb4bc7
 Zapier,https://s3.amazonaws.com/photos.angel.co/startups/i/78563-d6a685e956012e72415c2b12769e7459-medium_jpg.jpg?buster=1386814426
 ZappRx,https://s3.amazonaws.com/photos.angel.co/startups/i/208868-604a21acb805b02bcf36353a9fce0e2b-medium_jpg.jpg?buster=1368655043
 Zaranga,https://s3.amazonaws.com/photos.angel.co/startups/i/196627-375624599e0d2635bec791810b5ac5cc-medium_jpg.jpg?buster=1366184094
+Zendrive,https://s3.amazonaws.com/photos.angel.co/startups/i/161392-c1a8cbf859d36d456084eae6eecc4cf5-medium_jpg.jpg?buster=1377676627
 ZenPayroll,https://s3.amazonaws.com/photos.angel.co/startups/i/78720-5fd32474df5e2975289243a099b78635-medium_jpg.jpg?buster=1332831285
 Zillabyte,https://s3.amazonaws.com/photos.angel.co/startups/i/80054-2cc9154b1981ce648f94db4697856d70-medium_jpg.jpg?buster=1333320374

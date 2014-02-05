@@ -65,6 +65,8 @@
                 This app provides probabilistic predictions of seed-stage's chance of raising series A funding. The predictions are derived from supervised classification of early stage startups that have received seriesA funding after 2010 by Random Forest Classification with 5-fold cross validation. The model that  offered the best results (in mean square error sense) uses startup lifetime, log(seed amount), and founder experience as the most important features and consists of 16 trees. It would be really neat to try to correlate this with other metadata like startup hiring activities and social media visibility, something I'm looking into now. 
           </p>
           <p>Check out <a href="http://prezi.com/r4g0f27usss-/?utm_campaign=share&utm_medium=copy&rc=ex0share">InvestWiser's Prezi</a> to find out more information.</p>
+
+          <!-- <iframe src="http://prezi.com/embed/r4g0f27usss-/?bgcolor=ffffff&amp;lock_to_path=1&amp;autoplay=0&amp;autohide_ctrls=0&amp;features=undefined&amp;disabled_features=undefined" width="550" height="400" frameBorder="0"></iframe> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -277,10 +279,10 @@
       aval = (aval/1000000).toPrecision(3);
       // snippet = sn_data[sk].high_concept
 
-      if (aval > 1) {
+      if (aval > 0.3) {
         $('#worth-box').html('<h2> $' + worthval + 'M</h2><h3>($' + aval + 'M)</h3>');
       } else {
-        if (prob < 0.3) {
+        if (prob < 0.1) {
           $('#worth-box').html('<h2> <$1M </h2>');
         } else {
           $('#worth-box').html('<h2> $' + worthval + 'M </h2>');
@@ -595,10 +597,10 @@
           worthval = (worth/1000000).toPrecision(3);
           aval = (aval/1000000).toPrecision(3);
 
-          if (aval > 1) {
+          if (aval > 0.3) {
             $('#worth-box' + m).html('<h2> $' + worthval + 'M</h2><h3>($' + aval + 'M)</h3>');
           } else {
-            if (prob < 0.3) {
+            if (prob < 0.1) {
               $('#worth-box'+ m).html('<h2> <$1M </h2>');
             } else {
               $('#worth-box'+ m).html('<h2> $' + worthval + 'M </h2>');
