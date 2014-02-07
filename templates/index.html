@@ -597,6 +597,10 @@
           worthval = (worth/1000000).toPrecision(3);
           aval = (aval/1000000).toPrecision(3);
 
+          if (Math.abs(g_data[gi].RFRpred-g_data[gi].RFRval) > 0.3*worth) {
+            aval = 0;
+          }
+
           if (aval > 0.3) {
             $('#worth-box' + m).html('<h2> $' + worthval + 'M</h2><h3>($' + aval + 'M)</h3>');
           } else {
