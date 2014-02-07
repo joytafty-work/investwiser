@@ -331,7 +331,8 @@
 
       if (gi === "None") { 
         $('#notfound-box').html("Not enough information about '" + s + "'");
-        $('#notfound-box').toggle(); 
+        $('#notfound-box').fadeIn(); 
+        $('#result-box').fadeOut();
       } 
       else { 
         fetchResults(s);
