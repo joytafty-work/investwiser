@@ -277,6 +277,9 @@
       worth = g_data[gi].RFRpred; 
       worthval = (worth/1000000).toPrecision(3);
       aval = (aval/1000000).toPrecision(3);
+      if (Math.abs(g_data[gi].RFRpred - g_data[gi].RFRval) > 0.35*(g_data[gi].RFRval)){
+        aval = 0;
+      }
       // snippet = sn_data[sk].high_concept
 
       if (aval > 0.3) {
