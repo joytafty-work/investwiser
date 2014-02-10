@@ -249,10 +249,12 @@
 
     $(document).keyup(function(e) {
       if (e.keyCode == 27) { 
+        $('#notfound-box').fadeOut();
         $('#result-box').fadeOut(); 
         $('#result-box2').fadeOut(); 
         $('#result-box3').fadeOut(); 
         $('#result-box4').fadeOut();         
+        $('#result-box4').fadeOut();                 
       }
     });
     </script>
@@ -349,6 +351,7 @@
       else { 
         fetchResults(s);
         $('#result-box').fadeIn();    
+        $('#notfound-box').fadeOut();        
        }
     });
 
