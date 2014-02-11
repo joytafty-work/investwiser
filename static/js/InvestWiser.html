@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<!-- saved from url=(0020)http://0.0.0.0:5000/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="">
+   <meta name="author" content="">
+
+   <title> InvestWiser </title>
+
+   <!-- Bootstrap core CSS -->
+   <!-- <link href="static/css/bootstrap.css" rel="stylesheet"> -->
+   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+   <link href="http://0.0.0.0:5000/static/assets/css/main.css" rel="stylesheet">
+   <link href="http://0.0.0.0:5000/static/css/jquery.autocomplete.css" rel="stylesheet">
+   <link href="http://0.0.0.0:5000/static/css/pin.css" rel="stylesheet">
+
+   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+   <!--[if lt IE 9]>
+     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+   <![endif]-->
+
+
+ <style id="clearly_highlighting_css" type="text/css">/* selection */ html.clearly_highlighting_enabled ::-moz-selection { background: rgba(246, 238, 150, 0.99); } html.clearly_highlighting_enabled ::selection { background: rgba(246, 238, 150, 0.99); } /* cursor */ html.clearly_highlighting_enabled {    /* cursor and hot-spot position -- requires a default cursor, after the URL one */    cursor: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--cursor.png") 14 16, text; } /* highlight tag */ em.clearly_highlight_element {    font-style: inherit !important; font-weight: inherit !important;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow.png");    background-repeat: repeat-x; background-position: top left; background-size: 100% 100%; } /* the delete-buttons are positioned relative to this */ em.clearly_highlight_element.clearly_highlight_first { position: relative; } /* delete buttons */ em.clearly_highlight_element a.clearly_highlight_delete_element {    display: none; cursor: pointer;    padding: 0; margin: 0; line-height: 0;    position: absolute; width: 34px; height: 34px; left: -17px; top: -17px;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite.png"); background-repeat: no-repeat; background-position: 0px 0px; } em.clearly_highlight_element a.clearly_highlight_delete_element:hover { background-position: -34px 0px; } /* retina */ @media (min--moz-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {    em.clearly_highlight_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow@2x.png"); }    em.clearly_highlight_element a.clearly_highlight_delete_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite@2x.png"); background-size: 68px 34px; } } </style><style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style></head>
+
+  <body style="" data-ember-extension="1"><div class="container-fluid">
+   <div align="center">
+    <a href="./InvestWiser_files/InvestWiser.html"><h1 class="splash">InvestWiser</h1></a>
+     <h3 class="caption">Predict Series A Crunch Outcome</h3>
+        <div class="form-group">
+	       <span class="input-group-btn">
+	         <form class="form-inline" action="http://0.0.0.0:5000/fetchcompany" method="get">
+	         <input style="width: 500px; height:48px; font-size:20px;" type="text" id="company" name="company" class="form-control ac_input" placeholder="Type in startup name" autocomplete="off">  
+	         <button style="font-size:20px; height:48px;" class="btn primary-button" type="submit">Predict!</button>
+          <!-- Button trigger modal -->
+          <button class="btn primary-button" style="font-size:20px; height:48px;" data-toggle="modal" data-target="#myPrezi">
+            How it works
+          </button>
+
+          </form>
+	       </span>
+       </div>
+     </div>
+     <div id="notfound-box" style="display:none" align="center"><h4>Startup not found</h4></div>
+     <br><br>
+
+<!-- Modal -->
+<div class="modal fade" id="myPrezi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h3>About InvestWiser</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      </div>
+      <div class="modal-body">
+          <p>
+            InvestWiser is a project of Joy Rimchala, a Fellow at the Insight Data Science program.
+          </p>
+          <p>
+                This app provides probabilistic predictions of seed-stage's chance of raising series A funding. The predictions are derived from supervised classification of early stage startups that have received seriesA funding after 2010 by Random Forest Classification with 5-fold cross validation. The model that  offered the best results (in mean square error sense) uses startup lifetime, log(seed amount), and founder experience as the most important features and consists of 16 trees. It would be really neat to try to correlate this with other metadata like startup hiring activities and social media visibility, something I'm looking into now. 
+          </p>
+          <p>Check out <a href="http://prezi.com/r4g0f27usss-/?utm_campaign=share&utm_medium=copy&rc=ex0share">InvestWiser's Prezi</a> to find out more information.</p>
+
+          <!-- <iframe src="http://prezi.com/embed/r4g0f27usss-/?bgcolor=ffffff&amp;lock_to_path=1&amp;autoplay=0&amp;autohide_ctrls=0&amp;features=undefined&amp;disabled_features=undefined" width="550" height="400" frameBorder="0"></iframe> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Prediction box -->
+   <!-- ================================================== --> 
+
+    <div class="container">
+  &nbsp;&nbsp;&nbsp;&nbsp;<div class="centered col-lg-12">   
+        <div class="pin-wide" id="result-box" style="display: none">
+        <div class="row">
+            <div class="col-md-6"><h3>Likelihood</h3>
+              <h2 id="prob-box"></h2></div>
+            <div class="col-md-6"><h3>Amount(predicted)</h3>
+              <h2 id="worth-box"></h2></div>
+        </div>
+        <br><br>
+        <div class="row">
+        <div class="col-md-10">
+        <img class="col-xs-3 pull-left" id="company_img" src="./InvestWiser_files/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg">
+        <br><br>
+       <p style="font-size:32px; font-weight:bold;" height="400px" id="company_name" align="left"></p>
+       <p style="font-weight:bold" align="left" id="snippet"></p>
+       <p id="prod_desc" align="left"></p>
+       <a id="result-dismiss">CLOSE</a>
+       </div>
+       </div>
+
+<!--           <div class="row">
+         <br><br>
+ --><!--            <div class="col-sm-4 founder" id="wrapper1">
+             <img class="col-xs-8" id="founder1" src="https://s3.amazonaws.com/photos.angel.co/users/26786-medium_jpg?1306973402">
+             <div class="caption" id="name1" style="font-size:32px;font-weight:bold">Jeff Lawson</div>
+           </div>
+           <div class="col-sm-4 founder" id="wrapper2">
+             <img class="col-xs-8" id="founder2" src="https://s3.amazonaws.com/photos.angel.co/users/169245-medium_jpg?1346719228"><span><p id="name2"style="font-size:32px;font-weight:bold">John Wolthuis</p></span>
+           </div>
+           <div class="col-sm-4 founder" id="wrapper3">
+             <img class="col-xs-8" id="founder3" src=""><span><p  id="name3" style="font-size:32px;font-weight:bold"></p></span>
+            </div> -->
+            
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+
+  <!-- Pin container 1 -->
+  <!-- ================================================== --> 
+    <div class="pin-container">
+      <h3 align="center" id="YHhead">Young Promising Startups<h4><a href="http://0.0.0.0:5000/#" id="col1-trigger"> Show all</a> <a href="http://0.0.0.0:5000/#" id="col1-hider" style="display:none"> leaders </a></h4></h3>
+      <div class="columns" id="col1" align="center"><div class="pin" data-company="Locu"><img data-company="Locu" src="./InvestWiser_files/18978-3b1baf5e8f7cd6d7c6514d4d221962bd-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="DraftKings"><img data-company="DraftKings" src="./InvestWiser_files/31888-825265e74f51efb18569e0ab8e37b728-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="CompStak"><img data-company="CompStak" src="./InvestWiser_files/23577-a778054e1d5a9f878a2cc49c9703d034-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Nomi"><img data-company="Nomi" src="./InvestWiser_files/125432-3ef7ca1d041b04862c04e271008bbf79-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="42Floors"><img data-company="42Floors" src="./InvestWiser_files/19928-0845bda82c37fb7869e44ce421562049-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Tracelytics"><img data-company="Tracelytics" src="./InvestWiser_files/78511-32074d41a55eb29217bdabc036946043-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Chute"><img data-company="Chute" src="./InvestWiser_files/4041-8f1ef92c98a328c556446b9b77d0a31e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="SideTour"><img data-company="SideTour" src="./InvestWiser_files/67343-fe8d08b818d21b2361c165db592b548c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Locality"><img data-company="Locality" src="./InvestWiser_files/24637-2da0e1c15922065f8a5bf26933c5edbc-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Crowdtilt"><img data-company="Crowdtilt" src="./InvestWiser_files/22287-919326ea5bbae79b4b8744dede3e87d8-medium_jpg.jpg" height="42px"></div></div>
+      <div class="columns" id="col1-showmore" style="display:none" align="center"><div class="pin" data-company="Memrise"><img data-company="Memrise" src="./InvestWiser_files/19979-744befd35bdee202e3c1807afccb4e2e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="SocialBro"><img data-company="SocialBro" src="./InvestWiser_files/83783-medium_jpg" height="42px"></div><div class="pin" data-company="Clever"><img data-company="Clever" src="./InvestWiser_files/114426-35f998fe322ec70969f2c3c932b2caf3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Parking" panda=""><img data-company="Parking" panda="" src="./InvestWiser_files/24444-e6507b645e4ed1e310157110d5a7eea7-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Instacart"><img data-company="Instacart" src="./InvestWiser_files/131716-ec50ba6b52bf0edc889bc3a6dae17493-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Visual.ly"><img data-company="Visual.ly" src="./InvestWiser_files/55100-960d73aec3db99ddbe049866453602f9-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="TransferWise"><img data-company="TransferWise" src="./InvestWiser_files/27427-bab73226bb0db75cfedf4c320152658f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Roadtrippers"><img data-company="Roadtrippers" src="./InvestWiser_files/26330-8ceda9643c7ad2b03b5ee13f826e6620-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Scripted"><img data-company="Scripted" src="./InvestWiser_files/23346-e329076cc07e27d42d98840269c4730a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Scanadu"><img data-company="Scanadu" src="./InvestWiser_files/58699-91353fc8f733481054da9ac1b7305cc2-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="NatureBox"><img data-company="NatureBox" src="./InvestWiser_files/93497-3f2287c60b51a50c17a352b8405c6a4b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Swiftype"><img data-company="Swiftype" src="./InvestWiser_files/79624-f321f4eb50341a8d7ba6b723377ad31a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Coinbase"><img data-company="Coinbase" src="./InvestWiser_files/109557-a145b688c8b2ca5f2f190f83be53a8bd-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Firebase"><img data-company="Firebase" src="./InvestWiser_files/13274-1e708e28fa58694493de9b2f3bf08a11-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Atomic" reach=""><img data-company="Atomic" reach="" src="./InvestWiser_files/177452-7ac88c2c1dc63ad5eb48c2922703ab7e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Mocavo"><img data-company="Mocavo" src="./InvestWiser_files/6618-2290af1b42f94d5e781183de9cb3c92f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Olapic"><img data-company="Olapic" src="./InvestWiser_files/360-466f07ed7bfb24f4a9d4f159d8d8fa90-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Practically" green=""><img data-company="Practically" green="" src="./InvestWiser_files/30936-dda1c7a95eefdda83d7d6b51b9c7f2f7-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Remind101"><img data-company="Remind101" src="./InvestWiser_files/25312-6eb65636feb2208f9cc0b60d9aec5e66-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="FlexMinder"><img data-company="FlexMinder" src="./InvestWiser_files/26347-94d19aedf2d0b41623ce4207fa0a2d64-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Romotive"><img data-company="Romotive" src="./InvestWiser_files/27033-8f2babe85cd46488fb9ff647fbe9ef05-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Ravel" law=""><img data-company="Ravel" law="" src="./InvestWiser_files/164253-cfd71222caf8a555c6c2ecd52eb805b6-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="FlightCar"><img data-company="FlightCar" src="./InvestWiser_files/117187-475195700088695e72bc3dd6870e95e3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Rocketmiles"><img data-company="Rocketmiles" src="./InvestWiser_files/158571-e53ddffe9fb3ed5e57080db7134117d0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Influitive"><img data-company="Influitive" src="./InvestWiser_files/1266-99045f67f6956c90613ef42aff0eddfd-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Gnip"><img data-company="Gnip" src="./InvestWiser_files/39128-89a904957809064c72741f20617f88ed-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Jack" erwin=""><img data-company="Jack" erwin="" src="./InvestWiser_files/250442-5e9ce03d68c46f128d98cb0f0aa484f2-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="aisle411"><img data-company="aisle411" src="./InvestWiser_files/23611-4621ece73d29cc4b03f802eab1333395-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Pindrop" security=""><img data-company="Pindrop" security="" src="./InvestWiser_files/30585-cd4f0f4a24f4b15b99541c5b3dd93385-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Zenefits"><img data-company="Zenefits" src="./InvestWiser_files/nopic_startup.png" height="42px"></div><div class="pin" data-company="SendHub"><img data-company="SendHub" src="./InvestWiser_files/21042-dde51249b559a67e46c013acb1e2168d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Kitchensurfing"><img data-company="Kitchensurfing" src="./InvestWiser_files/109723-46a552feedcf29d6cc3e49428a7369e8-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Cloudability"><img data-company="Cloudability" src="./InvestWiser_files/11888-c2d312cdcde60a42af9fc0f62e1cf6c3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Quartzy"><img data-company="Quartzy" src="./InvestWiser_files/1790-1e20e19948d92cbadb180b47948a2124-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Take" the="" interview=""><img data-company="Take" the="" interview="" src="./InvestWiser_files/66427-689e783461e87be5bd661549b1432459-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="August"><img data-company="August" src="./InvestWiser_files/138977-d0faba43be51e88c15add1d3021c58f8-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Looker"><img data-company="Looker" src="./InvestWiser_files/32959-712c73e59bb8d654f1e71cd1384bcb94-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Tienda" nube="" nuvem="" shop=""><img data-company="Tienda" nube="" nuvem="" shop="" src="./InvestWiser_files/23784-cab3d7c67a4ce6302c1517e17b04c47c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Tienda" nube=""><img data-company="Tienda" nube="" src="./InvestWiser_files/23784-cab3d7c67a4ce6302c1517e17b04c47c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="MemSQL"><img data-company="MemSQL" src="./InvestWiser_files/40574-92d619b2909304031eb9818e5c8a4921-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Homejoy"><img data-company="Homejoy" src="./InvestWiser_files/34598-c7c7f738905c910032e53aa6f9ba5813-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Leap" motion=""><img data-company="Leap" motion="" src="./InvestWiser_files/6343-3704fb09e9b74996b5826f5cc1ab5a00-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Vungle"><img data-company="Vungle" src="./InvestWiser_files/10855-49ab6637e7b9f2f266246c5b2f7f5842-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Boundless"><img data-company="Boundless" src="./InvestWiser_files/55446-51ed4f8e5ee9cbeb09a21349ca2750c5-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="CoachUp"><img data-company="CoachUp" src="./InvestWiser_files/25294-6b198d40b13d7dbd900696f99cb83546-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Meddik"><img data-company="Meddik" src="./InvestWiser_files/26507-80cc41501879b33b4b00a9b9320462de-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Upverter"><img data-company="Upverter" src="./InvestWiser_files/3458-0e8bebc0e1189c5403036dbd7a4fab32-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="RelateIQ"><img data-company="RelateIQ" src="./InvestWiser_files/245654v3-max-250x250.png" height="42px"></div><div class="pin" data-company="Runnable"><img data-company="Runnable" src="./InvestWiser_files/64924-768c9366817dd6507531737ffef85656-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="CircleCI"><img data-company="CircleCI" src="./InvestWiser_files/29008-6e6dd5256518d42f047977b7de03d17a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Flashnotes"><img data-company="Flashnotes" src="./InvestWiser_files/21678-05a6ad7036dcd9766d7764aff1cb69a3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="MyHealthTeams"><img data-company="MyHealthTeams" src="./InvestWiser_files/31676-4f7d7b85dd3733fb166760964b938212-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Frontback"><img data-company="Frontback" src="./InvestWiser_files/296769-d802c41532f6fcd6be9b39b2ca7022a3-medium_jpg.jpg" height="42px"></div></div>
+    </div>
+
+  <!-- Prediction box 2-->
+   <!-- ================================================== --> 
+    <div class="container">
+  &nbsp;&nbsp;&nbsp;&nbsp;<div class="centered col-lg-12">   
+        <div class="pin-wide" id="result-box2" style="display: none">
+        <div class="row">
+            <div class="col-md-6"><h3>Likelihood</h3>
+              <h2 id="prob-box2"></h2></div>
+            <div class="col-md-6"><h3>Amount(predicted)</h3>
+              <h2 id="worth-box2"></h2></div>
+        </div>
+        <br><br>
+        <div class="row">
+        <div class="col-md-10">
+        <img class="col-xs-3 pull-left" id="company_img2" src="./InvestWiser_files/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg">
+        <br><br>
+       <p style="font-size:32px; font-weight:bold;" height="400px" id="company_name2" align="left"></p>
+       <p style="font-weight:bold" align="left" id="snippet2"></p>
+       <p id="prod_desc2" align="left"></p>
+       <a id="result-dismiss2">CLOSE</a>
+       </div>
+       </div>
+        </div>
+      </div>
+    </div>
+  <!-- Pin container 2 -->
+  <!-- ================================================== --> 
+    <div class="pin-container">
+      <h3 align="center" id="MHhead">Mature Promising Startups<h4><a href="http://0.0.0.0:5000/#" id="col2-trigger"> Show all</a> <a href="http://0.0.0.0:5000/#" id="col2-hider" style="display:none"> leaders </a></h4></h3>
+      <div class="columns" id="col2" align="center"><div class="pin" data-company="Posterous"><img data-company="Posterous" src="./InvestWiser_files/32366-7781eaf8f83c59aff60bc0f6aea6c6fa-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="TaskRabbit"><img data-company="TaskRabbit" src="./InvestWiser_files/32477-255b4c178cbfd00546d1768f380a475b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Songkick"><img data-company="Songkick" src="./InvestWiser_files/32452-96d8910b8e8a994ff3510ad6493c9428-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="HighlightCam"><img data-company="HighlightCam" src="./InvestWiser_files/103843-ba1c1866053693163fc0ad2c2527a600-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Glooko"><img data-company="Glooko" src="./InvestWiser_files/59114-b753c80fb6d8cb6896e5632f50ba7647-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="GrabCAD"><img data-company="GrabCAD" src="./InvestWiser_files/33930-fd8d882ed43985ec2a49dd0c9b36cf7e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Bluefin" labs=""><img data-company="Bluefin" labs="" src="./InvestWiser_files/59808-b258f07f5a9759065aceeef6b0c281c4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="oneforty"><img data-company="oneforty" src="./InvestWiser_files/20788-8259cf18e2754cfefa0cb05b0fe5de3b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="SeatGeek"><img data-company="SeatGeek" src="./InvestWiser_files/74139-75f197c37c953a29a5634c66c8c72545-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Heroku"><img data-company="Heroku" src="./InvestWiser_files/32217-9cef1dc3721cc42fcad1871cb99ef109-medium_jpg.jpg" height="42px"></div></div>
+      <div class="columns" id="col2-showmore" style="display:none" align="center"><div class="pin" data-company="BaubleBar"><img data-company="BaubleBar" src="./InvestWiser_files/72024-868905b00419535496997828c49e9a61-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="HealthTap"><img data-company="HealthTap" src="./InvestWiser_files/99135v6-max-250x250.jpg" height="42px"></div><div class="pin" data-company="Datadog"><img data-company="Datadog" src="./InvestWiser_files/652-7dad829fa07a840e0c8886c62dbbf66d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="HubSpot"><img data-company="HubSpot" src="./InvestWiser_files/32920-2787318454cce05a36eaba5be4d0e660-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Tiny" speck=""><img data-company="Tiny" speck="" src="./InvestWiser_files/54955-61c2ecb0175b3f68416d2da55da8d9a1-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Listia"><img data-company="Listia" src="./InvestWiser_files/1347-05cbd11ecf251b69dd79527ceafc3d71-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="SCVNGR"><img data-company="SCVNGR" src="./InvestWiser_files/32863-fba53761fded4719877dd70a277c17bc-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="AboutOne"><img data-company="AboutOne" src="./InvestWiser_files/19769-66405ea0ce40c5811aeea398172d3976-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Ginger.io"><img data-company="Ginger.io" src="./InvestWiser_files/21517-81702112a694f62e5a1d5daaf8a83c57-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Scribd"><img data-company="Scribd" src="./InvestWiser_files/32403-c0ed41441023a59fdfc080b08c7379fe-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="1000memories"><img data-company="1000memories" src="./InvestWiser_files/32603-01ace31b8afa9b91b680726ef19b5110-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="PagerDuty"><img data-company="PagerDuty" src="./InvestWiser_files/32606-ccb977f6d323e8bfb5128df59457ac0b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="EveryMove"><img data-company="EveryMove" src="./InvestWiser_files/21584-61e7adac2a97f0b328b58f3a60d7b109-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="WePay"><img data-company="WePay" src="./InvestWiser_files/32771-2b9436eb0f9821f1030875c7f87c58e7-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Brainient"><img data-company="Brainient" src="./InvestWiser_files/33521-6d2a8eacd84b010a9bee562c5d126c93-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Lore"><img data-company="Lore" src="./InvestWiser_files/140818v12-max-250x250.png" height="42px"></div><div class="pin" data-company="Disqus"><img data-company="Disqus" src="./InvestWiser_files/3295-7c0fcfb74aed7fd5796b1a543a4b81f4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Foodspotting"><img data-company="Foodspotting" src="./InvestWiser_files/19153-0dcc96509f2c6851740964fa96dd3ff0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Airbnb"><img data-company="Airbnb" src="./InvestWiser_files/32677-b873be4bf180abbcdad149b584b7e66f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Kwaga"><img data-company="Kwaga" src="./InvestWiser_files/1779-c29ff74885f7faed0ce50488af35ce42-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Twilio"><img data-company="Twilio" src="./InvestWiser_files/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Heyzap"><img data-company="Heyzap" src="./InvestWiser_files/17068-ba386cdbccb22f8d949681112d5cd5a5-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="500Friends"><img data-company="500Friends" src="./InvestWiser_files/3678-31076a88a14f433e61cb407b7df1f5f2-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="DailyBooth"><img data-company="DailyBooth" src="./InvestWiser_files/32122-9440da8a06b432ccb75c9484f8208660-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Myntra"><img data-company="Myntra" src="./InvestWiser_files/162432v2-max-250x250.png" height="42px"></div><div class="pin" data-company="Pantheon"><img data-company="Pantheon" src="./InvestWiser_files/907-cbdae2927a54d2281280f41e954e8a3d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Sift"><img data-company="Sift" src="./InvestWiser_files/75722-d7f7618a9da5af4db1d45d6efca21bfb-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Lyft"><img data-company="Lyft" src="./InvestWiser_files/145472-81bf8f2c4ca579700231c7044fa9839f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Udemy"><img data-company="Udemy" src="./InvestWiser_files/19168-46f7ef2c0f994d588d8e8e56360d926b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Kinvey"><img data-company="Kinvey" src="./InvestWiser_files/42274-6fbeaff67875c9fc32ec52a26b35e152-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Geckoboard"><img data-company="Geckoboard" src="./InvestWiser_files/29381-31393c8f0b83a8df0e3f78e680c3e2c0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="RethinkDB"><img data-company="RethinkDB" src="./InvestWiser_files/nopic_startup.png" height="42px"></div><div class="pin" data-company="Instagram"><img data-company="Instagram" src="./InvestWiser_files/34259-52439e42264ff9197a4636d040abbfff-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Simply" hired=""><img data-company="Simply" hired="" src="./InvestWiser_files/32423-fd37de9162c886a6d01974ca4a52cca9-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="EverTrue"><img data-company="EverTrue" src="./InvestWiser_files/23792-c7a1add9ea471f4f63571df3a36b2b96-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Zencoder"><img data-company="Zencoder" src="./InvestWiser_files/32683-07b0900bf4ab41a125563f5da60acd47-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ModCloth"><img data-company="ModCloth" src="./InvestWiser_files/32307-079dcb726b503b44121adf6ebe32b1f9-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Chartio"><img data-company="Chartio" src="./InvestWiser_files/19671-88e300ade718ba101e788facd19338cb-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="CrowdTwist"><img data-company="CrowdTwist" src="./InvestWiser_files/32877-072c3944ecd602de4dab908c4a82c7eb-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Marginize"><img data-company="Marginize" src="./InvestWiser_files/32717-cce33f4490d2cc4e6184bb03dcfce7f4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Counsyl"><img data-company="Counsyl" src="./InvestWiser_files/35667-f31788f9b2270d16584c952b2056a0b4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Shelby.tv"><img data-company="Shelby.tv" src="./InvestWiser_files/43617-f43e8d8fdb2218ce553dde4faa00c14b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Simplee"><img data-company="Simplee" src="./InvestWiser_files/53715-22a37141cd6c4ce3be026c3497644201-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Asana"><img data-company="Asana" src="./InvestWiser_files/32050-a9808112a1474ca453fbe2c1081b7792-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Adap.tv"><img data-company="Adap.tv" src="./InvestWiser_files/92043v5-max-250x250.jpg" height="42px"></div><div class="pin" data-company="Hailo"><img data-company="Hailo" src="./InvestWiser_files/52786-d31e1bc55961a3d86fd04b9d4e72f37f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Zendesk"><img data-company="Zendesk" src="./InvestWiser_files/32554-de155daaa658f03038f5545e810755dc-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="biNu"><img data-company="biNu" src="./InvestWiser_files/19308-f15c33a796e7a38ce1754b7601eba464-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Ifbyphone"><img data-company="Ifbyphone" src="./InvestWiser_files/14489v1-max-250x250.jpg" height="42px"></div><div class="pin" data-company="Joyent"><img data-company="Joyent" src="./InvestWiser_files/41417-4513281d257e7042bc830daa54673aa0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Zaarly"><img data-company="Zaarly" src="./InvestWiser_files/29321-d3ad02c35e8ba080a9b0f4a5d4538fac-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Saygent"><img data-company="Saygent" src="./InvestWiser_files/12271-ccb95bae2f91848620940becb209a414-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Stripe"><img data-company="Stripe" src="./InvestWiser_files/37232-b86e6247bcd9846c18c91fe65ca0355d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Moovweb"><img data-company="Moovweb" src="./InvestWiser_files/64921v4-max-250x250.jpg" height="42px"></div><div class="pin" data-company="Optimizely"><img data-company="Optimizely" src="./InvestWiser_files/32998-45e33954c547f256c086bc09986c5ba5-medium_jpg.jpg" height="42px"></div></div>
+    </div>
+
+    <!-- Prediction box 3-->
+     <!-- ================================================== --> 
+      <div class="container">
+    &nbsp;&nbsp;&nbsp;&nbsp;<div class="centered col-lg-12">   
+          <div class="pin-wide" id="result-box3" style="display: none">
+          <div class="row">
+              <div class="col-md-6"><h3>Likelihood</h3>
+                <h2 id="prob-box3"></h2></div>
+              <div class="col-md-6"><h3>Amount(predicted)</h3>
+                <h2 id="worth-box3"></h2></div>
+          </div>
+          <br><br>
+          <div class="row">
+          <div class="col-md-10">
+          <img class="col-xs-3 pull-left" id="company_img3" src="./InvestWiser_files/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg">
+          <br><br>
+         <p style="font-size:32px; font-weight:bold;" height="400px" id="company_name3" align="left"></p>
+         <p style="font-weight:bold" align="left" id="snippet3"></p>
+         <p id="prod_desc3" align="left"></p>
+         <a id="result-dismiss3">CLOSE</a>
+         </div>
+         </div>
+          </div>
+        </div>
+      </div>    
+  <!-- Pin container 3 -->
+  <!-- ================================================== --> 
+    <div class="pin-container">
+      <h3 align="center" id="YLhead">Young Contenders<h4><a href="http://0.0.0.0:5000/#" id="col3-trigger"> Show all</a> <a href="http://0.0.0.0:5000/#" id="col3-hider" style="display:none"> leaders </a></h4></h3>
+      <div class="columns" id="col3" align="center"><div class="pin" data-company="SpotMe"><img data-company="SpotMe" src="./InvestWiser_files/169960-6ef37e21fc7915adb3f643bfaa29ad49-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Skillbridge"><img data-company="Skillbridge" src="./InvestWiser_files/237681-1ec4f0ec6175437be12fa9cb2530083a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Juristat"><img data-company="Juristat" src="./InvestWiser_files/152767-2554c04ada1bc4227a70e3c4ff95f9a4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Symvato"><img data-company="Symvato" src="./InvestWiser_files/274680-0277f7d284b0e2460cedbab2de1298d3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Donde"><img data-company="Donde" src="./InvestWiser_files/147704-a58633aff21da1a54a54a758faa60858-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Openbay"><img data-company="Openbay" src="./InvestWiser_files/183516-d5c895e8d7a747c152988005fb4c9535-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Koemei"><img data-company="Koemei" src="./InvestWiser_files/26160-b9c782e3f3a42589a1103d51b2bfb115-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="OpenCare"><img data-company="OpenCare" src="./InvestWiser_files/175143-cfdfbf2d387c555b0c02953217a03995-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="CredSimple"><img data-company="CredSimple" src="./InvestWiser_files/177917-10e20afc1abc8f49be471c00cf62c183-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Communities" for="" cause=""><img data-company="Communities" for="" cause="" src="./InvestWiser_files/84886-2781149711d24d8787d44ce424871ab1-medium_jpg.jpg" height="42px"></div></div>
+      <div class="columns" id="col3-showmore" style="display:none" align="center"><div class="pin" data-company="Widow" games=""><img data-company="Widow" games="" src="./InvestWiser_files/183314-000db3f0870dcaf378d18a1eb5c6101c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="IM5"><img data-company="IM5" src="./InvestWiser_files/256799-2db7c6bea661759372f1b9ee02f01a6b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Priceonomics"><img data-company="Priceonomics" src="./InvestWiser_files/69763-e7410c45bbcb227cf1135a5233dd1f48-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ProductGram"><img data-company="ProductGram" src="./InvestWiser_files/278889v2-max-250x250.png" height="42px"></div><div class="pin" data-company="Credii"><img data-company="Credii" src="./InvestWiser_files/79849-413ad5653fab52936f00fc794f80e87b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Dealflicks"><img data-company="Dealflicks" src="./InvestWiser_files/104489-5c33c1bd720e824325829cdfae3d7a0a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Provender"><img data-company="Provender" src="./InvestWiser_files/165451-dc934d5c33a1ae0ee4be64065ca8fa93-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Fligoo"><img data-company="Fligoo" src="./InvestWiser_files/136082-d043e8c7827d4358df37bfd96930e2ac-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Padlet"><img data-company="Padlet" src="./InvestWiser_files/122888-c0185cba7b5ee8da079ab8750c1e3354-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="PriceBaba"><img data-company="PriceBaba" src="./InvestWiser_files/127729-48f67c4c80a3392ea479dc51e8d622e4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Binpress"><img data-company="Binpress" src="./InvestWiser_files/2506-17a6c09b67f0688ce06075ad07737abf-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Admittedly"><img data-company="Admittedly" src="./InvestWiser_files/201124-263624a9e5dee4e795192c8b907cf32a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Nutmeg" education=""><img data-company="Nutmeg" education="" src="./InvestWiser_files/132461-eed6b158a73ee10b6ac9845a7be767d5-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Reaction"><img data-company="Reaction" src="./InvestWiser_files/26909-78e22fa17a2479c281e7be09310ccc9f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Earbits"><img data-company="Earbits" src="./InvestWiser_files/517-c81b058ce0da2b97b1e09d00cc04c0dd-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Compilr"><img data-company="Compilr" src="./InvestWiser_files/27994-626af8e2e8f84e42638e668103f4ad42-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Custora"><img data-company="Custora" src="./InvestWiser_files/55899-5d76c573ac1c19359d71a7be8cc4fd7a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Culture" kitchen=""><img data-company="Culture" kitchen="" src="./InvestWiser_files/20520-07dee92b6d4b3bf12bad105d7c06cfcf-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Pipette"><img data-company="Pipette" src="./InvestWiser_files/31740-4b996faeb295834ce426465c1c9b355a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Inhabi"><img data-company="Inhabi" src="./InvestWiser_files/21481-9dc7d07f514a7fc2fe98949a79749cd8-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Murfie"><img data-company="Murfie" src="./InvestWiser_files/26432-70514b3ebba99aaab36557da0ae447b8-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Canary" calendar=""><img data-company="Canary" calendar="" src="./InvestWiser_files/90464-d51767e34ac1754344a4711a8a2e5486-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="GoChime"><img data-company="GoChime" src="./InvestWiser_files/72109-de779fee211524578236a758b462c187-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Campalyst"><img data-company="Campalyst" src="./InvestWiser_files/23745-4a4510fc507b210706401eda30e3ff3f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Fileboard"><img data-company="Fileboard" src="./InvestWiser_files/2752-096b6a43678e0dc41937ef1cd1d6ee2b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Fieldwire"><img data-company="Fieldwire" src="./InvestWiser_files/27490-b8cb93e8d497683a2dea3387f8ca1c7b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Docphin"><img data-company="Docphin" src="./InvestWiser_files/27231-96b2add821dc918284081dde71a3e8c3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="REPP"><img data-company="REPP" src="./InvestWiser_files/118057-0d9398b9ca4273113e2cea5b605acd35-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Yardsale"><img data-company="Yardsale" src="./InvestWiser_files/52073-67f1b16fb4bc77facee8f73919e9c113-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Snapjoy"><img data-company="Snapjoy" src="./InvestWiser_files/53145-e30a9adbf809000def7e3955038a952f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Lively"><img data-company="Lively" src="./InvestWiser_files/265823-41ea88382406950211bde0468f9bc71f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Sverve"><img data-company="Sverve" src="./InvestWiser_files/67109-bf761fc225067d936f20eb5e460405b0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="LetsWombat"><img data-company="LetsWombat" src="./InvestWiser_files/80437-78f183909f2a7f49a6a56040d7165830-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Wizpert"><img data-company="Wizpert" src="./InvestWiser_files/88026-96d5897c1ba0e4ae0ce1190d876c0da8-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Pictorious"><img data-company="Pictorious" src="./InvestWiser_files/50801-d866fdb1309e32a3518236ca981a0285-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="CitalDoc"><img data-company="CitalDoc" src="./InvestWiser_files/124027-25569b390f2549450cce8e304d700490-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Pharmly"><img data-company="Pharmly" src="./InvestWiser_files/206333-0b0761fda568caebe78afe9be0bab496-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Shoplins"><img data-company="Shoplins" src="./InvestWiser_files/24929-8a033858b8942e940803f3be764e19b0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Starbates"><img data-company="Starbates" src="./InvestWiser_files/30579-871a8b2df22d2725debda5612f7b5ae1-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Tred"><img data-company="Tred" src="./InvestWiser_files/96232-a62f170a008bd39cc865fe6af8e5c6c6-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Poq" studio=""><img data-company="Poq" studio="" src="./InvestWiser_files/26842-5852b4f71fcce29de8e66a188ea43ea1-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ViFlux"><img data-company="ViFlux" src="./InvestWiser_files/77959-ce33b7b8a923fdf19fe5ebd3f875893b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="WooWho"><img data-company="WooWho" src="./InvestWiser_files/127700-734ff184e2460aeadc9980291c62f6fc-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="SERPs"><img data-company="SERPs" src="./InvestWiser_files/75082-ab36287d701df07187f43e55c2aa812e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="The" whoot=""><img data-company="The" whoot="" src="./InvestWiser_files/69488-d2ed5d8895738994671faf5cad6aab6a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ClrTouch"><img data-company="ClrTouch" src="./InvestWiser_files/534-6eb1fc35e8cc6e7b4998b647bf98602c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="CloudMine"><img data-company="CloudMine" src="./InvestWiser_files/23864-5e0b5bdad383d9606dabcf6f349629eb-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="N4MD"><img data-company="N4MD" src="./InvestWiser_files/29795-09a6e9551a9760fcde84ad3dc06caf26-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Farmeron"><img data-company="Farmeron" src="./InvestWiser_files/16828-e05efbe009824a918d915f5747dc61d2-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="The" tap="" lab=""><img data-company="The" tap="" lab="" src="./InvestWiser_files/22588-2bd0df58a5a592bad839511ff15e482a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Mineful"><img data-company="Mineful" src="./InvestWiser_files/2430-e736414a8ff70a197213735282188e42-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Leaky"><img data-company="Leaky" src="./InvestWiser_files/81396-8aecdd0ff159ebb949ea7e3ce93da24f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="t-Art"><img data-company="t-Art" src="./InvestWiser_files/77906-f8951a489864459b93126c268c64457e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Gliph"><img data-company="Gliph" src="./InvestWiser_files/93705-4a6a2b224a787338f18fde469800be59-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Aurality"><img data-company="Aurality" src="./InvestWiser_files/28430-748467a2298c49b565591a405c6b721d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ooomf"><img data-company="ooomf" src="./InvestWiser_files/65467-4b3e46561abf4c2727186ffb1aec54cf-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Fontacto"><img data-company="Fontacto" src="./InvestWiser_files/65640-9470fcc8599592146011009754e6de96-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Sitesimon"><img data-company="Sitesimon" src="./InvestWiser_files/24500-034b8352d427c371433407007fd10bd8-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Homeschool" snowboarding=""><img data-company="Homeschool" snowboarding="" src="./InvestWiser_files/97091-edd5402819e1137c01beb2e1852ddaf4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Hively"><img data-company="Hively" src="./InvestWiser_files/23707-6102ccf82894e3d9337eb766a43ca1c5-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="LaunchSide"><img data-company="LaunchSide" src="./InvestWiser_files/24566-8c30bb851edb273801a9fad0499f7138-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="UsherBuddy"><img data-company="UsherBuddy" src="./InvestWiser_files/22891-dec947fa337ea1870c1869498b0afb0c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="GroovinAds"><img data-company="GroovinAds" src="./InvestWiser_files/25439-8d43172e7f83b8d07eab7e7f92251877-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="MoPix"><img data-company="MoPix" src="./InvestWiser_files/25717-37d1a066f22ea3bbe946de06e60d8ba5-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="BuildingLayer"><img data-company="BuildingLayer" src="./InvestWiser_files/154984v2-max-250x250.png" height="42px"></div><div class="pin" data-company="Vayable"><img data-company="Vayable" src="./InvestWiser_files/2197-3983fe228b05d33a497de287388ed5ff-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Campus" shift=""><img data-company="Campus" shift="" src="./InvestWiser_files/180690v7-max-250x250.jpg" height="42px"></div><div class="pin" data-company="Bilbus"><img data-company="Bilbus" src="./InvestWiser_files/66785-e444fa8410389a36990b6172932d7fc2-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Keepio"><img data-company="Keepio" src="./InvestWiser_files/2443-78bd2de457c4d4bfcaf187aa22fb8ed8-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Holvi"><img data-company="Holvi" src="./InvestWiser_files/24023-0b29ff54359b776862af424058e13d3f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="RentShare"><img data-company="RentShare" src="./InvestWiser_files/26350-1d0b52fb04286b62d34f9bb6fc39136f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Rewardli"><img data-company="Rewardli" src="./InvestWiser_files/13076-4e76e02bc2e41262687371546476268e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Nutrino"><img data-company="Nutrino" src="./InvestWiser_files/223748v4-max-250x250.png" height="42px"></div><div class="pin" data-company="MFive" labs="" (listn)=""><img data-company="MFive" labs="" (listn)="" src="./InvestWiser_files/241446v4-max-250x250.png" height="42px"></div><div class="pin" data-company="Badgy"><img data-company="Badgy" src="./InvestWiser_files/199691v2-max-250x250.png" height="42px"></div><div class="pin" data-company="BuzzTable"><img data-company="BuzzTable" src="./InvestWiser_files/24727-a839f4480be495b16575d33cd8a6e1fb-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="iMedicare"><img data-company="iMedicare" src="./InvestWiser_files/132704-709d60a05a9e9fff08228dbf06c92f81-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="RadPad"><img data-company="RadPad" src="./InvestWiser_files/118378-2af8b580f8eca61f987c4b4cbb7946a8-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="DataRank"><img data-company="DataRank" src="./InvestWiser_files/25092-b998e56479a0cb2bd28c8c3f6dab4c2c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Sush.io"><img data-company="Sush.io" src="./InvestWiser_files/30384-0b6c1464881e03a3475d993b925d0bd3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Memetales"><img data-company="Memetales" src="./InvestWiser_files/21821-603d1bb6854b0f41e69d5261d440ed71-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="HighScore" house=""><img data-company="HighScore" house="" src="./InvestWiser_files/22458-7e2f67fedcdb8c6bb18fdb23996cff7b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="PageLever"><img data-company="PageLever" src="./InvestWiser_files/24541-75931a8296c162813019d3bb216eaefc-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Zagster"><img data-company="Zagster" src="./InvestWiser_files/1856-ff0ac5c965036f975451d39a8cce15d0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="iCouch"><img data-company="iCouch" src="./InvestWiser_files/7433-64ddc52ba5a2c99c749054a8696b4548-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Populy" games=""><img data-company="Populy" games="" src="./InvestWiser_files/120630-2a64e0c963e94c06b7a0f1ae6329a09c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Sessions"><img data-company="Sessions" src="./InvestWiser_files/85456-f3f28afb989d5139a75ce0a6287644e4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Corengi"><img data-company="Corengi" src="./InvestWiser_files/24199-ce4f9d6f5b24b21ecaf2485d126ccf34-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="LocalBonus"><img data-company="LocalBonus" src="./InvestWiser_files/22123-e8ae2138b2f4254613387f827b655c0e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Gizmo.com"><img data-company="Gizmo.com" src="./InvestWiser_files/10310-e12aeccfa4877f9716f3483fa84fc38a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="MobileWorks"><img data-company="MobileWorks" src="./InvestWiser_files/62150-08b544eef4333560f3df9b6dfefe3614-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Noom"><img data-company="Noom" src="./InvestWiser_files/109072-acb40e7bde18a6c02f67e07fe4b621d9-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Stamplay"><img data-company="Stamplay" src="./InvestWiser_files/149925-bdaaff8c1aa594119bec495439fa6aae-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="coUrbanize"><img data-company="coUrbanize" src="./InvestWiser_files/198978-beabb4325974c24576ee9f0f89badf93-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ZoomTilt"><img data-company="ZoomTilt" src="./InvestWiser_files/70346-b8efca476498bba499991ac1f59507b4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Shopsy"><img data-company="Shopsy" src="./InvestWiser_files/21594-afc9535734c311e7c511fd77e44ccb06-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Recroup"><img data-company="Recroup" src="./InvestWiser_files/174817-3ee26e779ad6fe8f92cd2fa787373c91-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="MiCarga"><img data-company="MiCarga" src="./InvestWiser_files/76317-6c4ec9d2b4964313990fed27f8926cf3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="BitGym"><img data-company="BitGym" src="./InvestWiser_files/21516-02f6e54ee8bc4e9e7acc4fac774c0486-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Nveloped"><img data-company="Nveloped" src="./InvestWiser_files/31196-3d20b54b15cf64a991164c8b55fcd1fe-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Leanplum"><img data-company="Leanplum" src="./InvestWiser_files/134201-56e24e0584e0de406d8ce6965cb3f65a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Psykosoft"><img data-company="Psykosoft" src="./InvestWiser_files/1566-5340a51c78781f8ef2bb8a0a83061275-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Properati"><img data-company="Properati" src="./InvestWiser_files/144469-cee7bc432edb02b87508b9120b6fba86-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Neurala"><img data-company="Neurala" src="./InvestWiser_files/136219-e6edc37bb162e0dc5ecb7629435010e0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="DoorDash"><img data-company="DoorDash" src="./InvestWiser_files/271485-0323baf5a3b7d6dc76ab970febe7bcbf-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="SocStock"><img data-company="SocStock" src="./InvestWiser_files/29772-1a48a19a3ba5ff9c2ac94132904b2707-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Motion" dispatch=""><img data-company="Motion" dispatch="" src="./InvestWiser_files/74505-de0b8e2869671822b6be75c9457e70c9-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Invested.in"><img data-company="Invested.in" src="./InvestWiser_files/20326-b9cba17a8e46cb85ec1307972afdbf1d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Rentlord"><img data-company="Rentlord" src="./InvestWiser_files/22038-7f02b45447acfbb57c6463dccfab426f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="adFreeq"><img data-company="adFreeq" src="./InvestWiser_files/72308-42d297d85e8bec8b3df601f7ffd60793-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Glassmap"><img data-company="Glassmap" src="./InvestWiser_files/130560-3496c6c0d9952f25053e791a2ee7b3cd-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="VONTRIP"><img data-company="VONTRIP" src="./InvestWiser_files/185760-199ee97a2ccd48586ca0c40f5a0c4e04-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Eventcheq"><img data-company="Eventcheq" src="./InvestWiser_files/122060-52777b07dfcc4ceb7b05cca1b7b0a310-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="TheFanLeague"><img data-company="TheFanLeague" src="./InvestWiser_files/183002-cdb07c3060d13861f980d9898290ab9f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Tealet"><img data-company="Tealet" src="./InvestWiser_files/103572-ec3e04c720fa8a229916db49b320207d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="GroupTalent"><img data-company="GroupTalent" src="./InvestWiser_files/10908-efff23e7f635cc4563f111956aecd268-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Transit" app=""><img data-company="Transit" app="" src="./InvestWiser_files/156318-73ea4421ed47741248c97b1d8e4203ca-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Now" in="" store=""><img data-company="Now" in="" store="" src="./InvestWiser_files/156266-568ee59c49e1b0e3dd4b9782b09bbab3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Swift" identity=""><img data-company="Swift" identity="" src="./InvestWiser_files/159332-5c1f6500ad6caac8b6690b5bb712dbd5-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="LookUP"><img data-company="LookUP" src="./InvestWiser_files/74473-e7b92312588e2dc31159a4c1aa2d694f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="femeninas"><img data-company="femeninas" src="./InvestWiser_files/127726-4709d3fcbad5db0e711823528fc26879-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Blossom"><img data-company="Blossom" src="./InvestWiser_files/21905-8e337c624718413d560b041132a30cc3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Ordr.in"><img data-company="Ordr.in" src="./InvestWiser_files/48212-a87853fcb26e1646bf7de4f3488790c0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Fitocracy"><img data-company="Fitocracy" src="./InvestWiser_files/18937-25d96605a57406758a0f9cbe39b8ecda-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Bombfell"><img data-company="Bombfell" src="./InvestWiser_files/80314-6e8a59e9050370ccae85207c6fb3f3d5-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Qwiqq"><img data-company="Qwiqq" src="./InvestWiser_files/79811-af14789c199890f6be03453e3c329068-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="BugHerd"><img data-company="BugHerd" src="./InvestWiser_files/4081-ae884ce4ca1e15ab260208274c921448-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Promoboxx"><img data-company="Promoboxx" src="./InvestWiser_files/20917-61f3c94585eaa6721ea826b20831f18e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="iCracked"><img data-company="iCracked" src="./InvestWiser_files/79259-04f6ff52ae8799ba2721cf1a6f7df88f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Nitrogram"><img data-company="Nitrogram" src="./InvestWiser_files/31646-fe91f1caed14d9d9044dadd971fea83e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Click" with="" me="" now=""><img data-company="Click" with="" me="" now="" src="./InvestWiser_files/89696-035fcf299187f2fcebe27def7a27a4aa-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Urtak"><img data-company="Urtak" src="./InvestWiser_files/86920v4-max-250x250.jpg" height="42px"></div><div class="pin" data-company="Mobilligy"><img data-company="Mobilligy" src="./InvestWiser_files/154369-4b285b547540c839f8748ca8e27c05bb-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ChickRx"><img data-company="ChickRx" src="./InvestWiser_files/61743-de593b08494fcc62e698af37cbfb540b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Twitmusic"><img data-company="Twitmusic" src="./InvestWiser_files/30459-6cef9b507535b7d33a02bd624fd3f328-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Harry&#39;s"><img data-company="Harry&#39;s" src="./InvestWiser_files/183969-09f830ee9affb3cb791de79cf9c8042a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Thryve"><img data-company="Thryve" src="./InvestWiser_files/102844-bc22cac4f12bb06ff24efe001880db5a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Thumbs" up=""><img data-company="Thumbs" up="" src="./InvestWiser_files/78686-e60009eae00d9b3f12bcd1d34192eb25-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Antavo"><img data-company="Antavo" src="./InvestWiser_files/95597-9550bc09664882cb7f7e7e09750aef67-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Grassroots" unwired=""><img data-company="Grassroots" unwired="" src="./InvestWiser_files/14397-c7e231d19cbe579ddeab7eadddf117b0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Libboo"><img data-company="Libboo" src="./InvestWiser_files/20011-0ee8693fc068383f839855627f81bb0d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Ubersense"><img data-company="Ubersense" src="./InvestWiser_files/61263-e9ec1c802aad05d2f16af5ca20352bc0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Zeppelin"><img data-company="Zeppelin" src="./InvestWiser_files/27096-3fb63509c13f4b5f078dcc5d4386083c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Outline"><img data-company="Outline" src="./InvestWiser_files/144353-16c48b6994435bbb19c1396ade9e3c86-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Nommunity"><img data-company="Nommunity" src="./InvestWiser_files/79887-44723985820657343315618b91b487fd-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Atticous"><img data-company="Atticous" src="./InvestWiser_files/30668-6775669a27e4282b18db636f769ca707-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Mind" factoryar=""><img data-company="Mind" factoryar="" src="./InvestWiser_files/77921-5bb25088d47a1326b67200bbeeee3684-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Teliportme"><img data-company="Teliportme" src="./InvestWiser_files/817-56d463b7c815caffef1a4e15c5e82d2c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Evisors"><img data-company="Evisors" src="./InvestWiser_files/1326-aa983ac53ae6eb6bb9484aee98661b39-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="numberFire"><img data-company="numberFire" src="./InvestWiser_files/24642-590c299336910705fd2702fa7ede6423-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ShuttleCloud"><img data-company="ShuttleCloud" src="./InvestWiser_files/26683-f7b966daeea19f2c8628b06cb8f38e16-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Bazaart"><img data-company="Bazaart" src="./InvestWiser_files/85981-377f49815c24640394cfccffdb6add8e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Saborstudio"><img data-company="Saborstudio" src="./InvestWiser_files/28409-6cedff56049ef84e2afbf0aeff6f4458-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="HazelMail"><img data-company="HazelMail" src="./InvestWiser_files/121258-1a40899c1d6d7244de4e5875f8682688-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Presstler"><img data-company="Presstler" src="./InvestWiser_files/79808-353ba1b6c0284c8393b8b9d3ed32a6cb-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="WoowUp"><img data-company="WoowUp" src="./InvestWiser_files/248354-31180d432aeedee4dce25d02a29acba8-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Attender"><img data-company="Attender" src="./InvestWiser_files/121281-ac3b626c680072aa2a6fb88d919c6f41-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Kwelia"><img data-company="Kwelia" src="./InvestWiser_files/30009-91296f026a767411616e9196b8580c0d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="PublicStuff"><img data-company="PublicStuff" src="./InvestWiser_files/24837-0cccd0e5c6ec6bdb50010ca6dd6bd091-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Statwing"><img data-company="Statwing" src="./InvestWiser_files/114180-a8d5c65e9cb986eb5ffbb96ebe0baa19-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Zerply"><img data-company="Zerply" src="./InvestWiser_files/4374-df5b10e633190f7d980ca47f58b93d2b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="CashBet"><img data-company="CashBet" src="./InvestWiser_files/202325-1a10f1081ba2d9b73e864c988f0af015-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="CrowdHall"><img data-company="CrowdHall" src="./InvestWiser_files/106395-eab36012154b2ce52f01e500f03ebb22-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="121nexus"><img data-company="121nexus" src="./InvestWiser_files/82334-3c143dd8754f6bc6d524347abdce9537-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Off" track="" planet=""><img data-company="Off" track="" planet="" src="./InvestWiser_files/3138-563cf7c4ceb51575c0995f5cf83cc82f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Flipaste"><img data-company="Flipaste" src="./InvestWiser_files/124037-2551a9298ed68f4498eb7d19f24550ac-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Bespoke" post=""><img data-company="Bespoke" post="" src="./InvestWiser_files/24738-af0aeb7bef5f0e295036b9a17db4a36a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Reclip.It"><img data-company="Reclip.It" src="./InvestWiser_files/79796-33a928aed42530155e04cc256f8ae6b0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Preact"><img data-company="Preact" src="./InvestWiser_files/121558-cc28a1678e8c208ea6e2b5359aff33dc-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Kippt"><img data-company="Kippt" src="./InvestWiser_files/58059-a50effb231719ad36b3e237d8b925ff2-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Sproutel"><img data-company="Sproutel" src="./InvestWiser_files/82170-4055bb69a754968a9e5cfc908ca02b18-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Ninua"><img data-company="Ninua" src="./InvestWiser_files/13097-bab2877df2e45ef39a006dca8b3dccb7-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Learnmetrics"><img data-company="Learnmetrics" src="./InvestWiser_files/147045-4c00771b88c789f23a7f4ef0f98b9470-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Dropifi"><img data-company="Dropifi" src="./InvestWiser_files/195195-8779ed1f90800fd80c5aa3c9b536b8c7-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Where" my="" dogs="" at=""><img data-company="Where" my="" dogs="" at="" src="./InvestWiser_files/100071-fdc03a0e01b30adb391a642003d9a846-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Moodyo"><img data-company="Moodyo" src="./InvestWiser_files/120914-66e2c08f8601f318b49c997668454372-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="CumuLogic"><img data-company="CumuLogic" src="./InvestWiser_files/211282v1-max-250x250.jpg" height="42px"></div><div class="pin" data-company="Everypost"><img data-company="Everypost" src="./InvestWiser_files/118506-a56c943da122551ca7f0a2ea25fa4636-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Andtix"><img data-company="Andtix" src="./InvestWiser_files/127773-99d895c11cce8c23ea5cf967c62490bf-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Squabbler"><img data-company="Squabbler" src="./InvestWiser_files/27228-522a0d735f2660db5a7cad42c0357240-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Dakwak"><img data-company="Dakwak" src="./InvestWiser_files/116466-ff1bed7962171d6e71e6092be44a4cc6-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="99dresses"><img data-company="99dresses" src="./InvestWiser_files/79556-5a4f3f4fb122167726ee1c213ff7fec5-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Zaranga"><img data-company="Zaranga" src="./InvestWiser_files/196627-375624599e0d2635bec791810b5ac5cc-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="BabyList"><img data-company="BabyList" src="./InvestWiser_files/107217-c269224a8f820b030907178db115a537-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ImpulseSave"><img data-company="ImpulseSave" src="./InvestWiser_files/77179-f2ded37fec31b1af9649642932c9b2e7-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Spling"><img data-company="Spling" src="./InvestWiser_files/16533-ed9f194f457de6ca615826696fc03a82-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="1stdibs"><img data-company="1stdibs" src="./InvestWiser_files/156938-740ad2a3e7d4c7fb33075145fe5bad01-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Cuponomia"><img data-company="Cuponomia" src="./InvestWiser_files/127575-7c44c823a1a42431c4555767c7f26311-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="AnyCloud"><img data-company="AnyCloud" src="./InvestWiser_files/64934-fdac10772be324472c237007eb2d9b5e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="TinyTap"><img data-company="TinyTap" src="./InvestWiser_files/99407-9a6da72856341069bf190e47842c8fcf-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="FoodEssentials"><img data-company="FoodEssentials" src="./InvestWiser_files/31859-fb5ce1e26e7b60107c3e692776d412e2-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Von" bismark=""><img data-company="Von" bismark="" src="./InvestWiser_files/74497-2de2f10801c6b42a1a1b8b05f3e005cc-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Tweetwall"><img data-company="Tweetwall" src="./InvestWiser_files/358-c686a22f750e81ef433c0de44efc56f6-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Iconfinder"><img data-company="Iconfinder" src="./InvestWiser_files/1682-2fd0f78ff6dc884538d079b018d1d40a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="AnyPerk"><img data-company="AnyPerk" src="./InvestWiser_files/76533-501008e2cd9b79527c0e7b161cdfa142-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Crunchbutton"><img data-company="Crunchbutton" src="./InvestWiser_files/78905-6b8e6d361d7e552efb967202eb01c0de-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Scholrly"><img data-company="Scholrly" src="./InvestWiser_files/19017-aec125cc8bfe1d39adf2688792aa8935-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Kuratur"><img data-company="Kuratur" src="./InvestWiser_files/64577-e3a274b4ea09ea4f084dcec4c9693aa3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Monogram"><img data-company="Monogram" src="./InvestWiser_files/81433-4d55dd98692d7097e031cdbf7ec48f9b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Apptentive"><img data-company="Apptentive" src="./InvestWiser_files/21073-062438febb11c40ea1bd7255f1b58043-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Plandree"><img data-company="Plandree" src="./InvestWiser_files/96276-85d569d80caa92b1a90d7c0ed341f865-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Hundo"><img data-company="Hundo" src="./InvestWiser_files/251747v9-max-250x250.png" height="42px"></div><div class="pin" data-company="Rootless"><img data-company="Rootless" src="./InvestWiser_files/222604v2-max-250x250.png" height="42px"></div><div class="pin" data-company="Gecko" health="" innovation="" (geckocap)=""><img data-company="Gecko" health="" innovation="" (geckocap)="" src="./InvestWiser_files/26692-d80429a1b7c2c5db932452cdaddd11c2-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Qual" canal=""><img data-company="Qual" canal="" src="./InvestWiser_files/127824-e99695ed223a5dbb08be5644ba56fed3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="LaunchGram"><img data-company="LaunchGram" src="./InvestWiser_files/66253-32a88e22b93ab5f02d6729acc88ff96e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Memebox"><img data-company="Memebox" src="./InvestWiser_files/238664v7-max-250x250.png" height="42px"></div><div class="pin" data-company="StackSocial"><img data-company="StackSocial" src="./InvestWiser_files/68638-b43c6f1fab12783dff93702d1075c83d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="EquityLancer"><img data-company="EquityLancer" src="./InvestWiser_files/117901-3c3cbc72b82428168478fa8fff757372-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="PlanGrid"><img data-company="PlanGrid" src="./InvestWiser_files/85839-99cae95d511098f375c6133e08167e03-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Wideo"><img data-company="Wideo" src="./InvestWiser_files/122262-44c995685c06fbce2ff58f95123176bf-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Seevibes"><img data-company="Seevibes" src="./InvestWiser_files/16294-bab2212b474f0136566e97da73ec690c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Freshdesk"><img data-company="Freshdesk" src="./InvestWiser_files/2473-2c38490d8e4c91660d86ff54ba5391ea-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Cody"><img data-company="Cody" src="./InvestWiser_files/117039-9e44427a5a381a23f6193407484930a4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="HealthRally"><img data-company="HealthRally" src="./InvestWiser_files/1787-a9208029d76e1ac8077ad75d52da13a0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Tapestry"><img data-company="Tapestry" src="./InvestWiser_files/167677-6c5a583276258a413235a755d7dcb227-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Wikisway"><img data-company="Wikisway" src="./InvestWiser_files/128827-e051e08855983861cbfbbb08c7f8c874-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ShutterCal"><img data-company="ShutterCal" src="./InvestWiser_files/187950-a41796d3ce8c81010e3ed1f8a9c66e9c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="SurpriseRide"><img data-company="SurpriseRide" src="./InvestWiser_files/137838-ee4907c4d0d007681c18050c2f37d7d4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="TRData"><img data-company="TRData" src="./InvestWiser_files/112523-d7c42e12faa5d3253c782e75a36cfd44-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="100Plus"><img data-company="100Plus" src="./InvestWiser_files/57905-cc85c11b038f461f30da7cb003be13b0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Mortar" data=""><img data-company="Mortar" data="" src="./InvestWiser_files/189715v2-max-250x250.png" height="42px"></div><div class="pin" data-company="qunb"><img data-company="qunb" src="./InvestWiser_files/11393-6c14d76c96d0ce36ddd67e4ddebc512d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Dashbell"><img data-company="Dashbell" src="./InvestWiser_files/25306-b5023500f6f5b914819c74c3247b253a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="BetterFit" technologies=""><img data-company="BetterFit" technologies="" src="./InvestWiser_files/134409-d765b01ac35b933a49298f1aeebc298a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Modulus"><img data-company="Modulus" src="./InvestWiser_files/88547-f3730974e6ede2087553be3ca36161bb-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="One" inc.=""><img data-company="One" inc.="" src="./InvestWiser_files/41335-2fda85f7fc32a7d898a8210d2d926cf8-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Happy" inspector=""><img data-company="Happy" inspector="" src="./InvestWiser_files/26179-5bbb6f18c318c61742e2aebf4260d1d9-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Teamly"><img data-company="Teamly" src="./InvestWiser_files/9434-327673b4b503fbd1bff38b62052163f9-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Faraday"><img data-company="Faraday" src="./InvestWiser_files/175701-a63ebd1b56a401e905963c64958204d4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ClassDojo"><img data-company="ClassDojo" src="./InvestWiser_files/58369-82fb0e203e635f49c4feea9b956caa53-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Splashscore"><img data-company="Splashscore" src="./InvestWiser_files/187199-8e5a4e21af81c9a7daa7ac29bd76baa4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="docTrackr"><img data-company="docTrackr" src="./InvestWiser_files/95818-312d9745e906300234689d16cf3c2a93-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Pact" fitness=""><img data-company="Pact" fitness="" src="./InvestWiser_files/169187v5-max-250x250.png" height="42px"></div><div class="pin" data-company="Zillabyte"><img data-company="Zillabyte" src="./InvestWiser_files/80054-2cc9154b1981ce648f94db4697856d70-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="everbill"><img data-company="everbill" src="./InvestWiser_files/122643-647f4c35406e9d6e357488e6d1435fb5-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="FamilyLeaf"><img data-company="FamilyLeaf" src="./InvestWiser_files/78224-5f59503bb281638f2da2832b0ddf76d2-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="FlyData"><img data-company="FlyData" src="./InvestWiser_files/27216-b18bad9ad23fd743b01f4e305c21c277-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="MobileDevHQ"><img data-company="MobileDevHQ" src="./InvestWiser_files/18138-95224a33892f520f8cf5afdfaccf3d7c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Socrative"><img data-company="Socrative" src="./InvestWiser_files/119191-86cda434e1364f51aebd05c43c61ab43-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="DocASAP"><img data-company="DocASAP" src="./InvestWiser_files/42183-29a1cd272ec163cc7f78f18ba437918b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Validic"><img data-company="Validic" src="./InvestWiser_files/5744-6364b93a827fb3bd23f5452a5be2403d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="LaunchRock"><img data-company="LaunchRock" src="./InvestWiser_files/2917-b4380ef3be86f10bac24ecee8ee5f763-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Sayduck"><img data-company="Sayduck" src="./InvestWiser_files/107821-01848bf6adaeda44f621f5a9b4915b56-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="CitySpark"><img data-company="CitySpark" src="./InvestWiser_files/29218-62f2b4793fc7f97d9db87040ff29381c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Lawdingo"><img data-company="Lawdingo" src="./InvestWiser_files/99336-b950ce44b19f885e2294c954713fbf0d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Eponym"><img data-company="Eponym" src="./InvestWiser_files/234840-e0af210496617f8761fba31ccc0b0cca-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Famigo," inc.=""><img data-company="Famigo," inc.="" src="./InvestWiser_files/60472v2-max-250x250.png" height="42px"></div><div class="pin" data-company="AdhereTech"><img data-company="AdhereTech" src="./InvestWiser_files/127125-299514d7bb76506e34397ec74889cf3f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Tutorspree"><img data-company="Tutorspree" src="./InvestWiser_files/28208-524177e4cfb85f910f3180ac465b5b49-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="SaleMove"><img data-company="SaleMove" src="./InvestWiser_files/95278-72c7ca4e128466e7e8ecb993ac8580d6-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Appifier"><img data-company="Appifier" src="./InvestWiser_files/26047-1b4a5b07db1f4b5257dfe0d9825904d0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Umbie" dentalcare=""><img data-company="Umbie" dentalcare="" src="./InvestWiser_files/324794v1-max-250x250.jpg" height="42px"></div><div class="pin" data-company="Openera"><img data-company="Openera" src="./InvestWiser_files/21369-33af6c5558401785d5430671981449a5-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Prepmatic"><img data-company="Prepmatic" src="./InvestWiser_files/81248-a35a115da43af363750255fe958d0f2f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Assembly"><img data-company="Assembly" src="./InvestWiser_files/24598-481245573403b45a58391caebdddd207-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Wallaby" financial=""><img data-company="Wallaby" financial="" src="./InvestWiser_files/77625-7a62f7d9406acd55c06995ed6eeb7135-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Shopperception"><img data-company="Shopperception" src="./InvestWiser_files/31777-0061c9571832de3d7377cda410930b6b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Fetchnotes"><img data-company="Fetchnotes" src="./InvestWiser_files/18966-2745e0f65cec2bb3dcadc55af9e63230-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Tindie"><img data-company="Tindie" src="./InvestWiser_files/127715-7efc05da6db0655755d20b9370a691c7-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Cubie"><img data-company="Cubie" src="./InvestWiser_files/83689-87d0cfb9e83f54b95f9c79f10047c881-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Prevoty"><img data-company="Prevoty" src="./InvestWiser_files/185695-82860ca00daa6b48d51e78450e005564-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="72Lux"><img data-company="72Lux" src="./InvestWiser_files/695-83b617f2a06a49abf02d4c55b4a73485-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Fancred"><img data-company="Fancred" src="./InvestWiser_files/101493-5ef8ffdb001188353f8cee62079ba183-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Enhatch"><img data-company="Enhatch" src="./InvestWiser_files/21403-ea02c798d7a7d69fc4da2c2c740c23ab-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Sandglaz"><img data-company="Sandglaz" src="./InvestWiser_files/72266-472f1283f7e131f9da430eacc9c2c653-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Rise" robotics=""><img data-company="Rise" robotics="" src="./InvestWiser_files/77419-99715137cc6e09f7abf37bc84754912a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Love" with="" food=""><img data-company="Love" with="" food="" src="./InvestWiser_files/26118-0b01be410a2633e359a449c5b726d98f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Sqrl"><img data-company="Sqrl" src="./InvestWiser_files/265551-da2e7d9aad9f916bd790bda357c36d88-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Panna"><img data-company="Panna" src="./InvestWiser_files/88774-e593da1969db5c29d0bb7dd08718056b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Mattermark"><img data-company="Mattermark" src="./InvestWiser_files/83136-b39ffbcbf00a99ccd2261c893d51b97a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Pick1"><img data-company="Pick1" src="./InvestWiser_files/2269-b04f6feeec62623ae9934337803a3526-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ReelSurfer"><img data-company="ReelSurfer" src="./InvestWiser_files/75737-69d01307cdc994c3dfa071621f025be6-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Urbita"><img data-company="Urbita" src="./InvestWiser_files/31776-d0358d130ee0766221b83527ed188ef0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Pixowl"><img data-company="Pixowl" src="./InvestWiser_files/28118-002a47c9972b12d34a09530f51dee795-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Chalkable"><img data-company="Chalkable" src="./InvestWiser_files/21031-c420b108c709c110caafa41974444202-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Fashion" project=""><img data-company="Fashion" project="" src="./InvestWiser_files/137045-a3a1c6a5b89085caea5d579e1de4969a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Freshplum"><img data-company="Freshplum" src="./InvestWiser_files/23086-239acc62e5d3e59e450ba1024a208938-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Watsi"><img data-company="Watsi" src="./InvestWiser_files/90458-bdca67d22fe3c295f9db420ebf498781-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Swipesense"><img data-company="Swipesense" src="./InvestWiser_files/292714v1-max-250x250.png" height="42px"></div><div class="pin" data-company="CrowdMed"><img data-company="CrowdMed" src="./InvestWiser_files/129941-38e426ff63e179f8402b9b6874678f24-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="BrightNest"><img data-company="BrightNest" src="./InvestWiser_files/31846-615d7dc41814003dd6c8e37b0835ea7b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Survata"><img data-company="Survata" src="./InvestWiser_files/182277-41f305e6f5c5e8c468a1567f8ce4a68d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Timbuktu" labs=""><img data-company="Timbuktu" labs="" src="./InvestWiser_files/176443v5-max-250x250.png" height="42px"></div><div class="pin" data-company="Ovuline"><img data-company="Ovuline" src="./InvestWiser_files/170252v4-max-250x250.png" height="42px"></div><div class="pin" data-company="MyVR"><img data-company="MyVR" src="./InvestWiser_files/91049-d371ab472aebc2d7f50a8b62342a18e7-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="OnTheGo" platforms=""><img data-company="OnTheGo" platforms="" src="./InvestWiser_files/123266-001115ef9a121690432a5a43ae7515c5-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Markerly"><img data-company="Markerly" src="./InvestWiser_files/90241-cb9b829e7f69d89f217fe4e3a7a39b69-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Versa"><img data-company="Versa" src="./InvestWiser_files/24498-4d01f2a80acfe8b060f235c45268050f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="NewsWhip"><img data-company="NewsWhip" src="./InvestWiser_files/139516-1aaec961e89e9c39db5cde08db8e29b3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Guidecentral"><img data-company="Guidecentral" src="./InvestWiser_files/125755-8b7688c14c498c098808e4c313e4bbd0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Wello"><img data-company="Wello" src="./InvestWiser_files/31748-fd4d96677ef0ee34cd02e45aae5f8e8d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Kamcord"><img data-company="Kamcord" src="./InvestWiser_files/115146-2109c6f07c0d6129664996e911547dd1-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="drchrono"><img data-company="drchrono" src="./InvestWiser_files/3473-50310418d96a904694d86a8215171551-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="BioBeats"><img data-company="BioBeats" src="./InvestWiser_files/99298-91bed1a3ae37a4a7c5245caebd291017-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Transcriptic"><img data-company="Transcriptic" src="./InvestWiser_files/76047-3a6a70790ce66dc29e49b2199c65c57a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="InVenture"><img data-company="InVenture" src="./InvestWiser_files/24322-99810a874bee29a5f577d9d6ab67a120-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Ringadoc"><img data-company="Ringadoc" src="./InvestWiser_files/74927-2e6003dd2f4ba76a8ceb41632923f5d1-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Spinnakr"><img data-company="Spinnakr" src="./InvestWiser_files/23877-036b1e16427a68843934df5e21caeb10-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Down"><img data-company="Down" src="./InvestWiser_files/233764v4-max-250x250.png" height="42px"></div><div class="pin" data-company="Pricing" engine=""><img data-company="Pricing" engine="" src="./InvestWiser_files/24764-89b93ebe9e3f8f3d79aadf9e2df14d42-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="BuildZoom"><img data-company="BuildZoom" src="./InvestWiser_files/67548-4cf2f5d0b603a9284292dbff305c10af-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Chewse"><img data-company="Chewse" src="./InvestWiser_files/30557-0e21e57c124019b44185d06a1158d379-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ElectNext"><img data-company="ElectNext" src="./InvestWiser_files/24498-4d01f2a80acfe8b060f235c45268050f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Wymsee"><img data-company="Wymsee" src="./InvestWiser_files/132224-047cd4ab5b18c7d3471e082611e03533-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="AppAddictive"><img data-company="AppAddictive" src="./InvestWiser_files/7091-22f32c9507bfaac7918f04778c77360b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="OrderAhead"><img data-company="OrderAhead" src="./InvestWiser_files/87599-ecb78252d3f07f35756c79310449d808-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Shippable"><img data-company="Shippable" src="./InvestWiser_files/162112-a54069e69c1c76a72e4335afd40be7a5-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ZappRx"><img data-company="ZappRx" src="./InvestWiser_files/208868-604a21acb805b02bcf36353a9fce0e2b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="WeHostels"><img data-company="WeHostels" src="./InvestWiser_files/23028-26498df32f403890bba6891fa6eb78b3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ThriveHive"><img data-company="ThriveHive" src="./InvestWiser_files/22197-35ec0087d07d434c2e49e4d8057473cb-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Bluefields"><img data-company="Bluefields" src="./InvestWiser_files/1248-7708a46b7e78afaf56a42bc321ea1d1a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Realty" mogul=""><img data-company="Realty" mogul="" src="./InvestWiser_files/150420-84a9013a9f880d54bd9925e19e562f12-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Contactually"><img data-company="Contactually" src="./InvestWiser_files/25513-0dcf823df06dad08d3ae275083ab4516-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="DoubleRecall"><img data-company="DoubleRecall" src="./InvestWiser_files/29047-f584cd402acd4ace572aa877062a9450-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Zapier"><img data-company="Zapier" src="./InvestWiser_files/78563-d6a685e956012e72415c2b12769e7459-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="LaunchBit"><img data-company="LaunchBit" src="./InvestWiser_files/19331-8d52053539a23cf079ef56d26635333d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Kicksend"><img data-company="Kicksend" src="./InvestWiser_files/6028-a0c3f0a97d12c54c8a6fd64f933f759f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Securly"><img data-company="Securly" src="./InvestWiser_files/102724-7ab5839d5e97f3575847ca2eab81a9b1-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Amicus"><img data-company="Amicus" src="./InvestWiser_files/20331-f20e1bef2b930ed19c1c0631c835c2da-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Mindbloom"><img data-company="Mindbloom" src="./InvestWiser_files/58332-580978e2d0b4a927a44eb90326ac4b29-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="EDITD"><img data-company="EDITD" src="./InvestWiser_files/42611-22e61c16069d81cd13003d0125eba46c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Apptimize"><img data-company="Apptimize" src="./InvestWiser_files/172493-de74294dd016ffaef3ec81d43df150ac-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Virool"><img data-company="Virool" src="./InvestWiser_files/101592-283928b6a968597f47da6069ab9446cd-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="popexpert"><img data-company="popexpert" src="./InvestWiser_files/162477-ee6b9bf8df6ac586b9fe0caf44d4e3f5-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Loku"><img data-company="Loku" src="./InvestWiser_files/20898-4e902abae828f5920622f3787dc55ab3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="MotherKnows"><img data-company="MotherKnows" src="./InvestWiser_files/5084-5a0a354a2ae748d4e92a2103c5767aef-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Exec"><img data-company="Exec" src="./InvestWiser_files/76645-b921b47d5be232e71d18b3794707fa1a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="FormaFina"><img data-company="FormaFina" src="./InvestWiser_files/77926-85acbf211a4550dc0cdf15c569f5a4e9-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="SocialWire"><img data-company="SocialWire" src="./InvestWiser_files/15077-c2b334f1a834c15833e2ab3e5ad644da-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Plivo"><img data-company="Plivo" src="./InvestWiser_files/27869-ed69b53f55006fff52d05a61cbc152dc-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="SmartAsset"><img data-company="SmartAsset" src="./InvestWiser_files/85122-c742a92e24a483c4037d5ad2ec4070cb-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Embarke"><img data-company="Embarke" src="./InvestWiser_files/149892-0cf6db002bcd9a63fbd3a903098e03a0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Zendrive"><img data-company="Zendrive" src="./InvestWiser_files/161392-c1a8cbf859d36d456084eae6eecc4cf5-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="AppStack"><img data-company="AppStack" src="./InvestWiser_files/21301-973a7a275e6c894d91ef4caad4990422-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Couple"><img data-company="Couple" src="./InvestWiser_files/77770-9937ffb3ac2668fd0050d939f07d9ab0-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="FIGS"><img data-company="FIGS" src="./InvestWiser_files/103036-3afcae8c068ca6a5c406a1fefd497c0e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Placester"><img data-company="Placester" src="./InvestWiser_files/44849-c493b130ccee0c67313008514a77a2eb-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ZenPayroll"><img data-company="ZenPayroll" src="./InvestWiser_files/78720-5fd32474df5e2975289243a099b78635-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Space" monkey=""><img data-company="Space" monkey="" src="./InvestWiser_files/13779-a2f34777456e7e235236b7931acffd44-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="9GAG"><img data-company="9GAG" src="./InvestWiser_files/19563-3bb24ef47482a01ad8e319328f00ca82-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Guardly"><img data-company="Guardly" src="./InvestWiser_files/106063-d7a3cbddce3a57cf219eaa6cf8ddb310-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="TrustEgg"><img data-company="TrustEgg" src="./InvestWiser_files/28064-0fbde88bb773cea817304d307ddbf694-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="NoRedInk"><img data-company="NoRedInk" src="./InvestWiser_files/115616-d46b44dca825cd851aca9d59e8cc1e4d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="SupplyHog"><img data-company="SupplyHog" src="./InvestWiser_files/125280-2ec744eae29274d4a260b622d9a3fc81-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="mParticle"><img data-company="mParticle" src="./InvestWiser_files/221541-38135d80136b3b18be0b29594350f55c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Sproutling"><img data-company="Sproutling" src="./InvestWiser_files/78769-fe8f3e4e6f3f15094e84d031d6059a55-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Athos"><img data-company="Athos" src="./InvestWiser_files/132238-4aa720346f88b14be274fb4a7f7163ae-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Pymetrics"><img data-company="Pymetrics" src="./InvestWiser_files/135880-2b066b8ce65bd793d592f3655545f0d7-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Colingo"><img data-company="Colingo" src="./InvestWiser_files/13300-3d817dac624c7d756da67ff41590b9e2-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Voxeet"><img data-company="Voxeet" src="./InvestWiser_files/121610-8f3bcbe49baa9b5c01eca3c53bd44ed4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Drizly"><img data-company="Drizly" src="./InvestWiser_files/287637-594c1a011d6a36638f16e4b533c6497d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Narrative"><img data-company="Narrative" src="./InvestWiser_files/135469-642768111a8b5171513d2ff94bd449d6-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ALOHA"><img data-company="ALOHA" src="./InvestWiser_files/362129v2-max-250x250.png" height="42px"></div><div class="pin" data-company="HipCricket"><img data-company="HipCricket" src="./InvestWiser_files/121643v1-max-250x250.png" height="42px"></div></div>
+    </div>
+
+  <!-- Prediction box 4-->
+     <!-- ================================================== --> 
+      <div class="container">
+    &nbsp;&nbsp;&nbsp;&nbsp;<div class="centered col-lg-12">   
+          <div class="pin-wide" id="result-box4" style="display: none">
+          <div class="row">
+              <div class="col-md-6"><h3>Likelihood</h3>
+                <h2 id="prob-box4"></h2></div>
+              <div class="col-md-6"><h3>Amount(predicted)</h3>
+                <h2 id="worth-box4"></h2></div>
+          </div>
+          <br><br>
+          <div class="row">
+          <div class="col-md-10">
+          <img class="col-xs-3 pull-left" id="company_img4" src="./InvestWiser_files/32509-cfb45c2a611a38850d8ea263d89ab595-medium_jpg.jpg">
+          <br><br>
+         <p style="font-size:32px; font-weight:bold;" height="400px" id="company_name4" align="left"></p>
+         <p style="font-weight:bold" align="left" id="snippet4"></p>
+         <p id="prod_desc4" align="left"></p>
+         <a id="result-dismiss4">CLOSE</a>
+         </div>
+         </div>
+          </div>
+        </div>
+      </div>        
+  <!-- Pin container 4 -->
+  <!-- ================================================== --> 
+    <div class="pin-container">
+      <h3 align="center" id="MLhead">Mature Contenders<h4><a href="http://0.0.0.0:5000/#" id="col4-trigger"> Show all</a> <a href="http://0.0.0.0:5000/#" id="col4-hider" style="display:none"> leaders </a></h4></h3>
+      <div class="columns" id="col4" align="center"><div class="pin" data-company="Loudcaster"><img data-company="Loudcaster" src="./InvestWiser_files/90638v2-max-250x250.png" height="42px"></div><div class="pin" data-company="Welcu"><img data-company="Welcu" src="./InvestWiser_files/6468-5ba80463218f3e7b305b5f227a311e1b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Spoondate"><img data-company="Spoondate" src="./InvestWiser_files/13090-bbae9ea9b7266d085502d1287389795d-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="24Symbols"><img data-company="24Symbols" src="./InvestWiser_files/68212-99815c0e61924ae1e6b6478bc9a1c37b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="World" blender=""><img data-company="World" blender="" src="./InvestWiser_files/107785v2-max-250x250.png" height="42px"></div><div class="pin" data-company="Pocket" tales=""><img data-company="Pocket" tales="" src="./InvestWiser_files/26167-3192e5a610763196097af4ec453a8894-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="MessageParty"><img data-company="MessageParty" src="./InvestWiser_files/51938-6e83742fa7d6bd2e8e88280eacbe9555-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Crowdbooster"><img data-company="Crowdbooster" src="./InvestWiser_files/1003-b2af262fa091903b0db94c9d585e51f1-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Lockitron"><img data-company="Lockitron" src="./InvestWiser_files/68853-13be87a36316e5bbca28bbbbbb6c4dfe-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Mopapp"><img data-company="Mopapp" src="./InvestWiser_files/3803-86c0f9ce75ff50be56d468387ba6aa89-medium_jpg.jpg" height="42px"></div></div>
+      <div class="columns" id="col4-showmore" style="display:none" align="center"><div class="pin" data-company="Wordy"><img data-company="Wordy" src="./InvestWiser_files/32900-e9f5b5fdd49226e58c2e18b859efec7c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Catapulter"><img data-company="Catapulter" src="./InvestWiser_files/15218-3498fc3d19a8a040666a6c03e91657d6-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="inDinero"><img data-company="inDinero" src="./InvestWiser_files/153921-2a4c75afc6d2ebac33e9acf20bdc4448-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="IMRSV"><img data-company="IMRSV" src="./InvestWiser_files/21304-7788697749e6f8e59dc03c6eacdee31e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Trendsetters"><img data-company="Trendsetters" src="./InvestWiser_files/25214-1866538bb8fbedf49ace3076d724a4b8-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Venturepax"><img data-company="Venturepax" src="./InvestWiser_files/1474-4165c50e2df9b85e41ebe67577f3479c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="KeepIdeas"><img data-company="KeepIdeas" src="./InvestWiser_files/24573-1854214c68816580cef9635c43c07adb-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Punchd"><img data-company="Punchd" src="./InvestWiser_files/1680-5d8f0d1ba01cb35d7e3423c0b4164ec5-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="SocialSci"><img data-company="SocialSci" src="./InvestWiser_files/36651-de9eda5b4bfbc4528ac07a625cd9f181-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Mogotest"><img data-company="Mogotest" src="./InvestWiser_files/89623v2-max-250x250.png" height="42px"></div><div class="pin" data-company="IActionable"><img data-company="IActionable" src="./InvestWiser_files/498-8ef575c468920006ad9e0741ccfb7796-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="KarmaKey"><img data-company="KarmaKey" src="./InvestWiser_files/1870-ea4cb9b3cac6daf73305a574a8817258-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Simperium"><img data-company="Simperium" src="./InvestWiser_files/34103-dbf52bbebf96cf6300fd3d8a32e87001-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Kaleidoscope"><img data-company="Kaleidoscope" src="./InvestWiser_files/nopic_startup.png" height="42px"></div><div class="pin" data-company="Keepstream"><img data-company="Keepstream" src="./InvestWiser_files/456-6ea6d7ec81bc7839d66abf67ce14a38f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Smackages"><img data-company="Smackages" src="./InvestWiser_files/400-19057ce7a40bcbb736dc569befcf3274-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="HaveMyShift"><img data-company="HaveMyShift" src="./InvestWiser_files/31581-477739b5ac17ce9c5d3550ded72b662c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Localytics"><img data-company="Localytics" src="./InvestWiser_files/21855-a489029dd2df75f18cf2522040afa034-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Runtastic"><img data-company="Runtastic" src="./InvestWiser_files/72573v9-max-250x250.png" height="42px"></div><div class="pin" data-company="ScriptPad"><img data-company="ScriptPad" src="./InvestWiser_files/979-04b4925d175267705c14ddb04efc173a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="NuLabel" technologies=""><img data-company="NuLabel" technologies="" src="./InvestWiser_files/23305-90c3c038a2ee87fad0eba6f112dfa70b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="LayerBoom"><img data-company="LayerBoom" src="./InvestWiser_files/32957-3f18df77382516b552fd3a4ed88f7b57-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Codility"><img data-company="Codility" src="./InvestWiser_files/34146-a9d1a5274d832e980827c4333643054f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="AccelGolf"><img data-company="AccelGolf" src="./InvestWiser_files/62675v2-max-250x250.png" height="42px"></div><div class="pin" data-company="Accelereach"><img data-company="Accelereach" src="./InvestWiser_files/23655-a989fe2c7e85b2ca16381f3cbd91ed6e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Ambassador"><img data-company="Ambassador" src="./InvestWiser_files/12106-9ab22362d094a325ad448f6f6a6a495b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Tripl"><img data-company="Tripl" src="./InvestWiser_files/19582-71aca92e8ad25e7a1ef69923152518f8-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="BizeeBee"><img data-company="BizeeBee" src="./InvestWiser_files/1639-6ce3f7cce1b59cf049e86d6c36dabe77-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="WakeMate"><img data-company="WakeMate" src="./InvestWiser_files/19146-0b00815434f5c6b8c6d6837ebabbde89-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Senexx"><img data-company="Senexx" src="./InvestWiser_files/21969-66a0d48f57cf99b0d1613807cc6bda23-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Localocracy"><img data-company="Localocracy" src="./InvestWiser_files/18779-94d63fc8f8d84953f4a6479f2112b2b9-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Beetailer"><img data-company="Beetailer" src="./InvestWiser_files/186244-51892ba4c28dd2787276bf76c3aef481-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Postling"><img data-company="Postling" src="./InvestWiser_files/2250-d7a2c859581f509b9d96f2b5d23ccbcd-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="MinoMonsters"><img data-company="MinoMonsters" src="./InvestWiser_files/13949-fd2931c307fc7800f6531815d5cef10a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Tagstand"><img data-company="Tagstand" src="./InvestWiser_files/52745-5741da38a16b404f1cd02d4bd87183bb-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="RecycleMatch"><img data-company="RecycleMatch" src="./InvestWiser_files/355-78070f08d4319ac70bb602cb47265359-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Skimble"><img data-company="Skimble" src="./InvestWiser_files/59374v4-max-250x250.png" height="42px"></div><div class="pin" data-company="CANDDi"><img data-company="CANDDi" src="./InvestWiser_files/nopic_startup.png" height="42px"></div><div class="pin" data-company="Baydin"><img data-company="Baydin" src="./InvestWiser_files/44-1212600112b0c2d6e356c805b73f6e04-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Highlighter"><img data-company="Highlighter" src="./InvestWiser_files/1541-1b9862402c918f8d19c8af4834616d9c-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="StarStreet"><img data-company="StarStreet" src="./InvestWiser_files/63-75f1974a84adcdfbb41af089c113d7da-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Cognection"><img data-company="Cognection" src="./InvestWiser_files/19672-716106261113f628f335a61df2a4bbb8-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="GinzaMetrics"><img data-company="GinzaMetrics" src="./InvestWiser_files/1410-96476610c318aa9c0078456f7df388c7-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="GazeHawk"><img data-company="GazeHawk" src="./InvestWiser_files/22663-30af57fe0b38a2865edfad38b73669f4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Sportlyzer"><img data-company="Sportlyzer" src="./InvestWiser_files/2198-1833c62fd5b85f9e62f2a3c8229cff84-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Opzi"><img data-company="Opzi" src="./InvestWiser_files/32934-59e345b62993075a91e000de8bc30b9e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Notifo"><img data-company="Notifo" src="./InvestWiser_files/nopic_startup.png" height="42px"></div><div class="pin" data-company="Cardpool"><img data-company="Cardpool" src="./InvestWiser_files/32566-e44af3dc4c32771d6fb5251cd122b5be-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Adioso"><img data-company="Adioso" src="./InvestWiser_files/25359-2087616600fff48658b7b06889cdee27-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Forrst"><img data-company="Forrst" src="./InvestWiser_files/1249-912a3173a890cd456ab799ea3366eacf-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="FanChatter"><img data-company="FanChatter" src="./InvestWiser_files/73437-b42f332832dee6d8cae8e025460db057-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Kinsights"><img data-company="Kinsights" src="./InvestWiser_files/20834-7fcc3ca8078702177b81009b3d7ff7e4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Privy.net"><img data-company="Privy.net" src="./InvestWiser_files/77984-6816f0f94cad0009823b1dfe4069f71f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Biographicon"><img data-company="Biographicon" src="./InvestWiser_files/nopic_startup.png" height="42px"></div><div class="pin" data-company="DoApp"><img data-company="DoApp" src="./InvestWiser_files/48498-7ca568b813a9382abdd1fa3c1935be1f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Verbling"><img data-company="Verbling" src="./InvestWiser_files/23492-3bffc7531a5bcb86355d8f83839aa736-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Olark"><img data-company="Olark" src="./InvestWiser_files/55797-6d6ea5e276b8ef305fb35a052d4a4223-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="LIFEmee"><img data-company="LIFEmee" src="./InvestWiser_files/58860v2-max-250x250.jpg" height="42px"></div><div class="pin" data-company="Tablefinder"><img data-company="Tablefinder" src="./InvestWiser_files/17967v1-max-250x250.png" height="42px"></div><div class="pin" data-company="Genomera"><img data-company="Genomera" src="./InvestWiser_files/797-40e905170a1d4e18bff5593c02bebb66-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Scoville"><img data-company="Scoville" src="./InvestWiser_files/123456v2-max-250x250.png" height="42px"></div><div class="pin" data-company="Leftronic"><img data-company="Leftronic" src="./InvestWiser_files/684-df50c6fa421f42d8b3defcbeef7be153-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Revetto"><img data-company="Revetto" src="./InvestWiser_files/51785v2-max-250x250.png" height="42px"></div><div class="pin" data-company="Guerillapps"><img data-company="Guerillapps" src="./InvestWiser_files/84352v7-max-250x250.jpg" height="42px"></div><div class="pin" data-company="Fabricly"><img data-company="Fabricly" src="./InvestWiser_files/52787-1e6161583d878daf76da9b4e39c5dd58-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="ThinkNear"><img data-company="ThinkNear" src="./InvestWiser_files/125963v2-max-250x250.jpg" height="42px"></div><div class="pin" data-company="Chirply"><img data-company="Chirply" src="./InvestWiser_files/34172-d5599b7abccd7a0e37a38f5a93f7baf3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Creative" market=""><img data-company="Creative" market="" src="./InvestWiser_files/2032-5c59ca9b10dff5c108e038e638176c1e-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Stupeflix"><img data-company="Stupeflix" src="./InvestWiser_files/23140-9d0a0800cdc986d1e5228d4f667b9d61-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Mobclix"><img data-company="Mobclix" src="./InvestWiser_files/32666-72f9701895e84eb096d1f4f710d00395-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Platogo"><img data-company="Platogo" src="./InvestWiser_files/53270-2887df12fe08cedb1d53c339f979b76a-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="FitnessKeeper"><img data-company="FitnessKeeper" src="./InvestWiser_files/32744-341155a32aeaa6a35338282e9756af99-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="DiJiPOP"><img data-company="DiJiPOP" src="./InvestWiser_files/4530-20fd79a467182b4a6fdeb957657510f4-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Snaptalent"><img data-company="Snaptalent" src="./InvestWiser_files/36043-aedbd0f430cb99267c392eb3cb16931f-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Tipjoy"><img data-company="Tipjoy" src="./InvestWiser_files/nopic_startup.png" height="42px"></div><div class="pin" data-company="Wattvision"><img data-company="Wattvision" src="./InvestWiser_files/6592-cbb55b24507306e54fb424b9502bc686-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Vuzit"><img data-company="Vuzit" src="./InvestWiser_files/11888v1-max-250x250.png" height="42px"></div><div class="pin" data-company="Clickpass"><img data-company="Clickpass" src="./InvestWiser_files/nopic_startup.png" height="42px"></div><div class="pin" data-company="Zyrra"><img data-company="Zyrra" src="./InvestWiser_files/65515-c32086ce17a20b46311d308636033c45-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Reddit"><img data-company="Reddit" src="./InvestWiser_files/43503-53d2b3bb436c1b4bb9662d2d431e1b2b-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Rapportive"><img data-company="Rapportive" src="./InvestWiser_files/2489-1a4e851d33bf478ab5e32751caeecb60-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="BackType"><img data-company="BackType" src="./InvestWiser_files/194-dc3e7239d7c0d1a32692772dcf99eafc-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Mailgun"><img data-company="Mailgun" src="./InvestWiser_files/76269-a11d7391346c18703d603cbcceed82b7-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Wundrbar"><img data-company="Wundrbar" src="./InvestWiser_files/nopic_startup.png" height="42px"></div><div class="pin" data-company="Auctomatic"><img data-company="Auctomatic" src="./InvestWiser_files/51405-8d6ad0d5694ec4eef7c546eb2f3b1706-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Grooveshark"><img data-company="Grooveshark" src="./InvestWiser_files/13121v3-max-250x250.png" height="42px"></div><div class="pin" data-company="Weebly"><img data-company="Weebly" src="./InvestWiser_files/33952-0a6f30223b4052d448a19d040c55b8d3-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="DailyBurn"><img data-company="DailyBurn" src="./InvestWiser_files/nopic_startup.png" height="42px"></div><div class="pin" data-company="Zemanta"><img data-company="Zemanta" src="./InvestWiser_files/16433v6-max-250x250.png" height="42px"></div><div class="pin" data-company="TripIt"><img data-company="TripIt" src="./InvestWiser_files/33430-34dcfbe0d618a5c2e55f8ea0eb3b3e60-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Chartbeat"><img data-company="Chartbeat" src="./InvestWiser_files/79156-580f3527243bcb36f275150a69325f38-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Wahanda"><img data-company="Wahanda" src="./InvestWiser_files/24080-15dff9d2c3789bb1feda94691485abaf-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Ark"><img data-company="Ark" src="./InvestWiser_files/19982-293442f50ab8b2639ec159d709938c87-medium_jpg.jpg" height="42px"></div><div class="pin" data-company="Foodzie"><img data-company="Foodzie" src="./InvestWiser_files/27048-308107a8810a423d1987c303d536ca1e-medium_jpg.jpg" height="42px"></div></div>
+    </div>
+   </div>
+
+    <!-- Bootstrap core JavaScript
+   ================================================== -->
+   <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="./InvestWiser_files/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="./InvestWiser_files/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./InvestWiser_files/d3.v3.min.js"></script> 
+    <script type="text/javascript" src="./InvestWiser_files/visualize.js"></script>
+    <script type="text/javascript" src="./InvestWiser_files/jquery.autocomplete.js"></script>
+    <!-- // <script type="text/javascript" src="static/js/jquery.autocomplete.js'"></script> -->
+    <!-- Autocomplete input box -->
+    <script>
+      $('#company').autocomplete("static/names.txt");
+    </script><div class="ac_results" style="display: none; position: absolute;"></div>  
+    <!-- Submit input with ENTER key -->
+    <script type="text/javascript">
+    $('input').keypress(function(event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            $('form').submit();
+        }
+    });
+
+    $(document).keypress(function(e) {
+      if (e.keyCode == 13) {
+        event.preventDefault();
+        $('input').select();
+      }
+    });
+
+    $(document).keyup(function(e) {
+      if (e.keyCode == 27) { 
+        $('#notfound-box').fadeOut();
+        $('#result-box').fadeOut(); 
+        $('#result-box2').fadeOut(); 
+        $('#result-box3').fadeOut(); 
+        $('#result-box4').fadeOut();         
+        $('#result-box4').fadeOut();                 
+      }
+    });
+    </script>
+
+  <!-- Script for fetching company data -->
+   <!-- ================================================== --> 
+    <script type="text/javascript">
+    // Fetch prediction
+    var g_data=[]; 
+    d3.csv('static/predictions/RF_classify_and_regress.csv', function (data) { g_data = data; } );
+    // Load companies data
+    var c_data = []; 
+    d3.csv('static/predictions/companies2.csv', function (data) { c_data = data; } );
+    // Load companies description
+    d3.csv('static/predictions/company_snippets.csv', function (data) {sn_data = data;} );
+
+    function fetchResults(s) {
+      for (j in c_data) {
+        r = c_data[j]; 
+        if (r.company_name.toLowerCase() == s.toLowerCase()) { cj = j; }
+        }
+
+      for (k in sn_data) {
+        sn = sn_data[k];
+        if (sn.company_name.toLowerCase() == s.toLowerCase()) { sk = k; }
+      }
+    
+      target = g_data[gi].company_name;
+      prob = g_data[gi].RFCprobA;
+      aval = g_data[gi].RFRval;
+      worth = g_data[gi].RFRpred; 
+      worthval = (worth/1000000).toPrecision(3);
+      aval = (aval/1000000).toPrecision(3);
+      if (Math.abs(g_data[gi].RFRpred - g_data[gi].RFRval) > 0.35*(g_data[gi].RFRval)){
+        aval = 0;
+      }
+      // snippet = sn_data[sk].high_concept
+
+      if (aval > 0.3) {
+        $('#worth-box').html('<h2> $' + worthval + 'M</h2><h3>($' + aval + 'M)</h3>');
+      } else {
+        if (prob < 0.1) {
+          $('#worth-box').html('<h2> <$1M </h2>');
+        } else {
+          $('#worth-box').html('<h2> $' + worthval + 'M </h2>');
+        }
+      }
+
+      $('#prob-box').html('<h2>' + (prob*100).toPrecision(3) + ' % </h2>');      
+      $('#company_img').attr('src', c_data[cj].company_img);
+      $('#company_name').text(c_data[cj].company_name);
+      $('#snippet').text(sn_data[sk].high_concept);
+
+      // Add Read more clickable if there's more snippets
+      if (sn_data[sk].product_desc !== "") { 
+        $('#prod_desc').html("<a href='#' id='more_prod_desc'>Read more</a>");
+        $('#more_prod_desc').click(function (e) { 
+          e.preventDefault(); 
+          $(this).html(sn_data[sk].product_desc);
+        });
+      }
+      // $('#prod_desc').text(sn_data[sk].product_desc);
+      // founder_counter = 1;
+      // for(i in c_data) {
+      //   if(c_data[i].company_name.toLowerCase() == s.toLowerCase()) {
+      //     $('#founder' + founder_counter).attr('src', '');
+      //     $('#founder' + founder_counter).attr('src', c_data[i].founder_img);
+      //     $('#name' + founder_counter).text(c_data[i].founder_name);          
+      //     $('#name' + founder_counter).css(c_data[i].founder_name);
+      //     $('#wrapper' + founder_counter).show(); 
+      //     founder_counter = founder_counter + 1;           
+      //   }
+      // }
+    }
+
+  // <!-- Form submission response -->
+   // <!-- ================================================== --> 
+
+    // Form submission
+    $('form').submit(function (e) { 
+      e.preventDefault(); 
+      s = $('input').val();
+      gi = "None"
+      for(i in g_data) {
+        row = g_data[i]; 
+        if (row.name.toLowerCase() == s.toLowerCase()) { gi = i; }
+        }
+
+      if (gi === "None") { 
+        $('#notfound-box').html("Not enough information about '" + s + "'");
+        $('#notfound-box').fadeIn(); 
+        $('#result-box').fadeOut();
+      } 
+      else { 
+        fetchResults(s);
+        $('#result-box').fadeIn();    
+        $('#notfound-box').fadeOut();        
+       }
+    });
+
+    // Close Result box 
+    $('#result-dismiss').click(function (e) {
+      e.preventDefault();
+      $('#result-box').fadeOut();
+    })
+  </script>
+
+<!-- // Grid icons with links -->
+<!-- ================================================== -->  
+ <!-- Class 1 : YH -->
+<!-- ================================================== --> 
+  <script type="text/javascript">
+    d3.csv('static/predictions/companies_class1YH.csv', function (data) {
+      npin = 10; 
+      for (i in data) {
+        if (i < npin) {
+          $('#col1').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
+          "</div>");          
+
+        } else {
+          $('#col1-showmore').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
+          "</a></div>");
+        }
+        // Show more startups button
+      }
+      $('#YHhead').append("<h4><a href='#' id='col1-trigger'> Show all</a> <a href='#' id='col1-hider' style='display:none'> leaders </h4>");      
+    });
+
+// <!-- ================================================== -->  -->
+//  <!-- Class 2 : MH -->
+// <!-- ================================================== -->  -->
+    d3.csv('static/predictions/companies_class2MH.csv', function (data) {
+      npin = 10; 
+      for (i in data) {
+        if (i < npin) {
+          $('#col2').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
+          "</div>");          
+
+        } else {
+          $('#col2-showmore').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
+          "</a></div>");
+        }
+        // Show more startups button
+      }
+      $('#MHhead').append("<h4><a href='#' id='col2-trigger'> Show all</a> <a href='#' id='col2-hider' style='display:none'> leaders </h4>");      
+    });
+
+// <!-- ================================================== -->  
+//  <!-- Class 3 : YL -->
+// <!-- ================================================== -->  
+    d3.csv('static/predictions/companies_class3YL.csv', function (data) {
+      npin = 10; 
+      for (i in data) {
+        if (i < npin) {
+          $('#col3').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
+          "</div>");          
+
+        } else {
+          $('#col3-showmore').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
+          "</a></div>");
+        }
+        // Show more startups button
+      }
+      $('#YLhead').append("<h4><a href='#' id='col3-trigger'> Show all</a> <a href='#' id='col3-hider' style='display:none'> leaders </h4>");      
+    });
+
+// <!-- ================================================== -->  
+//  <!-- Class 4 : MH -->
+// <!-- ================================================== -->  
+  d3.csv('static/predictions/companies_class4ML.csv', function (data) {
+      npin = 10; 
+      for (i in data) {
+        if (i < npin) {
+          $('#col4').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
+          "</div>");          
+
+        } else {
+          $('#col4-showmore').append(
+          "<div class='pin' data-company=" + data[i].company_name + ">" + 
+          // "<a href='/fetchcompany?company=" + data[i].company_name + "'>" + 
+          "<img data-company=" + data[i].company_name + " src=" + data[i].company_img + " height='42px'></img>" + 
+          "</a></div>");
+        }
+        // Show more startups button
+      }
+      $('#MLhead').append("<h4><a href='#' id='col4-trigger'> Show all</a> <a href='#' id='col4-hider' style='display:none'> leaders </h4>");      
+    });
+  </script>
+
+<!-- // ReadyPins -->
+<!-- ================================================== -->  
+  <script type="text/javascript">
+  function readyPinYH(jQuery) {
+    // Load prediction data
+   var g1_data=[]; d3.csv('static/predictions/RF_class1YH_classify_and_regress1.csv', function (data) { g1_data = data; } );
+   var g2_data=[]; d3.csv('static/predictions/RF_class2MH_classify_and_regress1.csv', function (data) { g2_data = data; } );
+   var g3_data=[]; d3.csv('static/predictions/RF_class3YL_classify_and_regress1.csv', function (data) { g3_data = data; } );
+   var g4_data=[]; d3.csv('static/predictions/RF_class4ML_classify_and_regress1.csv', function (data) { g4_data = data; } );
+
+    // Load companies data
+    var c1_data = []; d3.csv('static/predictions/companies_class1YH.csv', function (data) { c1_data = data; } );
+    var c2_data = []; d3.csv('static/predictions/companies_class2MH.csv', function (data) { c2_data = data; } );
+    var c3_data = []; d3.csv('static/predictions/companies_class3YL.csv', function (data) { c3_data = data; } );
+    var c4_data = []; d3.csv('static/predictions/companies_class4ML.csv', function (data) { c4_data = data; } );
+    
+    // Class 1: YH Show MORE click responses
+    $('#YHhead').on("click", "#col1-trigger", function(e) {
+      e.preventDefault();
+      $('#col1-trigger').toggle();
+      $('#col1-showmore').toggle();
+      $('#col1-hider').toggle();
+    }) 
+   // Class 1: YH Show LESS click responses
+    $('#YHhead').on("click", "#col1-hider", function(e) {
+      e.preventDefault();
+      $('#col1-showmore').toggle();
+      $('#col1-hider').toggle();
+      $('#col1-trigger').toggle();
+    }); 
+
+    // Class 2: MH Show MORE click responses
+    $('#MHhead').on("click", "#col2-trigger", function(e) {
+      e.preventDefault();
+      $('#col2-trigger').toggle();
+      $('#col2-showmore').toggle();
+      $('#col2-hider').toggle();
+    }) 
+
+   // Class 2: MH Show LESS click responses
+    $('#MHhead').on("click", "#col2-hider", function(e) {
+      e.preventDefault();
+      $('#col2-showmore').toggle();
+      $('#col2-hider').toggle();
+      $('#col2-trigger').toggle();
+    }); 
+
+    // Class 3: YL Show MORE click responses
+    $('#YLhead').on("click", "#col3-trigger", function(e) {
+      e.preventDefault();
+      $('#col3-trigger').toggle();
+      $('#col3-showmore').toggle();
+      $('#col3-hider').toggle();
+    }) 
+   // Class 3: YL Show LESS click responses
+    $('#YLhead').on("click", "#col3-hider", function(e) {
+      e.preventDefault();
+      $('#col3-showmore').toggle();
+      $('#col3-hider').toggle();
+      $('#col3-trigger').toggle();
+    });
+
+    // Class 4: ML Show MORE click responses
+    $('#MLhead').on("click", "#col4-trigger", function(e) {
+      e.preventDefault();
+      $('#col4-trigger').toggle();
+      $('#col4-showmore').toggle();
+      $('#col4-hider').toggle();
+    }) 
+   // Class 4: ML Show LESS click responses
+    $('#MLhead').on("click", "#col4-hider", function(e) {
+      e.preventDefault();
+      $('#col4-showmore').toggle();
+      $('#col4-hider').toggle();
+      $('#col4-trigger').toggle();
+    }); 
+
+    // Class 1: YH Pin click responses
+    $('#col1').on("click", ".pin", function (e) {
+      e.preventDefault();
+      s = $(this).attr('data-company');
+      getPinResult(s, g1_data, c1_data, '');
+    });
+    $('#col1-showmore').on("click", ".pin", function (e) {
+      e.preventDefault();
+      s = $(this).attr('data-company');
+      getPinResult(s, g1_data, c1_data, '');
+    });
+
+    // Class 2: MH Pin click responses
+    $('#col2').on("click", ".pin", function (e) {
+      e.preventDefault();
+      s = $(this).attr('data-company');
+      getPinResult(s, g2_data, c2_data, 2);
+    });
+
+    $('#col2-showmore').on("click", ".pin", function (e) {
+      e.preventDefault();
+      s = $(this).attr('data-company');
+      getPinResult(s, g2_data, c2_data, 2);
+    });
+
+    // Class 3: YL Pin click responses
+    $('#col3').on("click", ".pin", function (e) {
+      e.preventDefault();
+      s = $(this).attr('data-company');
+      getPinResult(s, g3_data, c3_data, 3);
+    });
+    $('#col3-showmore').on("click", ".pin", function (e) {
+      e.preventDefault();
+      s = $(this).attr('data-company');
+      getPinResult(s, g3_data, c3_data, 3);
+    });
+
+    // Class 4: YL Pin click responses
+    $('#col4').on("click", ".pin", function (e) {
+      e.preventDefault();
+      s = $(this).attr('data-company');
+      getPinResult(s, g4_data, c4_data, 4);
+    });
+    $('#col4-showmore').on("click", ".pin", function (e) {
+      e.preventDefault();
+      s = $(this).attr('data-company');
+      getPinResult(s, g4_data, c4_data, 4);
+    });
+
+    // Utility function for fetching pin results
+    function getPinResult(s, g_data, c_data, m) {
+      for(i in g_data) {
+          row = g_data[i]; 
+          if (row.name.toLowerCase() == s.toLowerCase()) { gi = i; } }
+
+        for (j in c_data) {
+          r = c_data[j]; 
+          if (r.company_name.toLowerCase() == s.toLowerCase()) { cj = j; } }
+
+        for (k in sn_data) {
+          sn = sn_data[k];
+          if (sn.company_name.toLowerCase() == s.toLowerCase()) { sk = k; }
+        }
+
+          target = g_data[gi].company_name;
+          prob = g_data[gi].RFCprobA;
+          aval = g_data[gi].RFRval;
+          worth = g_data[gi].RFRpred; 
+          worthval = (worth/1000000).toPrecision(3);
+          aval = (aval/1000000).toPrecision(3);
+
+          if (Math.abs(g_data[gi].RFRpred-g_data[gi].RFRval) > 0.3*worth) {
+            aval = 0;
+          }
+
+          if (aval > 0.3) {
+            $('#worth-box' + m).html('<h2> $' + worthval + 'M</h2><h3>($' + aval + 'M)</h3>');
+          } else {
+            if (prob < 0.1) {
+              $('#worth-box'+ m).html('<h2> <$1M </h2>');
+            } else {
+              $('#worth-box'+ m).html('<h2> $' + worthval + 'M </h2>');
+            }
+          }
+          $('#prob-box'+ m).html('<h2>' + (prob*100).toPrecision(3) + ' % </h2>');
+          $('#company_img'+ m).attr('src', c_data[cj].company_img);
+          $('#company_name'+ m).text(c_data[cj].company_name);
+
+          $('#snippet'+ m).text(sn_data[sk].high_concept);
+
+          // Add Read more clickable if there's more snippets
+          if (sn_data[sk].product_desc !== "") { 
+          $('#prod_desc'+ m).html("<a href='#' id='more_prod_desc"+ m + "'>More Info</a>");
+          $('#more_prod_desc'+ m).click(function (e) { 
+            e.preventDefault(); 
+            $(this).html(sn_data[sk].product_desc);
+        });
+      }
+      $('#result-box'+ m).fadeIn();
+
+      $('#result-dismiss' + m).click(function (e) {
+        e.preventDefault();
+        $('#result-box'+m).fadeOut();
+      });
+    }
+
+    }
+
+  $(document).ready(readyPinYH);
+  </script>      
+ 
+</body></html>
