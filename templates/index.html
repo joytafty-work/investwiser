@@ -23,6 +23,20 @@
      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
    <![endif]-->
 
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-47710173-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  </script>
+
 
  </head>
 
@@ -313,6 +327,7 @@
       $('#prob-box').html('<h2>' + (prob*100).toPrecision(3) + ' % </h2>');      
       $('#company_img').attr('src', c_data[cj].company_img);
       $('#company_name').text(c_data[cj].company_name);
+      $('#snippet').text('');
       $('#snippet').text(sn_data[sk].high_concept);
 
       // Add Read more clickable if there's more snippets

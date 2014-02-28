@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<!-- saved from url=(0080)http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+    <title>Implementation — Problem Solving with Algorithms and Data Structures</title>
+    
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/basic.css" type="text/css">
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/pygments.css" type="text/css">
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/video.css" type="text/css">
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/poll.css" type="text/css">
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/tabbedstuff.css" type="text/css">
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/pytutor.css" type="text/css">
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/basic(1).css" type="text/css">
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/codemirror.css" type="text/css">
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/activecode.css" type="text/css">
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/parsons.css" type="text/css">
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/prettify.css" type="text/css">
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/jquery-ui-1.10.3.custom.min.css" type="text/css">
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/bootstrap-sphinx.css" type="text/css">
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/user-highlights.css" type="text/css">
+    <link rel="stylesheet" href="./Implementation — Problem Solving with Algorithms and Data Structures_files/runestone-custom-sphinx-bootstrap.css" type="text/css">
+    
+    <script type="text/javascript" async="" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/ga.js"></script><script id="twitter-wjs" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/widgets.js"></script><script async="" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/prum.min.js"></script><script id="facebook-jssdk" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/all.js"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/jquery.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/underscore.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/doctools.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/poll.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/d3.v2.min.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/jquery.ba-bbq.min.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/jquery.jsPlumb-1.3.10-all-min.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/pytutor.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/jquery.highlight.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/bookfuncs.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/codemirror.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/python.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/activecode.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/skulpt.min.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/skulpt-stdlib.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/assess.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/animationbase.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/jquery.min.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/prettify.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/underscore-min.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/lis.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/parsons.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/parsons-noconflict.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/MathJax.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/jquery-fix.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/waypoints.min.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/rangy-core.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/rangy-textrange.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/rangy-cssclassapplier.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/user-highlights.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/jquery.idle-timer.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/processing-1.4.1.min.js"></script>
+    <script type="text/javascript" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/jquery.hotkey.js"></script>
+    <link rel="top" title="Problem Solving with Algorithms and Data Structures" href="http://interactivepython.org/runestone/static/pythonds/index.html">
+    <link rel="next" title="Binary Tree Applications" href="http://interactivepython.org/runestone/static/pythonds/Trees/bintreeapps.html">
+    <link rel="prev" title="Trees" href="http://interactivepython.org/runestone/static/pythonds/Trees/trees.html">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<script type="text/javascript">
+  eBookConfig = {};
+  eBookConfig.host = 'http://interactivepython.org' ? 'http://interactivepython.org' : 'http://127.0.0.1:8000';
+  eBookConfig.app = eBookConfig.host+'/runestone';
+  eBookConfig.ajaxURL = eBookConfig.app+'/ajax/';
+  eBookConfig.course = 'pythonds';
+  eBookConfig.logLevel = 10;
+  eBookConfig.loginRequired = false
+  eBookConfig.build_info = "2.1.5";
+  eBookConfig.isLoggedIn = false;
+</script>
+
+<style id="clearly_highlighting_css" type="text/css">/* selection */ html.clearly_highlighting_enabled ::-moz-selection { background: rgba(246, 238, 150, 0.99); } html.clearly_highlighting_enabled ::selection { background: rgba(246, 238, 150, 0.99); } /* cursor */ html.clearly_highlighting_enabled {    /* cursor and hot-spot position -- requires a default cursor, after the URL one */    cursor: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--cursor.png") 14 16, text; } /* highlight tag */ em.clearly_highlight_element {    font-style: inherit !important; font-weight: inherit !important;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow.png");    background-repeat: repeat-x; background-position: top left; background-size: 100% 100%; } /* the delete-buttons are positioned relative to this */ em.clearly_highlight_element.clearly_highlight_first { position: relative; } /* delete buttons */ em.clearly_highlight_element a.clearly_highlight_delete_element {    display: none; cursor: pointer;    padding: 0; margin: 0; line-height: 0;    position: absolute; width: 34px; height: 34px; left: -17px; top: -17px;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite.png"); background-repeat: no-repeat; background-position: 0px 0px; } em.clearly_highlight_element a.clearly_highlight_delete_element:hover { background-position: -34px 0px; } /* retina */ @media (min--moz-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {    em.clearly_highlight_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow@2x.png"); }    em.clearly_highlight_element a.clearly_highlight_delete_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite@2x.png"); background-size: 68px 34px; } } </style><style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}
+.fb_invisible{display:none}
+.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}
+.fb_reset > div{overflow:hidden}
+.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}
+.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}
+.fb_dialog_content{background:#fff;color:#333}
+.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\9;right:7px\9}
+.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}
+.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}
+.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}
+.fb_dialog_top_left,
+.fb_dialog_top_right,
+.fb_dialog_bottom_left,
+.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}
+.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}
+.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}
+.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}
+.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right,
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right{width:10px;height:100%}
+.fb_dialog_vert_left{margin-left:-10px}
+.fb_dialog_vert_right{right:0;margin-right:-10px}
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{width:100%;height:10px}
+.fb_dialog_horiz_top{margin-top:-10px}
+.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}
+.fb_dialog_iframe{line-height:0}
+.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}
+.fb_dialog_content .dialog_title > span{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif)
+no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}
+body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}
+.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif)
+white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}
+.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}
+#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}
+#fb-root #fb_dialog_ipad_overlay.hidden{display:none}
+.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}
+.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}
+.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%
+}
+.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6),
+color-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,
+rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}
+.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}
+.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}
+.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}
+#fb_dialog_loader_close{float:left}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}
+.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}
+.fb_iframe_widget iframe{position:absolute}
+.fb_iframe_widget_lift{z-index:1}
+.fb_hide_iframes iframe{position:relative;left:-10000px}
+.fb_iframe_widget_loader{position:relative;display:inline-block}
+.fb_iframe_widget_fluid{display:inline}
+.fb_iframe_widget_fluid span{width:100%}
+.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}
+.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_connect_bar_container div,
+.fb_connect_bar_container span,
+.fb_connect_bar_container a,
+.fb_connect_bar_container img,
+.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}
+.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}
+.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode=="CSS1Compat"? document.documentElement.scrollTop+"px":body.scrollTop+"px")}
+.fb_connect_bar{position:relative;margin:auto;height:100%;width:100%;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:"lucida grande", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}
+.fb_connect_bar a:hover{color:#fff}
+.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}
+.fb_connect_bar div a,
+.fb_connect_bar span,
+.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}
+.fb_connect_bar .fb_buttons{float:right;margin-top:7px}
+.fbpluginrecommendationsbarleft,
+.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}
+.fbpluginrecommendationsbarleft{left:10px}
+.fbpluginrecommendationsbarright{right:10px}</style></head><body style="" data-ember-extension="1" data-twttr-rendered="true"><div id="MathJax_Message" style="display: none;"></div><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tab-index="-1" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/xd_arbiter.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tab-index="-1" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/xd_arbiter(1).html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&status=0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+<script>
+var _prum = [['id', '521dfcc4abe53d0749000000'],
+             ['mark', 'firstbyte', (new Date()).getTime()]];
+(function() {
+    var s = document.getElementsByTagName('script')[0]
+      , p = document.createElement('script');
+    p.async = 'async';
+    p.src = '//rum-static.pingdom.net/prum.min.js';
+    s.parentNode.insertBefore(p, s);
+})();
+</script>
+
+
+
+  
+  
+
+
+<!-- Begin navbar -->
+<div id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+  <div class="container">
+
+    <div class="navbar-header">
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <div>
+        <a class="brand-logo" style="background: transparent url(&quot;../_static/img/logo_small.png&quot;) no-repeat 0px 0px;" href="http://interactivepython.org/runestone/default/user/login">&nbsp; </a>
+        <a class="navbar-brand" href="http://interactivepython.org/runestone/static/pythonds/index.html">Problem Solving with Algorithms and Data Structures</a>
+      </div>
+    </div>
+
+    <div class="navbar-collapse collapse navbar-ex1-collapse">
+
+      <ul class="nav navbar-nav navbar-right">
+
+        <li class="divider-vertical"></li>
+
+        <!-- social media dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-share-alt" style="opacity: 0.9"></i>
+          </a>
+          <ul class="dropdown-menu social-menu">
+              <li>
+                <div>
+                  <b>Runestone in social media:</b>
+                </div>
+                <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/follow_button.1392079123.html" class="twitter-follow-button twitter-follow-button" title="Twitter Follow Button" data-twttr-rendered="true" style="width: 229px; height: 20px;"></iframe><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                <div class="fb-like fb_iframe_widget" data-href="https://www.facebook.com/RunestoneInteractive" data-send="false" data-layout="button_count" data-width="300" data-show-faces="false" data-font="arial" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;font=arial&amp;href=https%3A%2F%2Fwww.facebook.com%2FRunestoneInteractive&amp;layout=button_count&amp;locale=en_US&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=300"><span style="vertical-align: bottom; width: 81px; height: 20px;"><iframe name="f18e0af9f8" width="300px" height="1000px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:like Facebook Social Plugin" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/like.html" class="" style="border: none; visibility: visible; width: 81px; height: 20px;"></iframe></span></div>
+              </li>
+
+              <li class="divider"></li>
+              <li>
+                <div>
+                  <b>Help support us:</b>
+                </div>
+                <div class="gittip">
+                  <iframe style="border:0;" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/widget.html" width="48pt" height="22pt" class="gittip-button">
+                  </iframe>
+                </div>
+              </li>
+          </ul>
+        </li>
+        <!-- end social media dropdown -->
+
+        <li class="divider-vertical"></li>
+
+        <!-- search dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-search" style="opacity:0.9;"></i>
+          </a>
+          <ul class="dropdown-menu">
+            
+                <li><a href="http://interactivepython.org/runestone/static/pythonds/index.html">Table of Contents</a></li>
+            
+            <li><a href="http://interactivepython.org/runestone/static/pythonds/genindex.html">Book Index</a></li>
+            <li class="divider"></li>
+            <li id="scratch_ac_link"><a href="javascript:toggleScratchActivecode()">Scratch ActiveCode</a></li>
+            <li class="divider"></li>
+            <li style="width: 240px;">
+              <form class="navbar-search" style="margin:10px;" action="http://interactivepython.org/runestone/static/pythonds/search.html" method="get">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="q" placeholder="Search this book">
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" style="margin:0;" type="submit">
+                      <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                  </span>
+                </div><!-- /input-group -->
+                <input type="hidden" name="check_keywords" value="yes">
+                <input type="hidden" name="area" value="default">
+              </form>
+            </li>
+          </ul>
+        </li>
+        <!-- end search dropdown -->
+
+        <li class="divider-vertical"></li>
+
+        <!-- user account dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-user" style="opacity:0.9;"></i>
+          </a>
+          <ul class="dropdown-menu user-menu">
+            <li><span class="loggedinuser">joytafty@gmail.com</span></li>
+            <li class="divider"></li>
+            <li><a href="http://interactivepython.org/runestone/admin/index">Instructor's Page</a></li>
+            <li class="divider"></li>
+            <li><a href="http://interactivepython.org/runestone/default/user/profile" id="profilelink" style="display: block;">Edit Profile</a></li>
+            <li><a href="http://interactivepython.org/runestone/default/user/change_password" id="passwordlink" style="display: block;">Change Password</a></li>
+            <li><a href="http://interactivepython.org/runestone/default/user/register" id="registerlink" style="display: none;">Register</a></li>
+            <li class="loginout"><a href="http://interactivepython.org/runestone/default/user/logout">Log Out</a></li> <!-- correct link populated by addNavbarLoginLink() -->
+          </ul>
+        </li>
+        <!-- end user account dropdown -->
+
+        <li class="divider-vertical"></li>
+
+        <!-- help menu dropdown -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-question-sign" style="opacity:0.9;"></i>
+          </a>
+          <ul class="dropdown-menu user-menu">
+            <li><a href="http://interactivepython.org/runestone/static/pythonds/navhelp.html">Navigation Help</a></li>
+            <li><a href="http://interactivepython.org/runestone/static/overview/instructor.html">Help for Instructors</a></li>            
+            <li class="divider"></li>
+            <li><a href="http://runestoneinteractive.org/">About Runestone</a></li>
+            <li><a href="https://github.com/bnmnetp/runestone/issues/new">Report A Problem</a></li>
+          </ul>
+        </li>
+        <!-- end help menu dropdown -->
+
+        <li class="divider-vertical"></li>
+
+      </ul>
+
+      <ul class="nav navbar-nav">
+        <li class="divider-vertical"></li>
+        
+          <li class="dropdown">
+  <a href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"><li><a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#">Implementation</a>
+</li><li class="divider"></li><li><a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#list-of-lists-representation">List of Lists Representation</a></li><li><a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#nodes-and-references">Nodes and References</a></li>
+</ul>
+</li>
+          <li class="divider-vertical"></li>
+        
+        
+          
+  <li id="relations-prev" title="" data-toggle="tooltip" data-original-title="Previous Chapter - Trees">
+    <a href="http://interactivepython.org/runestone/static/pythonds/Trees/trees.html">
+      <i class="glyphicon glyphicon-backward" style="opacity:0.9;"></i>
+    </a>
+  </li>
+  
+  <li id="relations-next" title="" data-toggle="tooltip" data-original-title="Next Chapter - Binary Tree Applications">
+    <a href="http://interactivepython.org/runestone/static/pythonds/Trees/bintreeapps.html">
+      <i class="glyphicon glyphicon-forward" style="opacity:0.9;"></i>
+    </a>
+  </li>
+  <li class="divider-vertical"></li>
+
+<script type="text/javascript">
+  opts = {'placement':'bottom',
+          'selector': '',
+          'delay': { show: 100, hide: 50}
+         };
+
+  $('#relations-prev').tooltip(opts);
+  $('#relations-next').tooltip(opts);
+</script>
+        
+        
+          <li></li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  
+  <div class="section _11878061739" id="implementation">
+<h1>Implementation<a class="headerlink" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#implementation" title="Permalink to this headline">¶</a></h1>
+<p class="_828269">Keeping in mind the definitions from the previous section, we can use
+the following functions to create and manipulate a binary tree:</p>
+<ul class="simple">
+<li><code>BinaryTree()</code> creates a new instance of a binary tree.</li>
+<li><code>getLeftChild()</code> returns the binary tree corresponding to the left
+child of the current node.</li>
+<li><code>getRightChild()</code> returns the binary tree corresponding to the
+right child of the current node.</li>
+<li><code>setRootVal(val)</code> stores the object in parameter <code>val</code> in the
+current node.</li>
+<li><code>getRootVal()</code> returns the object stored in the current node.</li>
+<li><code>insertLeft(val)</code> creates a new binary tree and installs it as the
+left child of the current node.</li>
+<li><code>insertRight(val)</code> creates a new binary tree and installs it as the
+right child of the current node.</li>
+</ul>
+<p class="_12194372">The key decision in implementing a tree is choosing a good internal
+storage technique. Python allows us two very interesting possibilities,
+so we will examine both before choosing one. The first technique we will
+call “list of lists,” the second technique we will call “nodes and
+references.”</p>
+<div class="section _2795686375" id="list-of-lists-representation">
+<h2>List of Lists Representation<a class="headerlink" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#list-of-lists-representation" title="Permalink to this headline">¶</a></h2>
+<p class="_36587271">In a tree represented by a list of lists, we will begin
+with Python’s list data structure and write the functions defined above.
+Although writing the interface as a set of operations on a list is a bit
+different from the other abstract data types we have implemented, it is
+interesting to do so because it provides us with a simple recursive data
+structure that we can look at and examine directly. In a list of lists
+tree, we will store the value of the root node as the first element of
+the list. The second element of the list will itself be a list that
+represents the left subtree. The third element of the list will be
+another list that represents the right subtree. To illustrate this
+storage technique, let’s look at an example. <a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#fig-smalltree"><em>Figure 1</em></a>
+shows a simple tree and the corresponding list implementation.</p>
+<div class="figure align-center" id="fig-smalltree">
+<img alt="../_images/smalltree.png" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/smalltree.png">
+<p class="caption _19394">Figure 1: A Small Tree</p>
+</div>
+<div class="highlight-python"><pre>myTree = ['a',   #root
+      ['b',  #left subtree
+       ['d' [], []],
+       ['e' [], []] ],
+      ['c',  #right subtree
+       ['f' [], []],
+       [] ]
+     ]</pre>
+</div>
+<p class="_29170649">Notice that we can access subtrees of the list using standard list
+indexing. The root of the tree is <code>myTree[0]</code>, the left subtree of the
+root is <code>myTree[1]</code>, and the right subtree is <code>myTree[2]</code>. <a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#lst-treelist1"><em>ActiveCode 1</em></a> illustrates creating a simple tree using a
+list. Once the tree is constructed, we can access the root and the left
+and right subtrees. One very nice property of this list of lists
+approach is that the structure of a list representing a subtree adheres
+to the structure defined for a tree; the structure itself is recursive!
+A subtree that has a root value and two empty lists is a leaf node.
+Another nice feature of the list of lists approach is that it
+generalizes to a tree that has many subtrees. In the case where the tree
+is more than a binary tree, another subtree is just another list.</p>
+
+<div id="tree_list1">
+
+<br>
+<div id="tree_list1_code_div" style="display: block">
+<textarea cols="50" rows="12" id="tree_list1_code" class="active_code" ,="" prefixcode="undefined" style="display: none;">myTree = ['a', ['b', ['d',[],[]], ['e',[],[]] ], ['c', ['f',[],[]], []] ]
+print(myTree)
+print('left subtree = ', myTree[1])
+print('root = ', myTree[0])
+print('right subtree = ', myTree[2])
+</textarea><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 7.4150390625px; left: 35.41192626953125px;"><textarea wrap="off" autocorrect="off" autocapitalize="off" style="position: absolute; padding: 0px; width: 1px; height: 1em;"></textarea></div><div class="CodeMirror-scrollbar" style="z-index: -2; visibility: hidden; display: none;"><div class="CodeMirror-scrollbar-inner"></div></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative;"><div style="position: relative; top: 0px;"><div class="CodeMirror-gutter" style="height: 131px;"><div class="CodeMirror-gutter-text"><pre>1</pre><pre>2</pre><pre>3</pre><pre>4</pre><pre>5</pre><pre>6</pre></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; min-width: 598px; margin-left: 28px;"><div style="position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden;"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px;">&nbsp;</pre><pre class="CodeMirror-cursor" style="visibility: hidden; left: 597px;">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-variable">myTree</span> = [<span class="cm-string">'a'</span>, [<span class="cm-string">'b'</span>, [<span class="cm-string">'d'</span>,[],[]], [<span class="cm-string">'e'</span>,[],[]] ], [<span class="cm-string">'c'</span>, [<span class="cm-string">'f'</span>,[],[]], []] ]</pre><pre><span class="cm-keyword">print</span>(<span class="cm-variable">myTree</span>)</pre><pre><span class="cm-keyword">print</span>(<span class="cm-string">'left subtree = '</span>, <span class="cm-variable">myTree</span>[<span class="cm-number">1</span>])</pre><pre><span class="cm-keyword">print</span>(<span class="cm-string">'root = '</span>, <span class="cm-variable">myTree</span>[<span class="cm-number">0</span>])</pre><pre><span class="cm-keyword">print</span>(<span class="cm-string">'right subtree = '</span>, <span class="cm-variable">myTree</span>[<span class="cm-number">2</span>])</pre><pre> </pre></div></div></div></div></div></div></div>
+</div>
+<p class="ac_caption _96695"><span class="ac_caption_text">Using Indexing to Access Subtrees (tree_list1)</span> </p>
+
+<button class="btn btn-success" id="tree_list1_runb" onclick="runit(&#39;tree_list1&#39;,this, undefined);">Run</button>
+
+<div id="cont"></div>
+
+<button class="ac_opt btn btn-default" style="display: inline-block" id="tree_list1_saveb" onclick="saveEditor(&#39;tree_list1&#39;);">Save</button>
+<button class="ac_opt btn btn-default" style="display: inline-block" id="tree_list1_loadb" onclick="requestCode(&#39;tree_list1&#39;);">Load</button>
+
+<script>
+if ('block' == 'none') {
+    // a hack to preserve the inline-block display style. Toggle() will use display: block
+    // (instead of inline-block) if the previous display style was 'none'
+    $('#tree_list1_saveb').toggle();
+    $('#tree_list1_loadb').toggle();
+}
+</script>
+
+
+<div style="text-align: center">
+<canvas id="tree_list1_canvas" class="ac-canvas" height="400" width="400" style="border-style: solid; display: none; text-align: center"></canvas>
+</div>
+<pre id="tree_list1_suffix" style="display:none"></pre>
+<pre id="tree_list1_pre" class="active_out">
+</pre>
+
+
+</div>
+
+<p class="_4251436">Let’s formalize this definition of the tree data structure by providing
+some functions that make it easy for us to use lists as trees. Note that
+we are not going to define a binary tree class. The functions we will
+write will just help us manipulate a standard list as though we are
+working with a tree.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">BinaryTree</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[]]</span>
+</pre></div>
+</div>
+<p class="_9543021">The <code>BinaryTree</code> function simply constructs a list with a root node
+and two empty sublists for the children. To add a left subtree to the
+root of a tree, we need to insert a new list into the second position of
+the root list. We must be careful. If the list already has something in
+the second position, we need to keep track of it and push it down the
+tree as the left child of the list we are adding. <a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#lst-linsleft"><em>Listing 1</em></a>
+shows the Python code for inserting a left child.</p>
+<p id="lst-linsleft" class="_2887"><strong>Listing 1</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">insertLeft</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">newBranch</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,[</span><span class="n">newBranch</span><span class="p">,</span><span class="n">t</span><span class="p">,[]])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,[</span><span class="n">newBranch</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[]])</span>
+    <span class="k">return</span> <span class="n">root</span>
+</pre></div>
+</div>
+<p class="_5899500">Notice that to insert a left child, we first obtain the (possibly empty)
+list that corresponds to the current left child. We then add the new
+left child, installing the old left child as the left child of the new
+one. This allows us to splice a new node into the tree at any position.
+The code for <code>insertRight</code> is similar to <code>insertLeft</code> and is shown
+in <a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#lst-linsright"><em>Listing 2</em></a>.</p>
+<p id="lst-linsright" class="_2895"><strong>Listing 2</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">insertRight</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">newBranch</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,[</span><span class="n">newBranch</span><span class="p">,[],</span><span class="n">t</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">root</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,[</span><span class="n">newBranch</span><span class="p">,[],[]])</span>
+    <span class="k">return</span> <span class="n">root</span>
+</pre></div>
+</div>
+<p class="_2202244">To round out this set of tree-making functions(see <a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#lst-treeacc"><em>Listing 3</em></a>), let’s write a couple of
+access functions for getting and setting the root value, as well as
+getting the left or right subtrees.</p>
+<p id="lst-treeacc" class="_2903"><strong>Listing 3</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">getRootVal</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">setRootVal</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">newVal</span><span class="p">):</span>
+    <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">newVal</span>
+
+<span class="k">def</span> <span class="nf">getLeftChild</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">getRightChild</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="_1685211"><a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#lst-bintreetry"><em>ActiveCode 2</em></a> exercises the tree
+functions we have just written. You should try it
+out for yourself. One of the exercises asks you to draw the tree
+structure resulting from this set of calls.</p>
+
+<div id="bin_tree">
+
+<br>
+<div id="bin_tree_code_div" style="display: block">
+<textarea cols="50" rows="12" id="bin_tree_code" class="active_code" ,="" prefixcode="undefined" style="display: none;">def BinaryTree(r):
+    return [r, [], []]
+
+def insertLeft(root,newBranch):
+    t = root.pop(1)
+    if len(t) &gt; 1:
+        root.insert(1,[newBranch,t,[]])
+    else:
+        root.insert(1,[newBranch, [], []])
+    return root
+
+def insertRight(root,newBranch):
+    t = root.pop(2)
+    if len(t) &gt; 1:
+        root.insert(2,[newBranch,[],t])
+    else:
+        root.insert(2,[newBranch,[],[]])
+    return root
+
+def getRootVal(root):
+    return root[0]
+
+def setRootVal(root,newVal):
+    root[0] = newVal
+
+def getLeftChild(root):
+    return root[1]
+
+def getRightChild(root):
+    return root[2]
+
+r = BinaryTree(3)
+insertLeft(r,4)
+insertLeft(r,5)
+insertRight(r,6)
+insertRight(r,7)
+l = getLeftChild(r)
+print(l)
+
+setRootVal(l,9)
+print(r)
+insertLeft(l,11)
+print(r)
+print(getRightChild(getRightChild(r)))
+</textarea><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 35.41192626953125px;"><textarea wrap="off" autocorrect="off" autocapitalize="off" style="position: absolute; padding: 0px; width: 1px; height: 1em;"></textarea></div><div class="CodeMirror-scrollbar" style="z-index: -2; visibility: hidden; display: block; height: 300px;"><div class="CodeMirror-scrollbar-inner" style="height: 910px;"></div></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative; min-height: 910px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-gutter" style="height: 911px;"><div class="CodeMirror-gutter-text"><pre>1</pre><pre>2</pre><pre>3</pre><pre>4</pre><pre>5</pre><pre>6</pre><pre>7</pre><pre>8</pre><pre>9</pre><pre>10</pre><pre>11</pre><pre>12</pre><pre>13</pre><pre>14</pre><pre>15</pre><pre>16</pre><pre>17</pre><pre>18</pre><pre>19</pre><pre>20</pre><pre>21</pre><pre>22</pre><pre>23</pre><pre>24</pre><pre>25</pre><pre>26</pre><pre>27</pre><pre>28</pre><pre>29</pre><pre>30</pre><pre>31</pre><pre>32</pre><pre>33</pre><pre>34</pre><pre>35</pre><pre>36</pre><pre>37</pre><pre>38</pre><pre>39</pre><pre>40</pre><pre>41</pre><pre>42</pre><pre>43</pre><pre>44</pre><pre>45</pre></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; min-width: 345px; margin-left: 28px;"><div style="position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden;"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px;">&nbsp;</pre><pre class="CodeMirror-cursor" style="visibility: hidden; left: 344px;">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-keyword">def</span> <span class="cm-variable">BinaryTree</span>(<span class="cm-variable">r</span>):</pre><pre>    <span class="cm-keyword">return</span> [<span class="cm-variable">r</span>, [], []]</pre><pre> </pre><pre><span class="cm-keyword">def</span> <span class="cm-variable">insertLeft</span>(<span class="cm-variable">root</span>,<span class="cm-variable">newBranch</span>):</pre><pre>    <span class="cm-variable">t</span> = <span class="cm-variable">root</span>.<span class="cm-variable">pop</span>(<span class="cm-number">1</span>)</pre><pre>    <span class="cm-keyword">if</span> <span class="cm-builtin">len</span>(<span class="cm-variable">t</span>) <span class="cm-operator">&gt;</span> <span class="cm-number">1</span>:</pre><pre>        <span class="cm-variable">root</span>.<span class="cm-variable">insert</span>(<span class="cm-number">1</span>,[<span class="cm-variable">newBranch</span>,<span class="cm-variable">t</span>,[]])</pre><pre>    <span class="cm-keyword">else</span>:</pre><pre>        <span class="cm-variable">root</span>.<span class="cm-variable">insert</span>(<span class="cm-number">1</span>,[<span class="cm-variable">newBranch</span>, [], []])</pre><pre>    <span class="cm-keyword">return</span> <span class="cm-variable">root</span></pre><pre> </pre><pre><span class="cm-keyword">def</span> <span class="cm-variable">insertRight</span>(<span class="cm-variable">root</span>,<span class="cm-variable">newBranch</span>):</pre><pre>    <span class="cm-variable">t</span> = <span class="cm-variable">root</span>.<span class="cm-variable">pop</span>(<span class="cm-number">2</span>)</pre><pre>    <span class="cm-keyword">if</span> <span class="cm-builtin">len</span>(<span class="cm-variable">t</span>) <span class="cm-operator">&gt;</span> <span class="cm-number">1</span>:</pre><pre>        <span class="cm-variable">root</span>.<span class="cm-variable">insert</span>(<span class="cm-number">2</span>,[<span class="cm-variable">newBranch</span>,[],<span class="cm-variable">t</span>])</pre><pre>    <span class="cm-keyword">else</span>:</pre><pre>        <span class="cm-variable">root</span>.<span class="cm-variable">insert</span>(<span class="cm-number">2</span>,[<span class="cm-variable">newBranch</span>,[],[]])</pre><pre>    <span class="cm-keyword">return</span> <span class="cm-variable">root</span></pre><pre> </pre><pre><span class="cm-keyword">def</span> <span class="cm-variable">getRootVal</span>(<span class="cm-variable">root</span>):</pre><pre>    <span class="cm-keyword">return</span> <span class="cm-variable">root</span>[<span class="cm-number">0</span>]</pre><pre> </pre><pre><span class="cm-keyword">def</span> <span class="cm-variable">setRootVal</span>(<span class="cm-variable">root</span>,<span class="cm-variable">newVal</span>):</pre><pre>    <span class="cm-variable">root</span>[<span class="cm-number">0</span>] = <span class="cm-variable">newVal</span></pre><pre> </pre><pre><span class="cm-keyword">def</span> <span class="cm-variable">getLeftChild</span>(<span class="cm-variable">root</span>):</pre><pre>    <span class="cm-keyword">return</span> <span class="cm-variable">root</span>[<span class="cm-number">1</span>]</pre><pre> </pre><pre><span class="cm-keyword">def</span> <span class="cm-variable">getRightChild</span>(<span class="cm-variable">root</span>):</pre><pre>    <span class="cm-keyword">return</span> <span class="cm-variable">root</span>[<span class="cm-number">2</span>]</pre><pre> </pre><pre><span class="cm-variable">r</span> = <span class="cm-variable">BinaryTree</span>(<span class="cm-number">3</span>)</pre><pre><span class="cm-variable">insertLeft</span>(<span class="cm-variable">r</span>,<span class="cm-number">4</span>)</pre><pre><span class="cm-variable">insertLeft</span>(<span class="cm-variable">r</span>,<span class="cm-number">5</span>)</pre><pre><span class="cm-variable">insertRight</span>(<span class="cm-variable">r</span>,<span class="cm-number">6</span>)</pre><pre><span class="cm-variable">insertRight</span>(<span class="cm-variable">r</span>,<span class="cm-number">7</span>)</pre><pre><span class="cm-variable">l</span> = <span class="cm-variable">getLeftChild</span>(<span class="cm-variable">r</span>)</pre><pre><span class="cm-keyword">print</span>(<span class="cm-variable">l</span>)</pre><pre> </pre><pre><span class="cm-variable">setRootVal</span>(<span class="cm-variable">l</span>,<span class="cm-number">9</span>)</pre><pre><span class="cm-keyword">print</span>(<span class="cm-variable">r</span>)</pre><pre><span class="cm-variable">insertLeft</span>(<span class="cm-variable">l</span>,<span class="cm-number">11</span>)</pre><pre><span class="cm-keyword">print</span>(<span class="cm-variable">r</span>)</pre><pre><span class="cm-keyword">print</span>(<span class="cm-variable">getRightChild</span>(<span class="cm-variable">getRightChild</span>(<span class="cm-variable">r</span>)))</pre><pre> </pre></div></div></div></div></div></div></div>
+</div>
+<p class="ac_caption _178009"><span class="ac_caption_text">A Python Session to Illustrate Basic Tree Functions (bin_tree)</span> </p>
+
+<button class="btn btn-success" id="bin_tree_runb" onclick="runit(&#39;bin_tree&#39;,this, undefined);">Run</button>
+
+<div id="cont"></div>
+
+<button class="ac_opt btn btn-default" style="display: inline-block" id="bin_tree_saveb" onclick="saveEditor(&#39;bin_tree&#39;);">Save</button>
+<button class="ac_opt btn btn-default" style="display: inline-block" id="bin_tree_loadb" onclick="requestCode(&#39;bin_tree&#39;);">Load</button>
+
+<script>
+if ('block' == 'none') {
+    // a hack to preserve the inline-block display style. Toggle() will use display: block
+    // (instead of inline-block) if the previous display style was 'none'
+    $('#bin_tree_saveb').toggle();
+    $('#bin_tree_loadb').toggle();
+}
+</script>
+
+
+<div style="text-align: center">
+<canvas id="bin_tree_canvas" class="ac-canvas" height="400" width="400" style="border-style: solid; display: none; text-align: center"></canvas>
+</div>
+<pre id="bin_tree_suffix" style="display:none"></pre>
+<pre id="bin_tree_pre" class="active_out">
+</pre>
+
+
+</div>
+
+<div class="admonition-self-check admonition ">
+<p class="first admonition-title _4172">Self Check</p>
+
+            <div id="mctree_1" class="alert alert-warning">
+            <p class="_72265">sort-11: Given the following statments:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="s">'a'</span><span class="p">)</span>
+<span class="n">insertLeft</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s">'b'</span><span class="p">)</span>
+<span class="n">insertRight</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s">'c'</span><span class="p">)</span>
+<span class="n">insertRight</span><span class="p">(</span><span class="n">getRightChild</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s">'d'</span><span class="p">)</span>
+<span class="n">insertLeft</span><span class="p">(</span><span class="n">getRightChild</span><span class="p">(</span><span class="n">getRightChild</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="s">'e'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="_186313">Which of the answers is the correct representation of the tree?</p>
+<form name="mctree_1_form" method="get" action="" onsubmit="return false;">
+            <input type="radio" name="group1" value="a" id="mctree_1_opt_a">
+            <label for="mctree_1_opt_a">  a) ['a', ['b', [], []], ['c', [], ['d', [], []]]]</label><br>
+            
+            <input type="radio" name="group1" value="b" id="mctree_1_opt_b">
+            <label for="mctree_1_opt_b">  b) ['a', ['c', [], ['d', ['e', [], []], []]], ['b', [], []]]</label><br>
+            
+            <input type="radio" name="group1" value="c" id="mctree_1_opt_c">
+            <label for="mctree_1_opt_c">  c) ['a', ['b', [], []], ['c', [], ['d', ['e', [], []], []]]]</label><br>
+            
+            <input type="radio" name="group1" value="d" id="mctree_1_opt_d">
+            <label for="mctree_1_opt_d">  d) ['a', ['b', [], ['d', ['e', [], []], []]], ['c', [], []]]</label><br>
+            
+
+            <script>
+            $(document).ready(function(){checkRadio('mctree_1');});
+            </script>
+            <button class="btn btn-success" name="do answer" onclick="checkMCMFStorage(&#39;mctree_1&#39;,&#39;c&#39;,[&#39;Not quite, this tree is missing the \u0027e\u0027 node.&#39;, &#39;This is close, but if you carefully you will see that the left and right children of the root are swapped.&#39;, &#39;Very good&#39;, &#39;This is close, but the left and right child names have been swapped along with the underlying structures.&#39;])">Check Me</button>
+            <button class="btn btn-default" id="mctree_1_bcomp" disabled="" name="compare" onclick="compareAnswers(&#39;mctree_1&#39;);">Compare Me</button>
+            </form><br>
+            <div id="mctree_1_feedback">
+            </div>
+            </div>
+            <p class="_489162">Write a function <code>buildTree</code> that returns a tree using the list of lists functions that looks like this:</p>
+<img alt="../_images/tree_ex.png" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/tree_ex.png">
+
+<div id="mctree_2">
+
+<br>
+<div id="mctree_2_code_div" style="display: none">
+<textarea cols="50" rows="12" id="mctree_2_code" class="active_code" ,="" prefixcode="undefined" style="display: none;">from test import testEqual
+
+def buildTree():
+    pass
+
+ttree = buildTree()
+testEqual(getRootVal(getRightChild(ttree)),'c')
+testEqual(getRootVal(getRightChild(getLeftChild(ttree))),'d')
+testEqual(getRootVal(getRightChild(getRightChild(ttree))),'f')
+</textarea><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea wrap="off" autocorrect="off" autocapitalize="off" style="position: absolute; padding: 0px; width: 1px; height: 1em;"></textarea></div><div class="CodeMirror-scrollbar" style="z-index: -2; visibility: hidden;"><div class="CodeMirror-scrollbar-inner"></div></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative;"><div style="position: relative;"><div class="CodeMirror-gutter" style="height: 0px;"><div class="CodeMirror-gutter-text"><pre>&nbsp;1</pre></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; min-width: 0px; margin-left: 0px;"><div style="position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden;"><pre><span class="cm-variable">testEqual</span>(<span class="cm-variable">getRootVal</span>(<span class="cm-variable">getRightChild</span>(<span class="cm-variable">getRightChild</span>(<span class="cm-variable">ttree</span>))),<span class="cm-string">'f'</span>)<span> </span></pre></div><pre class="CodeMirror-cursor">&nbsp;</pre><pre class="CodeMirror-cursor" style="visibility: hidden; left: 0px;">&nbsp;</pre><div style="position: relative; z-index: -1;"></div><div></div></div></div></div></div></div></div>
+</div>
+<p class="ac_caption _4874"><span class="ac_caption_text"> (mctree_2)</span> </p>
+
+<button class="btn btn-success" id="mctree_2_runb" onclick="runit(&#39;mctree_2&#39;,this, undefined);">Run</button>
+
+<div id="cont"></div>
+
+<button class="ac_opt btn btn-default" style="display: none;" id="mctree_2_saveb" onclick="saveEditor(&#39;mctree_2&#39;);">Save</button>
+<button class="ac_opt btn btn-default" style="display: none;" id="mctree_2_loadb" onclick="requestCode(&#39;mctree_2&#39;);">Load</button>
+
+<script>
+if ('none' == 'none') {
+    // a hack to preserve the inline-block display style. Toggle() will use display: block
+    // (instead of inline-block) if the previous display style was 'none'
+    $('#mctree_2_saveb').toggle();
+    $('#mctree_2_loadb').toggle();
+}
+</script>
+
+
+<div style="text-align: center">
+<canvas id="mctree_2_canvas" class="ac-canvas" height="400" width="400" style="border-style: solid; display: none; text-align: center"></canvas>
+</div>
+
+<button class="btn btn-default" id="mctree_2_showb" onclick="$(&#39;#mctree_2_code_div&#39;).toggle();cm_editors[&#39;mctree_2_code&#39;].refresh();$(&#39;#mctree_2_saveb&#39;).toggle();$(&#39;#mctree_2_loadb&#39;).toggle()">Show/Hide Code</button>
+
+<input type="button" class="btn btn-default " id="gradeb" name="Show Feedback" value="Show Feedback" onclick="createGradeSummary(&#39;mctree_2&#39;)">
+<pre id="mctree_2_suffix" style="display:none"></pre>
+<pre id="mctree_2_pre" class="active_out">
+</pre>
+
+
+</div>
+
+</div>
+</div>
+<div class="section _2284317162" id="nodes-and-references">
+<h2>Nodes and References<a class="headerlink" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#nodes-and-references" title="Permalink to this headline">¶</a></h2>
+<p class="_5686655">Our second method to represent a tree uses nodes and references. In this
+case we will define a class that has attributes for the root value, as
+well as the left and right subtrees. Since this representation more
+closely follows the object-oriented programming paradigm, we will
+continue to use this representation for the remainder of the chapter.</p>
+<p class="_501719">Using nodes and references, we might think of the tree as being
+structured like the one shown in <a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#fig-treerec"><em>Figure 2</em></a>.</p>
+<div class="figure align-center" id="fig-treerec">
+<img alt="image" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/treerecs.png">
+<p class="caption _168089">Figure 2: A Simple Tree Using a Nodes and References Approach</p>
+</div>
+<p class="_8847343">We will start out with a simple class definition for the nodes and
+references approach as shown in <a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#lst-nar"><em>Listing 4</em></a>. The important thing
+to remember about this representation is that the attributes <code>left</code>
+and <code>right</code> will become references to other instances of the
+<code>BinaryTree</code> class. For example, <span class="my-highlighted-text hl16429" id="hl16429">when we insert a new left child into
+the tree we create another instance of </span><code><span class="my-highlighted-text hl16429">BinaryTree</span></code><span class="my-highlighted-text hl16429"> and modify
+</span><code><span class="my-highlighted-text hl16429">self.leftChild</span></code><span class="my-highlighted-text hl16429"> in the root to reference the new tree.</span></p>
+<p id="lst-nar" class="_2911"><strong>Listing 4</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">BinaryTree</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rootObj</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">rootObj</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="bp">None</span>
+</pre></div>
+</div>
+<p class="_7888439">Notice that in <a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#lst-nar"><em>Listing 4</em></a>, the constructor function expects to
+get some kind of object to store in the root. Just like you can store
+any object you like in a list<span class="my-highlighted-text hl16431" id="hl16431">, the root object of a tree can be a
+reference to any object</span>. For our early examples, we will store the <span class="my-highlighted-text hl16432" id="hl16432">name
+of the node as the root value</span>. Using nodes and references to represent
+the tree in <a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#fig-treerec"><em>Figure 2</em></a>, we would create six instances of the
+BinaryTree class.</p>
+<p class="_3289420">Next let’s look at the functions we need to build the tree beyond the
+root node. To add a left child to the tree, we will create a new binary
+tree object and set the <code>left</code> attribute of the root to refer to this
+new object. The code for <code>insertLeft</code> is shown in
+<a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#lst-insl"><em>Listing 5</em></a>.</p>
+<p id="lst-insl" class="_2919"><strong>Listing 5</strong></p>
+<div class="highlight-python"><table class="highlighttable"><tbody><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">insertLeft</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newNode</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">newNode</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">newNode</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">t</span>
+</pre></div>
+</td></tr></tbody></table></div>
+<p class="_7503107">We must consider two cases for insertion. <span class="my-highlighted-text hl16498" id="hl16498">The first case is
+characterized by a node with no existing left child. When there is no
+left child, simply add a node to the tree. The second case is
+characterized by a node with an existing left child. In the second
+case, we insert a node and push the existing child down one level in the
+tree. </span>The second case is handled by the <code>else</code> statement on line
+4 of <a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#lst-insl"><em>Listing 5</em></a>.</p>
+<p class="_2113788">The code for <code>insertRight</code> must consider a symmetric set of cases.
+There will either be no right child, or we must insert the node between
+the root and an existing right child. The insertion code is shown in
+<a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#lst-insr"><em>Listing 6</em></a>.</p>
+<p id="lst-insr" class="_2927"><strong>Listing 6</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">insertRight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newNode</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">newNode</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">BinaryTree</span><span class="p">(</span><span class="n">newNode</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">t</span>
+</pre></div>
+</div>
+<p class="_1401864">To round out the definition for a simple binary tree data structure, we
+will write accessor methods (see <a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#lst-naracc"><em>Listing 7</em></a>) for the left and right children, as well as
+the root values.</p>
+<p id="lst-naracc" class="_2935"><strong>Listing 7</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">getRightChild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rightChild</span>
+
+<span class="k">def</span> <span class="nf">getLeftChild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">leftChild</span>
+
+<span class="k">def</span> <span class="nf">setRootVal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">obj</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">obj</span>
+
+<span class="k">def</span> <span class="nf">getRootVal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span>
+</pre></div>
+</div>
+<p class="_15866476">Now that we have all the pieces to create and manipulate a binary tree,
+let’s use them to check on the structure a bit more. Let’s make a simple
+tree with node a as the root, and add nodes b and c as children. <a class="reference internal" href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#lst-comptest"><em>ActiveCode 4</em></a> creates the tree and looks at the some of the
+values stored in <code>key</code>, <code>left</code>, and <code>right</code>. Notice that both the
+left and right children of the root are themselves distinct instances of
+the <code>BinaryTree</code> class. As we said in our original recursive
+definition for a tree, this allows us to treat any child of a binary
+tree as a binary tree itself.</p>
+
+<div id="bintree">
+
+<br>
+<div id="bintree_code_div" style="display: block">
+<textarea cols="50" rows="12" id="bintree_code" class="active_code" ,="" prefixcode="undefined" style="display: none;">class BinaryTree:
+    def __init__(self,rootObj):
+        self.key = rootObj
+        self.leftChild = None
+        self.rightChild = None
+
+    def insertLeft(self,newNode):
+        if self.leftChild == None:
+            self.leftChild = BinaryTree(newNode)
+        else:
+            t = BinaryTree(newNode)
+            t.leftChild = self.leftChild
+            self.leftChild = t
+
+    def insertRight(self,newNode):
+        if self.rightChild == None:
+            self.rightChild = BinaryTree(newNode)
+        else:
+            t = BinaryTree(newNode)
+            t.rightChild = self.rightChild
+            self.rightChild = t
+
+
+    def getRightChild(self):
+        return self.rightChild
+
+    def getLeftChild(self):
+        return self.leftChild
+
+    def setRootVal(self,obj):
+        self.key = obj
+
+    def getRootVal(self):
+        return self.key
+
+
+r = BinaryTree('a')
+print(r.getRootVal())
+print(r.getLeftChild())
+r.insertLeft('b')
+print(r.getLeftChild())
+print(r.getLeftChild().getRootVal())
+r.insertRight('c')
+print(r.getRightChild())
+print(r.getRightChild().getRootVal())
+r.getRightChild().setRootVal('hello')
+print(r.getRightChild().getRootVal())
+</textarea><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 35.41192626953125px;"><textarea wrap="off" autocorrect="off" autocapitalize="off" style="position: absolute; padding: 0px; width: 1px; height: 1em;"></textarea></div><div class="CodeMirror-scrollbar" style="z-index: -2; visibility: hidden; display: block; height: 300px;"><div class="CodeMirror-scrollbar-inner" style="height: 970px;"></div></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative; min-height: 970px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-gutter" style="height: 971px;"><div class="CodeMirror-gutter-text"><pre>1</pre><pre>2</pre><pre>3</pre><pre>4</pre><pre>5</pre><pre>6</pre><pre>7</pre><pre>8</pre><pre>9</pre><pre>10</pre><pre>11</pre><pre>12</pre><pre>13</pre><pre>14</pre><pre>15</pre><pre>16</pre><pre>17</pre><pre>18</pre><pre>19</pre><pre>20</pre><pre>21</pre><pre>22</pre><pre>23</pre><pre>24</pre><pre>25</pre><pre>26</pre><pre>27</pre><pre>28</pre><pre>29</pre><pre>30</pre><pre>31</pre><pre>32</pre><pre>33</pre><pre>34</pre><pre>35</pre><pre>36</pre><pre>37</pre><pre>38</pre><pre>39</pre><pre>40</pre><pre>41</pre><pre>42</pre><pre>43</pre><pre>44</pre><pre>45</pre><pre>46</pre><pre>47</pre><pre>48</pre></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; min-width: 402px; margin-left: 28px;"><div style="position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden;"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px;">&nbsp;</pre><pre class="CodeMirror-cursor" style="visibility: hidden; left: 401px;">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-keyword">class</span> <span class="cm-variable">BinaryTree</span>:</pre><pre>    <span class="cm-keyword">def</span> <span class="cm-variable">__init__</span>(<span class="cm-variable">self</span>,<span class="cm-variable">rootObj</span>):</pre><pre>        <span class="cm-variable">self</span>.<span class="cm-variable">key</span> = <span class="cm-variable">rootObj</span></pre><pre>        <span class="cm-variable">self</span>.<span class="cm-variable">leftChild</span> = <span class="cm-builtin">None</span></pre><pre>        <span class="cm-variable">self</span>.<span class="cm-variable">rightChild</span> = <span class="cm-builtin">None</span></pre><pre> </pre><pre>    <span class="cm-keyword">def</span> <span class="cm-variable">insertLeft</span>(<span class="cm-variable">self</span>,<span class="cm-variable">newNode</span>):</pre><pre>        <span class="cm-keyword">if</span> <span class="cm-variable">self</span>.<span class="cm-variable">leftChild</span> <span class="cm-operator">==</span> <span class="cm-builtin">None</span>:</pre><pre>            <span class="cm-variable">self</span>.<span class="cm-variable">leftChild</span> = <span class="cm-variable">BinaryTree</span>(<span class="cm-variable">newNode</span>)</pre><pre>        <span class="cm-keyword">else</span>:</pre><pre>            <span class="cm-variable">t</span> = <span class="cm-variable">BinaryTree</span>(<span class="cm-variable">newNode</span>)</pre><pre>            <span class="cm-variable">t</span>.<span class="cm-variable">leftChild</span> = <span class="cm-variable">self</span>.<span class="cm-variable">leftChild</span></pre><pre>            <span class="cm-variable">self</span>.<span class="cm-variable">leftChild</span> = <span class="cm-variable">t</span></pre><pre> </pre><pre>    <span class="cm-keyword">def</span> <span class="cm-variable">insertRight</span>(<span class="cm-variable">self</span>,<span class="cm-variable">newNode</span>):</pre><pre>        <span class="cm-keyword">if</span> <span class="cm-variable">self</span>.<span class="cm-variable">rightChild</span> <span class="cm-operator">==</span> <span class="cm-builtin">None</span>:</pre><pre>            <span class="cm-variable">self</span>.<span class="cm-variable">rightChild</span> = <span class="cm-variable">BinaryTree</span>(<span class="cm-variable">newNode</span>)</pre><pre>        <span class="cm-keyword">else</span>:</pre><pre>            <span class="cm-variable">t</span> = <span class="cm-variable">BinaryTree</span>(<span class="cm-variable">newNode</span>)</pre><pre>            <span class="cm-variable">t</span>.<span class="cm-variable">rightChild</span> = <span class="cm-variable">self</span>.<span class="cm-variable">rightChild</span></pre><pre>            <span class="cm-variable">self</span>.<span class="cm-variable">rightChild</span> = <span class="cm-variable">t</span></pre><pre> </pre><pre> </pre><pre>    <span class="cm-keyword">def</span> <span class="cm-variable">getRightChild</span>(<span class="cm-variable">self</span>):</pre><pre>        <span class="cm-keyword">return</span> <span class="cm-variable">self</span>.<span class="cm-variable">rightChild</span></pre><pre> </pre><pre>    <span class="cm-keyword">def</span> <span class="cm-variable">getLeftChild</span>(<span class="cm-variable">self</span>):</pre><pre>        <span class="cm-keyword">return</span> <span class="cm-variable">self</span>.<span class="cm-variable">leftChild</span></pre><pre> </pre><pre>    <span class="cm-keyword">def</span> <span class="cm-variable">setRootVal</span>(<span class="cm-variable">self</span>,<span class="cm-variable">obj</span>):</pre><pre>        <span class="cm-variable">self</span>.<span class="cm-variable">key</span> = <span class="cm-variable">obj</span></pre><pre> </pre><pre>    <span class="cm-keyword">def</span> <span class="cm-variable">getRootVal</span>(<span class="cm-variable">self</span>):</pre><pre>        <span class="cm-keyword">return</span> <span class="cm-variable">self</span>.<span class="cm-variable">key</span></pre><pre> </pre><pre> </pre><pre><span class="cm-variable">r</span> = <span class="cm-variable">BinaryTree</span>(<span class="cm-string">'a'</span>)</pre><pre><span class="cm-keyword">print</span>(<span class="cm-variable">r</span>.<span class="cm-variable">getRootVal</span>())</pre><pre><span class="cm-keyword">print</span>(<span class="cm-variable">r</span>.<span class="cm-variable">getLeftChild</span>())</pre><pre><span class="cm-variable">r</span>.<span class="cm-variable">insertLeft</span>(<span class="cm-string">'b'</span>)</pre><pre><span class="cm-keyword">print</span>(<span class="cm-variable">r</span>.<span class="cm-variable">getLeftChild</span>())</pre><pre><span class="cm-keyword">print</span>(<span class="cm-variable">r</span>.<span class="cm-variable">getLeftChild</span>().<span class="cm-variable">getRootVal</span>())</pre><pre><span class="cm-variable">r</span>.<span class="cm-variable">insertRight</span>(<span class="cm-string">'c'</span>)</pre><pre><span class="cm-keyword">print</span>(<span class="cm-variable">r</span>.<span class="cm-variable">getRightChild</span>())</pre><pre><span class="cm-keyword">print</span>(<span class="cm-variable">r</span>.<span class="cm-variable">getRightChild</span>().<span class="cm-variable">getRootVal</span>())</pre><pre><span class="cm-variable">r</span>.<span class="cm-variable">getRightChild</span>().<span class="cm-variable">setRootVal</span>(<span class="cm-string">'hello'</span>)</pre><pre><span class="cm-keyword">print</span>(<span class="cm-variable">r</span>.<span class="cm-variable">getRightChild</span>().<span class="cm-variable">getRootVal</span>())</pre><pre> </pre></div></div></div></div></div></div></div>
+</div>
+<p class="ac_caption _157621"><span class="ac_caption_text">Exercising the Node and Reference Implementation (bintree)</span> </p>
+
+<button class="btn btn-success" id="bintree_runb" onclick="runit(&#39;bintree&#39;,this, undefined);">Run</button>
+
+<div id="cont"></div>
+
+<button class="ac_opt btn btn-default" style="display: inline-block" id="bintree_saveb" onclick="saveEditor(&#39;bintree&#39;);">Save</button>
+<button class="ac_opt btn btn-default" style="display: inline-block" id="bintree_loadb" onclick="requestCode(&#39;bintree&#39;);">Load</button>
+
+<script>
+if ('block' == 'none') {
+    // a hack to preserve the inline-block display style. Toggle() will use display: block
+    // (instead of inline-block) if the previous display style was 'none'
+    $('#bintree_saveb').toggle();
+    $('#bintree_loadb').toggle();
+}
+</script>
+
+
+<div style="text-align: center">
+<canvas id="bintree_canvas" class="ac-canvas" height="400" width="400" style="border-style: solid; display: none; text-align: center"></canvas>
+</div>
+<pre id="bintree_suffix" style="display:none"></pre>
+<pre id="bintree_pre" class="active_out">
+</pre>
+
+
+</div>
+
+<div class="admonition-self-check admonition ">
+<p class="first admonition-title _4172">Self Check</p>
+<p class="_617800">Write a function <code>buildTree</code> that returns a tree using the nodes and references implementation that looks like this:</p>
+<img alt="../_images/tree_ex.png" src="./Implementation — Problem Solving with Algorithms and Data Structures_files/tree_ex.png">
+
+<div id="mctree_3">
+
+<br>
+<div id="mctree_3_code_div" style="">
+<textarea cols="50" rows="12" id="mctree_3_code" class="active_code" ,="" prefixcode="undefined" style="display: none;">from test import testEqual
+
+def buildTree():
+    pass
+
+ttree = buildTree()
+
+testEqual(ttree.getRightChild().getRootVal(),'c')
+testEqual(ttree.getLeftChild().getRightChild().getRootVal(),'d')
+testEqual(ttree.getRightChild().getLeftChild().getRootVal(),'e')
+</textarea><div class="CodeMirror" style="border-top-width: 2px; border-top-style: solid; border-top-color: rgb(180, 50, 50); border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: rgb(180, 50, 50);"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 176.5056915283203px; left: 133.41192626953125px;"><textarea wrap="off" autocorrect="off" autocapitalize="off" style="position: absolute; padding: 0px; width: 1px; height: 1em;"></textarea></div><div class="CodeMirror-scrollbar" style="z-index: -2; visibility: hidden; display: block; height: 300px;"><div class="CodeMirror-scrollbar-inner" style="height: 410px;"></div></div><div class="CodeMirror-scroll cm-s-default CodeMirror-focused" tabindex="-1"><div style="position: relative; min-height: 410px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-gutter" style="height: 411px;"><div class="CodeMirror-gutter-text"><pre>1</pre><pre>2</pre><pre>3</pre><pre>4</pre><pre>5</pre><pre>6</pre><pre>7</pre><pre>8</pre><pre>9</pre><pre>10</pre><pre>11</pre><pre>12</pre><pre>13</pre><pre>14</pre><pre>15</pre><pre>16</pre><pre>17</pre><pre>18</pre><pre>19</pre><pre>20</pre></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; min-width: 0px; margin-left: 28px;"><div style="position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden;"><pre>    <span class="cm-keyword">return</span> <span class="cm-variable">t</span><span> </span></pre></div><pre class="CodeMirror-cursor" style="top: 240px; left: 98px; visibility: hidden;">&nbsp;</pre><pre class="CodeMirror-cursor" style="visibility: hidden; left: 0px;">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"><div class="CodeMirror-selected" style="position: absolute; left: 0px; top: 80px; right: 400px; height: 20px;"></div></div><div style=""><pre><span class="cm-keyword">from</span> <span class="cm-variable">test</span> <span class="cm-keyword">import</span> <span class="cm-variable">testEqual</span></pre><pre> </pre><pre><span class="cm-keyword">def</span> <span class="cm-variable">buildTree</span>():</pre><pre>    <span class="cm-variable">t</span> = <span class="cm-variable">BinaryTree</span>(<span class="cm-string">'a'</span>)</pre><pre>    <span class="cm-variable">tl</span> = <span class="cm-variable">BinaryTree</span>(<span class="cm-string">'b'</span>)</pre><pre>    <span class="cm-variable">tl</span>.<span class="cm-variable">insertRight</span>(<span class="cm-string">'d'</span>)</pre><pre>    <span class="cm-variable">tr</span> = <span class="cm-variable">BinaryTree</span>(<span class="cm-string">'c'</span>)</pre><pre>    <span class="cm-variable">tr</span>.<span class="cm-variable">insertLeft</span>(<span class="cm-string">'e'</span>)</pre><pre>    <span class="cm-variable">tr</span>.<span class="cm-variable">insertRight</span>(<span class="cm-string">'f'</span>)</pre><pre>    <span class="cm-variable">t</span>.<span class="cm-variable">leftChild</span> = <span class="cm-variable">tl</span></pre><pre>    <span class="cm-variable">t</span>.<span class="cm-variable">rightChild</span> = <span class="cm-variable">tr</span></pre><pre>    </pre><pre>    <span class="cm-keyword">return</span> <span class="cm-variable">t</span></pre><pre> </pre><pre><span class="cm-variable">ttree</span> = <span class="cm-variable">buildTree</span>()</pre><pre> </pre><pre><span class="cm-variable">testEqual</span>(<span class="cm-variable">ttree</span>.<span class="cm-variable">getRightChild</span>().<span class="cm-variable">getRootVal</span>(),<span class="cm-string">'c'</span>)</pre><pre><span class="cm-variable">testEqual</span>(<span class="cm-variable">ttree</span>.<span class="cm-variable">getLeftChild</span>().<span class="cm-variable">getRightChild</span>().<span class="cm-variable">getRootVal</span>(),<span class="cm-string">'d'</span>)</pre><pre><span class="cm-variable">testEqual</span>(<span class="cm-variable">ttree</span>.<span class="cm-variable">getRightChild</span>().<span class="cm-variable">getLeftChild</span>().<span class="cm-variable">getRootVal</span>(),<span class="cm-string">'e'</span>)</pre><pre> </pre></div></div></div></div></div></div></div>
+</div>
+<p class="ac_caption _4883"><span class="ac_caption_text"> (mctree_3)</span> </p>
+
+<button class="btn btn-success" id="mctree_3_runb" onclick="runit(&#39;mctree_3&#39;,this, undefined);">Run</button>
+
+<div id="cont"></div>
+
+<button class="ac_opt btn btn-default" style="display: inline-block;" id="mctree_3_saveb" onclick="saveEditor(&#39;mctree_3&#39;);">Save</button>
+<button class="ac_opt btn btn-default" style="display: inline-block;" id="mctree_3_loadb" onclick="requestCode(&#39;mctree_3&#39;);">Load</button>
+
+<script>
+if ('none' == 'none') {
+    // a hack to preserve the inline-block display style. Toggle() will use display: block
+    // (instead of inline-block) if the previous display style was 'none'
+    $('#mctree_3_saveb').toggle();
+    $('#mctree_3_loadb').toggle();
+}
+</script>
+
+
+<div style="text-align: center">
+<canvas id="mctree_3_canvas" class="ac-canvas" height="400" width="400" style="border-style: solid; display: none; text-align: center"></canvas>
+</div>
+
+<button class="btn btn-default" id="mctree_3_showb" onclick="$(&#39;#mctree_3_code_div&#39;).toggle();cm_editors[&#39;mctree_3_code&#39;].refresh();$(&#39;#mctree_3_saveb&#39;).toggle();$(&#39;#mctree_3_loadb&#39;).toggle()">Show/Hide Code</button>
+
+<input type="button" class="btn btn-default " id="gradeb" name="Show Feedback" value="Show Feedback" onclick="createGradeSummary(&#39;mctree_3&#39;)">
+<pre id="mctree_3_suffix" style="display:none"></pre>
+<pre id="mctree_3_pre" class="active_out">
+</pre>
+
+
+</div>
+
+</div>
+</div>
+</div>
+
+
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right _94873">
+      <span id="numuserspan">71</span> readers online now | <span class="loggedinuser">joytafty@gmail.com</span> | <a href="http://interactivepython.org/runestone/static/pythonds/Trees/implementation.html#">Back to top</a>
+      
+    </p>
+    <p class="_286724">
+        © Copyright 2013 Brad Miller, David Ranum.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </p>
+  </div>
+</footer>
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(addUserToFooter);
+    $(document).ready(addNavbarLoginLink);
+    $(document).ready(createEditors);
+    $(document).ready(getNumUsers);
+    $(document).ready(getOnlineUsers);
+    $(document).ready(createScratchActivecode());
+    $(document).ready(styleUnittestResults());
+</script><div id="ac_modal_pythondsTreesimplementation" class="modal fade">  <div class="modal-dialog scratch-ac-modal">    <div class="modal-content">      <div class="modal-header">        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>        <h4 class="modal-title">Scratch ActiveCode</h4>      </div>       <div class="modal-body">        <div id="pythondsTreesimplementation">          <div id="pythondsTreesimplementation_code_div" style="display: block">            <textarea cols="50" rows="12" id="pythondsTreesimplementation_code" class="active_code" style="display: none;">
+
+
+
+</textarea><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px;"><textarea wrap="off" autocorrect="off" autocapitalize="off" style="position: absolute; padding: 0px; width: 1px; height: 1em;"></textarea></div><div class="CodeMirror-scrollbar" style="z-index: -2; visibility: hidden;"><div class="CodeMirror-scrollbar-inner"></div></div><div class="CodeMirror-scroll cm-s-default" tabindex="-1"><div style="position: relative;"><div style="position: relative;"><div class="CodeMirror-gutter" style="height: 0px;"><div class="CodeMirror-gutter-text"><pre>1</pre></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; min-width: 0px; margin-left: 0px;"><div style="position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden;"></div><pre class="CodeMirror-cursor">&nbsp;</pre><pre class="CodeMirror-cursor" style="visibility: hidden; left: 0px;">&nbsp;</pre><div style="position: relative; z-index: -1;"></div><div></div></div></div></div></div></div></div>          </div>          <p class="ac_caption _9465"><span class="ac_caption_text">Scratch Editor</span> </p>          <button class="btn btn-success" id="pythondsTreesimplementation_runb" onclick="runit(&#39;pythondsTreesimplementation&#39;,this, undefined);">Run</button>          <div id="cont"></div>          <button class="ac_opt btn btn-default" style="display: inline-block" id="pythondsTreesimplementation_saveb" onclick="saveEditor(&#39;pythondsTreesimplementation&#39;);">Save</button>          <button class="ac_opt btn btn-default" style="display: inline-block" id="pythondsTreesimplementation_loadb" onclick="requestCode(&#39;pythondsTreesimplementation&#39;);">Load</button>          <div style="text-align: center">            <canvas id="pythondsTreesimplementation_canvas" class="ac-canvas" height="400" width="400" style="border-style: solid; display: none; text-align: center"></canvas>          </div>          <pre id="pythondsTreesimplementation_suffix" style="display:none">          </pre>          <pre id="pythondsTreesimplementation_pre" class="active_out">          </pre>        </div>      </div>    </div>  </div></div>
+
+<script type="text/javascript">
+  // add the video play button overlay image
+  $(".video-play-overlay").each(function() {
+    $(this).css('background-image', "url(\'../_static/play_overlay_icon.png\')")
+    });
+
+  // This function is needed to allow the dropdown search bar to work;
+  // The default behaviour is that the dropdown menu closes when something in
+  // it (like the search bar) is clicked
+  $(function() {
+    // Fix input element click problem
+    $('.dropdown input, .dropdown label').click(function(e) {
+      e.stopPropagation();
+      });
+  });
+
+  // style codelens buttons (doing it here because PyTutor is a submodule owned by someone else
+  $(function() {
+    $(".ExecutionVisualizer").each(function() {
+      $(this).find("#jmpFirstInstr").addClass('btn btn-default');
+      $(this).find("#jmpStepBack").addClass('btn btn-danger');
+      $(this).find("#jmpStepFwd").addClass('btn btn-success');
+      $(this).find("#jmpLastInstr").addClass('btn btn-default');
+      });
+  });
+
+</script>
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-32029811-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+  
+<ul class="dropdown-menu" id="highlight-option-box" style="display: none; top: 6434.7337646484375px; left: 364.0095520019531px;"><li><a href="javascript:void(0);" id="option-highlight-text" style="display:block;">Highlight</a></li></ul></body></html>
